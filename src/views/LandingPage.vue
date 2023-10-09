@@ -1,13 +1,11 @@
 <script setup>
-import NavBar from '../components/NavBar.vue'
 import LandingHeader from '../components/LandingHeader.vue';
 import InsuranceCard from '../components/InsuranceCard.vue';
 import CheckMark from '../components/CheckMark.vue';
-import Footer from '../components/Footer.vue';
 </script>
 
 <template>
-    <NavBar />
+    
     <LandingHeader />
     <main class="">
 
@@ -19,9 +17,9 @@ import Footer from '../components/Footer.vue';
 
                 <!-- Insurance Cards -->
                 <div class="flex justify-center gap-5 mt-10">
-                    <InsuranceCard image="./src/assets/vehicle.png" text="Motor Insurance" />
-                    <InsuranceCard image="./src/assets/house.png" text="Home Insurance" />
-                    <InsuranceCard image="./src/assets/travel-luggage.png" text="Travel Insurance" />
+                    <InsuranceCard image="./src/assets/vehicle3.png" text="Motor Insurance" link="MotorInsurance" />
+                    <InsuranceCard image="./src/assets/house2.png" text="Home Insurance" />
+                    <InsuranceCard image="./src/assets/travel-luggage2.png" text="Travel Insurance" />
                 </div>
             </div>
         </section>
@@ -122,8 +120,7 @@ import Footer from '../components/Footer.vue';
         </section>
     </main>
 
-    <!-- footer -->
-    <Footer />
+    
 </template>
 
 <style scoped>
