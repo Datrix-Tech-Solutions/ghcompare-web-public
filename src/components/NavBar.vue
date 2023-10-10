@@ -13,11 +13,14 @@ const links = [
     <nav class="border-b">
         <div class="max-width flex justify-between items-center py-3 text-">
             <div class="">
-                <img src="../assets/logo.png" alt="">
+                <router-link :to="{ name: 'LandingPage' }">
+                    <img src="../assets/logo.png" alt="">
+                </router-link>
             </div>
             <div class="flex items-center gap-7">
                 <div class="links">
-                    <a href="#" class="font-semibold text-gray-600 mr-7 hover:text-primary transition">Home</a>
+                    <router-link :to="{ name: 'LandingPage' }"
+                        class="font-semibold text-gray-600 mr-7 hover:text-primary transition">Home</router-link>
                     <a href="#" class="font-semibold text-gray-600 mr-5 hover:text-primary transition">Compare
                         <ChevronDownIcon class="inline w-4 h-4" />
                     </a>

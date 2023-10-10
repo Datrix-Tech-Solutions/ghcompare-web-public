@@ -1,28 +1,56 @@
 <script setup>
 import CoverDetailsForm from './CoverDetailsForm.vue';
 import VehicleDetailsForm from './VehicleDetailsForm.vue';
+import { useFormDataStore } from '../../store/formData'
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
+const store = useFormDataStore() //for storing data in store oo s3 d3n
+
 const route = useRoute()
 const router = useRouter()
-const activeForm = ref('CoverDetailsForm')
+const formData = ref({
+    coverDetails: Object,
+    vehicleDetails: Object,
+})
+const activeForm = ref('CoverDetailsForm') //active form
+
+// for form component switching
 const forms = {
     CoverDetailsForm,
     VehicleDetailsForm,
 }
 
-// watch()
-
 // function that checks route for form query param and displays corresponding form
 function updateForm() {
     switch (route.query?.form) {
-        case 'cover_details': activeForm.value = 'CoverDetailsForm'
+        case 'cover_details': activeForm.value = 'CoverDetailsForm';
+
             break;
         case 'vehicle_details': activeForm.value = 'VehicleDetailsForm'
             break;
         default: activeForm.value = 'CoverDetailsForm'
     }
+}
+
+//function to get data from the various forms
+function getFormData(data) {
+    // helper function that checks route for form query param and displays corresponding form
+    updateForm()
+
+    //capture details
+    if (data.formType == 'cover details') {
+        formData.value.coverDetails = data.data
+    } else if (data.formType == 'vehicle details') {
+        formData.value.vehicleDetails = data.data
+
+        //Navigate user to premium page
+        router.push({ name: 'Premium', 'params': { insuranceType: route.meta.insuranceType } })
+    }
+
+    //save the data in the formData store
+    store.motorInsuranceData = formData.value
+    console.log(formData.value)
 }
 
 onMounted(() => {
@@ -39,6 +67,8 @@ onMounted(() => {
 
 <template>
     <div class="">
-        <component :is="forms[activeForm]" @updateForm="updateForm"></component>
+        <KeepAlive>
+            <component :is="forms[activeForm]" @sendFormData="getFormData" @updateForm="updateForm"></component>
+        </KeepAlive>
     </div>
 </template>

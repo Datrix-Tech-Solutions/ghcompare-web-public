@@ -1,49 +1,31 @@
 <script setup>
 import { ArrowRightIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
+import { coverTypeList as coverType, durationList as duration } from '../../data/car_data.js'
 import { useRouter } from 'vue-router'
+import {
+    ref
+} from 'vue';
 
 const router = useRouter()
 
+const formData = ref({
+    formType: 'cover details',
+    data: {
+        coverType: '',
+        duration: '',
+    }
+})
+
 const coverDetails = {
-    coverType: [
-        {
-            name: "Comprehensive",
-            id: 1,
-        },
-        {
-            name: "Third Party",
-            id: 2,
-        },
-        {
-            name: "Third Party, Fire and Theft",
-            id: 3,
-        },
-    ],
-    duration: [
-        {
-            name: "1 Month",
-            id: 1
-        },
-        {
-            name: "3 Month",
-            id: 2
-        },
-        {
-            name: "6 Month",
-            id: 3
-        },
-        {
-            name: "Full Year",
-            id: 4
-        },
-    ]
+    coverType,
+    duration,
 }
 
-const emit = defineEmits(['updateForm'])
+const emit = defineEmits(['sendFormData'])
 
 async function goToNext() {
     await router.push({ name: 'MotorInsurance', query: { form: 'vehicle_details' } })
-    emit('updateForm')
+    emit('sendFormData', formData.value)
 }
 </script>
 
@@ -63,7 +45,8 @@ async function goToNext() {
             <div class="">
                 <template v-for="covertype in coverDetails.coverType" :key="covertype.id">
                     <p class="mb-2">
-                        <input type="radio" name="covertype" :id="covertype.name" class="mr-2 cursor-pointer">
+                        <input required type="radio" name="covertype" :id="covertype.name" class="mr-2 cursor-pointer"
+                            :value="covertype.name" v-model="formData.data.coverType">
                         <label class="cursor-pointer" :for="covertype.name">{{ covertype.name }}</label>
                     </p>
                 </template>
@@ -79,8 +62,9 @@ async function goToNext() {
 
             <div class="">
                 <template v-for="duration in coverDetails.duration" :key="duration.id">
-                    <p class="mb-2 cursor-pointer">
-                        <input type="radio" name="duration" :id="duration.name" class="mr-2 cursor-pointer">
+                    <p class="mb-2">
+                        <input type="radio" required name="duration" :id="duration.name" class="mr-2 cursor-pointer"
+                            :value="duration.name" v-model="formData.data.duration">
                         <label class="cursor-pointer" :for="duration.name"> {{ duration.name }}</label>
                     </p>
                 </template>

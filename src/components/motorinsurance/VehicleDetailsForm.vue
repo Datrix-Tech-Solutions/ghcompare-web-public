@@ -1,14 +1,44 @@
 <script setup>
 import { ArrowLeftIcon, ArrowRightIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
-import { useRouter } from 'vue-router'
+import { privateUse, commercialUse } from '../../data/car_data';
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const router = useRouter()
 
-const emit = defineEmits(['updateForm'])
+const formData = ref({
+    formType: 'vehicle details',
+    data: {
+        vehicleUse: 'N/A',
+        riskType: 'N/A',
+        numberOfSeats: 'N/A',
+        amountInsured: null,
+    }
+})
 
+//data for this form
+const vehicleDetails = {
+    privateUse, commercialUse,
+}
+
+//emits
+const emit = defineEmits(['sendFormData', 'updateForm'])
+
+
+//function to update the value of vehicle use 
+function updateVehicleUse(vehicleUse) {
+    formData.value.data.vehicleUse = vehicleUse
+    formData.value.data.riskType = ""
+}
+//function to go to previous form
 async function goToPrev() {
     await router.push({ name: 'MotorInsurance', query: { form: 'cover_details' } })
     emit('updateForm')
+}
+
+async function goToNext() {
+    emit('sendFormData', formData.value)
+    // alert('hello')
 }
 </script>
 
@@ -28,15 +58,17 @@ async function goToPrev() {
             <div class="flex gap-5">
                 <!-- commercial -->
                 <div class="border rounded-lg p-3 w-28 cursor-pointer hover:outline hover:outline-2 hover:outline-primary"
-                    tabindex="0">
+                    tabindex="0" @click="updateVehicleUse('Commercial')"
+                    :class="{ selected: formData.data.vehicleUse == 'Commercial' }">
                     <img src="../../assets/commercial.png" alt="commercial" class="w-16 mx-auto">
                     <p class="text-sm text-gray-600 font-semibold text-center">Commercial</p>
                 </div>
 
                 <!-- personal -->
                 <div class="border rounded-lg p-3 w-28 cursor-pointer hover:outline hover:outline-2 hover:outline-primary"
-                    tabindex="0">
-                    <img src="../../assets/personal.png" alt="personal" class="w-16 mx-auto">
+                    tabindex="0" @click="updateVehicleUse('Private')"
+                    :class="{ selected: formData.data.vehicleUse == 'Private' }">
+                    <img src="../../assets/private.png" alt="personal" class="w-16 mx-auto">
                     <p class="text-sm text-gray-600 font-semibold text-center">Private</p>
                 </div>
             </div>
@@ -44,28 +76,37 @@ async function goToPrev() {
             <hr class="my-8">
 
             <!-- Risk Type -->
-            <div class="flex justify-between ">
-                <h4 class="text-lg text-primary font-semibold mb-3">Risk Type</h4>
-                <QuestionMarkCircleIcon class="w-6 h-6 text-primary" />
+            <div class="flex justify-between">
+                <h4 class="text-lg text-primary font-semibold mb-3" :class="{ disabled: formData.data.vehicleUse == '' }">
+                    Risk Type</h4>
+                <QuestionMarkCircleIcon class="w-6 h-6 text-primary"
+                    :class="{ disabled: formData.data.vehicleUse == '' }" />
             </div>
 
-            <div class="">
-                <select name="risktype" id="" class="w-full">
-                    <option value="risk type">jlsjsl</option>
-                    <option value="risk type">jfddfflsjsl</option>
+            <div class="" :title="formData.data.vehicleUse ? '' : 'Please select vehicle use value'">
+                <select name="risktype" id="risktype" v-model="formData.data.riskType" class="w-full" required
+                    :class="{ disabled: formData.data.vehicleUse == '' }">
+                    <option disabled value="">Please select risk type</option>
+                    <template
+                        v-for="(risk, index) in formData.data.vehicleUse == 'Commercial' ? vehicleDetails.commercialUse : vehicleDetails.privateUse"
+                        :key="index">
+                        <option> {{ risk.risk }}</option>
+                    </template>
+
                 </select>
             </div>
 
             <hr class="my-8">
 
             <!-- Number of seats -->
-            <div class="flex justify-between ">
+            <div class="flex justify-between">
                 <h4 class="text-lg text-primary font-semibold mb-3">Number of Seats</h4>
                 <QuestionMarkCircleIcon class="w-6 h-6 text-primary" />
             </div>
 
             <div class="">
-                <input type="number" name="seats" id="seats" class="max-w-[120px]">
+                <input type="number" name="seats" id="seats" class="max-w-[120px]" v-model="formData.data.numberOfSeats"
+                    placeholder="e.g. 12">
             </div>
 
             <hr class="my-8">
@@ -77,8 +118,9 @@ async function goToPrev() {
             </div>
 
             <div class="">
+                <span class="mr-2">GH&#8373;</span>
                 <input type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" name="amountinsured" id="amountinsured"
-                    class="max-w-[120px]">
+                    class="max-w-[120px]" placeholder="e.g. 1200" v-model="formData.data.amountInsured">
             </div>
 
             <!-- next and back button -->
@@ -96,3 +138,18 @@ async function goToPrev() {
         </form>
     </div>
 </template>
+
+<style scoped>
+.selected {
+    background-color: var(--primary-color);
+}
+
+.selected p {
+    color: white !important;
+}
+
+.disabled {
+    pointer-events: none;
+    color: #aaa
+}
+</style>

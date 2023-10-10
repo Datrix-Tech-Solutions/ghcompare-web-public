@@ -18,6 +18,15 @@ const routes = [
     name: "MotorInsurance",
     component: () =>
       import(/* webpackChunkName: "MotorInsurance" */ "../views/MotorInsurance.vue"),
+      meta: {
+        insuranceType: 'motor-insurance'
+      }
+  },
+  {
+    path: "/:insuranceType/premium",
+    name: "Premium",
+    component: () =>
+      import(/* webpackChunkName: "MotorInsurance" */ "../views/PremiumPage.vue"),
   },
 ];
 
