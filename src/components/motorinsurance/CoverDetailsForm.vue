@@ -8,12 +8,11 @@ import {
 
 const router = useRouter()
 
-const formData = ref({
+const props = defineProps(['formData'])
+
+const coverData = ref({
     formType: 'cover details',
-    data: {
-        coverType: '',
-        duration: '',
-    }
+    data: props.formData.coverDetails,
 })
 
 const coverDetails = {
@@ -23,9 +22,9 @@ const coverDetails = {
 
 const emit = defineEmits(['sendFormData'])
 
-async function goToNext() {
+async function submitForm() {
     await router.push({ name: 'MotorInsurance', query: { form: 'vehicle_details' } })
-    emit('sendFormData', formData.value)
+    emit('sendFormData', coverData.value)
 }
 </script>
 
@@ -35,7 +34,7 @@ async function goToNext() {
         <h3 class="text-2xl font-bold mb-5">Cover Details</h3>
 
         <!-- the form -->
-        <form @submit.prevent="goToNext">
+        <form @submit.prevent="submitForm">
             <!-- cover type -->
             <div class="flex justify-between ">
                 <h4 class="text-lg text-primary font-semibold mb-3">Cover Type</h4>
@@ -46,7 +45,7 @@ async function goToNext() {
                 <template v-for="covertype in coverDetails.coverType" :key="covertype.id">
                     <p class="mb-2">
                         <input required type="radio" name="covertype" :id="covertype.name" class="mr-2 cursor-pointer"
-                            :value="covertype.name" v-model="formData.data.coverType">
+                            :value="covertype.name" v-model="coverData.data.coverType">
                         <label class="cursor-pointer" :for="covertype.name">{{ covertype.name }}</label>
                     </p>
                 </template>
@@ -64,13 +63,14 @@ async function goToNext() {
                 <template v-for="duration in coverDetails.duration" :key="duration.id">
                     <p class="mb-2">
                         <input type="radio" required name="duration" :id="duration.name" class="mr-2 cursor-pointer"
-                            :value="duration.name" v-model="formData.data.duration">
+                            :value="duration.name" v-model="coverData.data.duration">
                         <label class="cursor-pointer" :for="duration.name"> {{ duration.name }}</label>
                     </p>
                 </template>
             </div>
 
             <!-- next button -->
+
             <div class="flex justify-end mt-10">
                 <button class="group button-primary">Next
                     <ArrowRightIcon class="w-5 h-5 inline  group-hover:translate-x-2 transition" />

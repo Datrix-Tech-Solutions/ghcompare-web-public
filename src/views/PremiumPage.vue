@@ -23,8 +23,8 @@ const formData = store.motorInsuranceData
                     <FormSummary :form-data="formData" />
                 </div>
                 <div class="w-1/2">
-                    <p class="text-center font-semibold text-3xl mb-3">
-                        Premium
+                    <p class="text-center font-semibold text-2xl mb-3">
+                        Total Premium Payable
                     </p>
                     <p class="text-center text-primary text-5xl font-bold">Gh&#8373;200</p>
                     <div class="flex mt-10 justify-center">

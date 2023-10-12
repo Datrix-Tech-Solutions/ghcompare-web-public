@@ -6,14 +6,11 @@ import { ref } from 'vue';
 
 const router = useRouter()
 
-const formData = ref({
+const props = defineProps(['formData'])
+
+const vehicleData = ref({
     formType: 'vehicle details',
-    data: {
-        vehicleUse: 'N/A',
-        riskType: 'N/A',
-        numberOfSeats: 'N/A',
-        amountInsured: null,
-    }
+    data: props.formData.vehicleDetails,
 })
 
 //data for this form
@@ -27,8 +24,8 @@ const emit = defineEmits(['sendFormData', 'updateForm'])
 
 //function to update the value of vehicle use 
 function updateVehicleUse(vehicleUse) {
-    formData.value.data.vehicleUse = vehicleUse
-    formData.value.data.riskType = ""
+    vehicleData.value.data.vehicleUse = vehicleUse
+    vehicleData.value.data.riskType = ""
 }
 //function to go to previous form
 async function goToPrev() {
@@ -36,8 +33,8 @@ async function goToPrev() {
     emit('updateForm')
 }
 
-async function goToNext() {
-    emit('sendFormData', formData.value)
+async function submit() {
+    emit('sendFormData', vehicleData.value)
     // alert('hello')
 }
 </script>
@@ -48,7 +45,7 @@ async function goToNext() {
         <h3 class="text-2xl font-bold mb-5">Vehicle Details</h3>
 
         <!-- the form -->
-        <form @submit.prevent="goToNext">
+        <form @submit.prevent="submit">
             <!-- Vehicle use -->
             <div class="flex justify-between ">
                 <h4 class="text-lg text-primary font-semibold mb-3">Vehicle Use</h4>
@@ -59,7 +56,7 @@ async function goToNext() {
                 <!-- commercial -->
                 <div class="border rounded-lg p-3 w-28 cursor-pointer hover:outline hover:outline-2 hover:outline-primary"
                     tabindex="0" @click="updateVehicleUse('Commercial')"
-                    :class="{ selected: formData.data.vehicleUse == 'Commercial' }">
+                    :class="{ selected: vehicleData.data.vehicleUse == 'Commercial' }">
                     <img src="../../assets/commercial.png" alt="commercial" class="w-16 mx-auto">
                     <p class="text-sm text-gray-600 font-semibold text-center">Commercial</p>
                 </div>
@@ -67,7 +64,7 @@ async function goToNext() {
                 <!-- personal -->
                 <div class="border rounded-lg p-3 w-28 cursor-pointer hover:outline hover:outline-2 hover:outline-primary"
                     tabindex="0" @click="updateVehicleUse('Private')"
-                    :class="{ selected: formData.data.vehicleUse == 'Private' }">
+                    :class="{ selected: vehicleData.data.vehicleUse == 'Private' }">
                     <img src="../../assets/private.png" alt="personal" class="w-16 mx-auto">
                     <p class="text-sm text-gray-600 font-semibold text-center">Private</p>
                 </div>
@@ -77,18 +74,19 @@ async function goToNext() {
 
             <!-- Risk Type -->
             <div class="flex justify-between">
-                <h4 class="text-lg text-primary font-semibold mb-3" :class="{ disabled: formData.data.vehicleUse == '' }">
+                <h4 class="text-lg text-primary font-semibold mb-3"
+                    :class="{ disabled: vehicleData.data.vehicleUse == '' }">
                     Risk Type</h4>
                 <QuestionMarkCircleIcon class="w-6 h-6 text-primary"
-                    :class="{ disabled: formData.data.vehicleUse == '' }" />
+                    :class="{ disabled: vehicleData.data.vehicleUse == '' }" />
             </div>
 
-            <div class="" :title="formData.data.vehicleUse ? '' : 'Please select vehicle use value'">
-                <select name="risktype" id="risktype" v-model="formData.data.riskType" class="w-full" required
-                    :class="{ disabled: formData.data.vehicleUse == '' }">
+            <div class="" :title="vehicleData.data.vehicleUse ? '' : 'Please select vehicle use value'">
+                <select name="risktype" id="risktype" v-model="vehicleData.data.riskType" class="w-full" required
+                    :class="{ disabled: vehicleData.data.vehicleUse == '' }">
                     <option disabled value="">Please select risk type</option>
                     <template
-                        v-for="(risk, index) in formData.data.vehicleUse == 'Commercial' ? vehicleDetails.commercialUse : vehicleDetails.privateUse"
+                        v-for="(risk, index) in vehicleData.data.vehicleUse == 'Commercial' ? vehicleDetails.commercialUse : vehicleDetails.privateUse"
                         :key="index">
                         <option> {{ risk.risk }}</option>
                     </template>
@@ -105,25 +103,27 @@ async function goToNext() {
             </div>
 
             <div class="">
-                <input type="number" name="seats" id="seats" class="max-w-[120px]" v-model="formData.data.numberOfSeats"
+                <input type="number" name="seats" id="seats" class="max-w-[120px]" v-model="vehicleData.data.numberOfSeats"
                     placeholder="e.g. 12">
             </div>
 
             <hr class="my-8">
 
             <!-- Amount insured -->
-            <div class="flex justify-between ">
-                <h4 class="text-lg text-primary font-semibold mb-3">Amount Insured</h4>
-                <QuestionMarkCircleIcon class="w-6 h-6 text-primary" />
+            <div class="" v-if="formData.coverDetails.coverType !== 'Third Party'">
+                <div class="flex justify-between ">
+                    <h4 class="text-lg text-primary font-semibold mb-3">Amount Insured</h4>
+                    <QuestionMarkCircleIcon class="w-6 h-6 text-primary" />
+                </div>
+
+                <div class="">
+                    <span class="mr-2">GH&#8373;</span>
+                    <input type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" name="amountinsured"
+                        id="amountinsured" class="max-w-[120px]" placeholder="e.g. 1200"
+                        v-model="vehicleData.data.amountInsured">
+                </div>
             </div>
 
-            <div class="">
-                <span class="mr-2">GH&#8373;</span>
-                <input type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" name="amountinsured" id="amountinsured"
-                    class="max-w-[120px]" placeholder="e.g. 1200" v-model="formData.data.amountInsured">
-            </div>
-
-            <!-- next and back button -->
             <div class="flex justify-between flex-row-reverse mt-10">
                 <!-- next -->
                 <button class="group button-primary">Next

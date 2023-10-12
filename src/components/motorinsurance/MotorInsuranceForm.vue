@@ -5,14 +5,11 @@ import { useFormDataStore } from '../../store/formData'
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-const store = useFormDataStore() //for storing data in store oo s3 d3n
+const store = useFormDataStore() //for storing data in store
 
 const route = useRoute()
 const router = useRouter()
-const formData = ref({
-    coverDetails: Object,
-    vehicleDetails: Object,
-})
+const formData = ref(store.motorInsuranceData)
 const activeForm = ref('CoverDetailsForm') //active form
 
 // for form component switching
@@ -68,7 +65,8 @@ onMounted(() => {
 <template>
     <div class="">
         <KeepAlive>
-            <component :is="forms[activeForm]" @sendFormData="getFormData" @updateForm="updateForm"></component>
+            <component :is="forms[activeForm]" :form-data="formData" @sendFormData="getFormData" @updateForm="updateForm">
+            </component>
         </KeepAlive>
     </div>
 </template>
