@@ -8,10 +8,10 @@ export const useFormDataStore = defineStore('formData', () => {
             duration: '',
         },
         vehicleDetails: {
-            vehicleUse: 'N/A',
-            riskType: 'N/A',
-            numberOfSeats: 'N/A',
-            amountInsured: null,
+            vehicleUse: '',
+            riskType: '',
+            numberOfSeats: '',
+            amountInsured: '',
         },
     })
 

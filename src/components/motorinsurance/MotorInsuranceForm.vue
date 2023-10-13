@@ -1,4 +1,5 @@
 <script setup>
+// @ts-check
 import CoverDetailsForm from './CoverDetailsForm.vue';
 import VehicleDetailsForm from './VehicleDetailsForm.vue';
 import { useFormDataStore } from '../../store/formData'
@@ -9,7 +10,7 @@ const store = useFormDataStore() //for storing data in store
 
 const route = useRoute() // initialise route object
 const router = useRouter() // initialise router object
-const formData = ref(store.motorInsuranceData) // form data
+const formData = ref(store.motorInsuranceData) // form data to be used for this page
 const activeForm = ref('CoverDetailsForm') //active form
 
 // for form component switching
@@ -30,7 +31,7 @@ watch(() => route.query.form, (newQuery) => {
     }
 })
 
-// function that checks route for form query param and displays corresponding form
+// function that checks route for form query param and displays corresponding form - for refreshes
 function updateForm() {
     switch (route.query?.form) {
         case 'cover_details': activeForm.value = 'CoverDetailsForm';
@@ -42,15 +43,12 @@ function updateForm() {
     }
 }
 
-//function to get data from the various forms
+
 /**
- * 
- * @param {object} data - this is what waht
+ * function gets data from the various forms
+ * @param {object} data - data payload from form
  */
 function getFormData(data) {
-    // helper function that checks route for form query param and displays corresponding form
-    updateForm()
-
     //capture details
     if (data.formType == 'cover details') {
         formData.value.coverDetails = data.data
@@ -81,7 +79,7 @@ onMounted(() => {
 <template>
     <div class="">
         <KeepAlive>
-            <component :is="forms[activeForm]" :form-data="formData" @sendFormData="getFormData" @updateForm="updateForm">
+            <component :is="forms[activeForm]" :form-data="formData" @sendFormData="getFormData">
             </component>
         </KeepAlive>
     </div>

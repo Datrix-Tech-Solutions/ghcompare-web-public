@@ -48,7 +48,7 @@ function updateVehicleUse(vehicleUse) {
  */
 async function goToPrev() {
     await router.push({ name: 'MotorInsurance', query: { form: 'cover_details' } })
-    emit('updateForm')
+    // emit('updateForm')
 }
 
 /**
@@ -97,7 +97,7 @@ async function submit() {
             <div class="flex justify-between">
                 <h4 class="text-lg text-primary font-semibold mb-3"
                     :class="{ disabled: vehicleData.data.vehicleUse == '' }">
-                    Risk Type</h4>
+                    Risk Type </h4>
                 <QuestionMarkCircleIcon class="w-6 h-6 text-primary"
                     :class="{ disabled: vehicleData.data.vehicleUse == '' }" />
             </div>
@@ -124,8 +124,8 @@ async function submit() {
             </div>
 
             <div class="">
-                <input type="number" name="seats" id="seats" class="max-w-[120px]" v-model="vehicleData.data.numberOfSeats"
-                    placeholder="e.g. 12">
+                <input type="number" name="seats" id="seats" class="max-w-[120px]" required
+                    v-model="vehicleData.data.numberOfSeats" placeholder="e.g. 12">
             </div>
 
             <hr class="my-8">
@@ -140,7 +140,7 @@ async function submit() {
                 <div class="">
                     <span class="mr-2">GH&#8373;</span>
                     <input type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" name="amountinsured"
-                        id="amountinsured" class="max-w-[120px]" placeholder="e.g. 1200"
+                        id="amountinsured" class="max-w-[120px]" placeholder="e.g. 1200" required
                         v-model="vehicleData.data.amountInsured">
                 </div>
             </div>

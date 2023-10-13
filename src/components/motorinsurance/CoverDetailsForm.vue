@@ -2,26 +2,37 @@
 import { ArrowRightIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
 import { coverTypeList as coverType, durationList as duration } from '../../data/car_data.js'
 import { useRouter } from 'vue-router'
-import {
-    ref
-} from 'vue';
+import { ref } from 'vue';
 
 const router = useRouter()
 
-const props = defineProps(['formData'])
+const props = defineProps({
+    formData: {
+        type: Object
+    }
+})
 
+//form data values to be used for and captured from this form
 const coverData = ref({
     formType: 'cover details',
     data: props.formData.coverDetails,
 })
 
+/**
+ * cover type and duration options 
+ * @type {object}
+ */
 const coverDetails = {
     coverType,
     duration,
 }
 
+//emits
 const emit = defineEmits(['sendFormData'])
 
+/**
+ * submit form
+ */
 async function submitForm() {
     await router.push({ name: 'MotorInsurance', query: { form: 'vehicle_details' } })
     emit('sendFormData', coverData.value)
