@@ -1,19 +1,30 @@
 <script setup>
+// @ts-check
 import { ArrowLeftIcon, ArrowRightIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
 import { privateUse, commercialUse } from '../../data/car_data';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 
+// initialise router object
 const router = useRouter()
 
-const props = defineProps(['formData'])
-
-const vehicleData = ref({
-    formType: 'vehicle details',
-    data: props.formData.vehicleDetails,
+// props
+const props = defineProps({
+    formData: {
+        type: Object
+    }
 })
 
-//data for this form
+//form data values to be used for and captured from this form
+const vehicleData = ref({
+    formType: 'vehicle details',
+    data: props.formData?.vehicleDetails,
+})
+
+/**
+ * risk type options 
+ * @type {object}
+ */
 const vehicleDetails = {
     privateUse, commercialUse,
 }
@@ -22,17 +33,27 @@ const vehicleDetails = {
 const emit = defineEmits(['sendFormData', 'updateForm'])
 
 
-//function to update the value of vehicle use 
+/**
+ * The function updates vehicle use and sets risk type to empty string
+ * @param {String} vehicleUse - Use of vehicle - either private or commercial
+ */
 function updateVehicleUse(vehicleUse) {
     vehicleData.value.data.vehicleUse = vehicleUse
     vehicleData.value.data.riskType = ""
 }
-//function to go to previous form
+
+
+/**
+ * function to go to previous form
+ */
 async function goToPrev() {
     await router.push({ name: 'MotorInsurance', query: { form: 'cover_details' } })
     emit('updateForm')
 }
 
+/**
+ * submit form
+ */
 async function submit() {
     emit('sendFormData', vehicleData.value)
     // alert('hello')
@@ -110,7 +131,7 @@ async function submit() {
             <hr class="my-8">
 
             <!-- Amount insured -->
-            <div class="" v-if="formData.coverDetails.coverType !== 'Third Party'">
+            <div class="" v-if="formData?.coverDetails.coverType !== 'Third Party'">
                 <div class="flex justify-between ">
                     <h4 class="text-lg text-primary font-semibold mb-3">Amount Insured</h4>
                     <QuestionMarkCircleIcon class="w-6 h-6 text-primary" />

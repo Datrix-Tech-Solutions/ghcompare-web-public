@@ -8,12 +8,6 @@ const routes = [
     component: LandingPage,
   },
   {
-    path: "/test",
-    name: "Test",
-    component: () =>
-      import(/* webpackChunkName: "test" */ "../views/TestRoute.vue"),
-  },
-  {
     path: "/motor-insurance",
     name: "MotorInsurance",
     component: () =>

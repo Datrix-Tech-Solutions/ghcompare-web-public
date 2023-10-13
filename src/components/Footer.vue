@@ -1,5 +1,11 @@
 <script setup>
+// @ts-check
 import { PhoneIcon, MapPinIcon, EnvelopeIcon } from "@heroicons/vue/24/outline"
+
+/**
+ * Links to Compare various policies
+ * @type {Array<object>}
+ */
 const compare = [
     {
         text: "Motor Insurance",
@@ -12,6 +18,10 @@ const compare = [
     },
 ]
 
+/**
+ * Links to various pages on the website
+ * @type {Array<object>}
+ */
 const company = [
     { text: "Home" },
     { text: "About Us" },

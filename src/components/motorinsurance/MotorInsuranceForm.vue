@@ -2,14 +2,14 @@
 import CoverDetailsForm from './CoverDetailsForm.vue';
 import VehicleDetailsForm from './VehicleDetailsForm.vue';
 import { useFormDataStore } from '../../store/formData'
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const store = useFormDataStore() //for storing data in store
 
-const route = useRoute()
-const router = useRouter()
-const formData = ref(store.motorInsuranceData)
+const route = useRoute() // initialise route object
+const router = useRouter() // initialise router object
+const formData = ref(store.motorInsuranceData) // form data
 const activeForm = ref('CoverDetailsForm') //active form
 
 // for form component switching
@@ -17,6 +17,18 @@ const forms = {
     CoverDetailsForm,
     VehicleDetailsForm,
 }
+
+//watch route to update form on page
+watch(() => route.query.form, (newQuery) => {
+    switch (newQuery) {
+        case 'cover_details': activeForm.value = 'CoverDetailsForm';
+
+            break;
+        case 'vehicle_details': activeForm.value = 'VehicleDetailsForm'
+            break;
+        default: activeForm.value = 'CoverDetailsForm'
+    }
+})
 
 // function that checks route for form query param and displays corresponding form
 function updateForm() {
@@ -31,6 +43,10 @@ function updateForm() {
 }
 
 //function to get data from the various forms
+/**
+ * 
+ * @param {object} data - this is what waht
+ */
 function getFormData(data) {
     // helper function that checks route for form query param and displays corresponding form
     updateForm()

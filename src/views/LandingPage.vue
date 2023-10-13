@@ -5,8 +5,10 @@ import CheckMark from '../components/CheckMark.vue';
 </script>
 
 <template>
-    
+    <!-- Header -->
     <LandingHeader />
+
+    <!-- Main content -->
     <main class="">
 
         <!-- compare products -->
@@ -119,12 +121,4 @@ import CheckMark from '../components/CheckMark.vue';
             </div>
         </section>
     </main>
-
-    
 </template>
-
-<style scoped>
-.d {
-    color: #71b8ea;
-}
-</style>

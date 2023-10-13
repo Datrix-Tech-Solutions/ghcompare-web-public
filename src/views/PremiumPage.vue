@@ -1,8 +1,15 @@
 <script setup>
+// @ts-check
+
 import FormSummary from '../components/motorinsurance/FormSummary.vue';
 import { useFormDataStore } from '../store/formData';
 
-const store = useFormDataStore()
+const store = useFormDataStore() //initialize store
+
+/**
+ *  Motor Insurance Form data from store...
+ *  @type {Object}
+ */
 const formData = store.motorInsuranceData
 </script>
 
@@ -19,14 +26,20 @@ const formData = store.motorInsuranceData
         <!-- Details section -->
         <section class="pt-20">
             <div class="flex gap-10 items-center ">
+
+                <!-- Form summary -->
                 <div class="w-1/2">
                     <FormSummary :form-data="formData" />
                 </div>
+
+                <!-- Display premium -->
                 <div class="w-1/2">
                     <p class="text-center font-semibold text-2xl mb-3">
                         Total Premium Payable
                     </p>
                     <p class="text-center text-primary text-5xl font-bold">Gh&#8373;200</p>
+
+                    <!-- button to compare offers -->
                     <div class="flex mt-10 justify-center">
                         <button class="group button-primary w-1/2">Compare Offers
                         </button>
