@@ -29,6 +29,12 @@ const vehicleDetails = {
     privateUse, commercialUse,
 }
 
+//to hide and show various info on these fields
+const showVehicleUseInfo = ref(false)
+const showRiskTypeInfo = ref(false)
+const showSeatsInfo = ref(false)
+const showAmountInsuredInfo = ref(false)
+
 //emits
 const emit = defineEmits(['sendFormData', 'updateForm'])
 
@@ -70,7 +76,21 @@ async function submit() {
             <!-- Vehicle use -->
             <div class="flex justify-between ">
                 <h4 class="text-lg text-primary font-semibold mb-3">Vehicle Use</h4>
-                <QuestionMarkCircleIcon class="w-6 h-6 text-primary" />
+
+                <!-- Information on Vehicle use -->
+                <div class="relative">
+                    <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
+                        @click="() => { showVehicleUseInfo = !showVehicleUseInfo }" />
+
+                    <!-- overlay for hiding vehicle use info card -->
+                    <div class="overlay fixed top-0 bottom-0 left-0 right-0" @click="() => { showVehicleUseInfo = false }"
+                        v-if="showVehicleUseInfo"></div>
+
+                    <!-- vehicle use information card -->
+                    <div class="absolute w-96 z-10 top-full right-0" v-if="showVehicleUseInfo">
+                        <Information />
+                    </div>
+                </div>
             </div>
 
             <div class="flex gap-5">
@@ -98,8 +118,22 @@ async function submit() {
                 <h4 class="text-lg text-primary font-semibold mb-3"
                     :class="{ disabled: vehicleData.data.vehicleUse == '' }">
                     Risk Type </h4>
-                <QuestionMarkCircleIcon class="w-6 h-6 text-primary"
-                    :class="{ disabled: vehicleData.data.vehicleUse == '' }" />
+
+                <!-- Information on risk type -->
+                <div class="relative">
+                    <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer !pointer-events-auto"
+                        :class="{ disabled: vehicleData.data.vehicleUse == '' }"
+                        @click="() => { showRiskTypeInfo = !showRiskTypeInfo }" />
+
+                    <!-- overlay for hiding risk type info card -->
+                    <div class="overlay fixed top-0 bottom-0 left-0 right-0" @click="() => { showRiskTypeInfo = false }"
+                        v-if="showRiskTypeInfo"></div>
+
+                    <!-- risk type information card -->
+                    <div class="absolute w-96 z-10 top-full right-0" v-if="showRiskTypeInfo">
+                        <Information />
+                    </div>
+                </div>
             </div>
 
             <div class="" :title="vehicleData.data.vehicleUse ? '' : 'Please select vehicle use value'">
@@ -120,7 +154,22 @@ async function submit() {
             <!-- Number of seats -->
             <div class="flex justify-between">
                 <h4 class="text-lg text-primary font-semibold mb-3">Number of Seats</h4>
-                <QuestionMarkCircleIcon class="w-6 h-6 text-primary" />
+
+
+                <!-- Information on number of seats -->
+                <div class="relative">
+                    <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
+                        @click="() => { showSeatsInfo = !showSeatsInfo }" />
+
+                    <!-- overlay for hiding number of seats info card -->
+                    <div class="overlay fixed top-0 bottom-0 left-0 right-0" @click="() => { showSeatsInfo = false }"
+                        v-if="showSeatsInfo"></div>
+
+                    <!-- number of seats information card -->
+                    <div class="absolute w-96 z-10 top-full right-0" v-if="showSeatsInfo">
+                        <Information />
+                    </div>
+                </div>
             </div>
 
             <div class="">
@@ -134,7 +183,21 @@ async function submit() {
             <div class="" v-if="formData?.coverDetails.coverType !== 'Third Party'">
                 <div class="flex justify-between ">
                     <h4 class="text-lg text-primary font-semibold mb-3">Amount Insured</h4>
-                    <QuestionMarkCircleIcon class="w-6 h-6 text-primary" />
+
+                    <!-- Information on amount insured -->
+                    <div class="relative">
+                        <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
+                            @click="() => { showAmountInsuredInfo = !showAmountInsuredInfo }" />
+
+                        <!-- overlay for hiding amount insured info card -->
+                        <div class="overlay fixed top-0 bottom-0 left-0 right-0"
+                            @click="() => { showAmountInsuredInfo = false }" v-if="showAmountInsuredInfo"></div>
+
+                        <!-- amount insured information card -->
+                        <div class="absolute w-96 top-full right-0" v-if="showAmountInsuredInfo">
+                            <Information />
+                        </div>
+                    </div>
                 </div>
 
                 <div class="">

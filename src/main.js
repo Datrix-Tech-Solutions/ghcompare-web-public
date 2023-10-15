@@ -4,6 +4,9 @@ import "./style.css";
 import App from "./App.vue";
 import router from "./router";
 
+//global components
+import Information from './components/motorinsurance/Information.vue'
+
 const pinia = createPinia()
 
-createApp(App).use(router).use(pinia).mount("#app");
+createApp(App).use(router).use(pinia).component('Information', Information).mount("#app");

@@ -6,6 +6,8 @@ import { ref } from 'vue';
 
 const router = useRouter()
 
+
+
 const props = defineProps({
     formData: {
         type: Object
@@ -18,6 +20,8 @@ const coverData = ref({
     data: props.formData.coverDetails,
 })
 
+
+
 /**
  * cover type and duration options 
  * @type {object}
@@ -26,6 +30,9 @@ const coverDetails = {
     coverType,
     duration,
 }
+
+const showCoverTypeInfo = ref(false) //to hide and show cover type info
+const showDurationInfo = ref(false) //to hide and show duration info
 
 //emits
 const emit = defineEmits(['sendFormData'])
@@ -47,9 +54,23 @@ async function submitForm() {
         <!-- the form -->
         <form @submit.prevent="submitForm">
             <!-- cover type -->
-            <div class="flex justify-between ">
+            <div class="flex justify-between items-start">
                 <h4 class="text-lg text-primary font-semibold mb-3">Cover Type</h4>
-                <QuestionMarkCircleIcon class="w-6 h-6 text-primary" />
+
+                <!-- Information on cover Type -->
+                <div class="relative">
+                    <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
+                        @click="() => { showCoverTypeInfo = !showCoverTypeInfo }" />
+
+                    <!-- overlay for hiding cover type info card -->
+                    <div class="overlay fixed top-0 bottom-0 left-0 right-0" @click="() => { showCoverTypeInfo = false }"
+                        v-if="showCoverTypeInfo"></div>
+
+                    <!-- cover type information card -->
+                    <div class="absolute w-96 top-full right-0" v-if="showCoverTypeInfo">
+                        <Information />
+                    </div>
+                </div>
             </div>
 
             <div class="">
@@ -65,9 +86,23 @@ async function submitForm() {
             <hr class="my-6">
 
             <!-- Duration -->
-            <div class="flex justify-between ">
+            <div class="flex justify-between items-start">
                 <h4 class="text-lg text-primary font-semibold mb-3">Duration</h4>
-                <QuestionMarkCircleIcon class="w-6 h-6 text-primary" />
+
+                <!-- Information on Duration -->
+                <div class=" relative">
+                    <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
+                        @click="() => { showDurationInfo = !showDurationInfo }" />
+
+                    <!-- overlay for hiding duration info card -->
+                    <div class="overlay fixed top-0 bottom-0 left-0 right-0" @click="() => { showDurationInfo = false }"
+                        v-if="showDurationInfo"></div>
+
+                    <!-- duration informationm card... -->
+                    <div class="absolute w-96 top-full right-0 z-10" v-if="showDurationInfo">
+                        <Information />
+                    </div>
+                </div>
             </div>
 
             <div class="">

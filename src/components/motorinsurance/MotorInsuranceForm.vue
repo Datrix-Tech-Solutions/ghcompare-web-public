@@ -1,5 +1,4 @@
 <script setup>
-// @ts-check
 import CoverDetailsForm from './CoverDetailsForm.vue';
 import VehicleDetailsForm from './VehicleDetailsForm.vue';
 import { useFormDataStore } from '../../store/formData'
