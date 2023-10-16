@@ -1,6 +1,7 @@
 <script setup>
 import { ArrowRightIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
 import { coverTypeList as coverType, durationList as duration } from '../../data/car_data.js'
+import { helpInfo } from '../../data/help_data'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue';
 
@@ -30,6 +31,9 @@ const coverDetails = {
     coverType,
     duration,
 }
+
+//cover details information data 
+const info = ref(helpInfo.coverDetailsHelp)
 
 const showCoverTypeInfo = ref(false) //to hide and show cover type info
 const showDurationInfo = ref(false) //to hide and show duration info
@@ -67,8 +71,14 @@ async function submitForm() {
                         v-if="showCoverTypeInfo"></div>
 
                     <!-- cover type information card -->
-                    <div class="absolute w-96 top-full right-0" v-if="showCoverTypeInfo">
-                        <Information />
+                    <div class="absolute w-96 top-full z-10 right-0" v-if="showCoverTypeInfo">
+                        <Information>
+                            <p class="mb-2">{{ info.coverType.info }}</p>
+                            <ul v-for="type in info.coverType.type" :key="type.name">
+                                <li class="mb-2 ml-2"><span class="font-semibold">{{ type.name }}</span>: {{ type.info }}
+                                </li>
+                            </ul>
+                        </Information>
                     </div>
                 </div>
             </div>
@@ -100,7 +110,9 @@ async function submitForm() {
 
                     <!-- duration informationm card... -->
                     <div class="absolute w-96 top-full right-0 z-10" v-if="showDurationInfo">
-                        <Information />
+                        <Information>
+                            <p>{{ info.duration }}</p>
+                        </Information>
                     </div>
                 </div>
             </div>

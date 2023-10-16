@@ -2,6 +2,7 @@
 // @ts-check
 import { ArrowLeftIcon, ArrowRightIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
 import { privateUse, commercialUse } from '../../data/car_data';
+import { helpInfo } from '../../data/help_data'
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 
@@ -28,6 +29,9 @@ const vehicleData = ref({
 const vehicleDetails = {
     privateUse, commercialUse,
 }
+
+//vehicle details info data
+const info = ref(helpInfo.vehicleDetailsHelp)
 
 //to hide and show various info on these fields
 const showVehicleUseInfo = ref(false)
@@ -74,7 +78,7 @@ async function submit() {
         <!-- the form -->
         <form @submit.prevent="submit">
             <!-- Vehicle use -->
-            <div class="flex justify-between ">
+            <div class="flex justify-between items-start">
                 <h4 class="text-lg text-primary font-semibold mb-3">Vehicle Use</h4>
 
                 <!-- Information on Vehicle use -->
@@ -88,7 +92,9 @@ async function submit() {
 
                     <!-- vehicle use information card -->
                     <div class="absolute w-96 z-10 top-full right-0" v-if="showVehicleUseInfo">
-                        <Information />
+                        <Information>
+                            <p>{{ info.vehicleUse }}</p>
+                        </Information>
                     </div>
                 </div>
             </div>
@@ -114,7 +120,7 @@ async function submit() {
             <hr class="my-8">
 
             <!-- Risk Type -->
-            <div class="flex justify-between">
+            <div class="flex justify-between items-start">
                 <h4 class="text-lg text-primary font-semibold mb-3"
                     :class="{ disabled: vehicleData.data.vehicleUse == '' }">
                     Risk Type </h4>
@@ -131,7 +137,9 @@ async function submit() {
 
                     <!-- risk type information card -->
                     <div class="absolute w-96 z-10 top-full right-0" v-if="showRiskTypeInfo">
-                        <Information />
+                        <Information>
+                            <p>{{ info.riskType }}</p>
+                        </Information>
                     </div>
                 </div>
             </div>
@@ -152,7 +160,7 @@ async function submit() {
             <hr class="my-8">
 
             <!-- Number of seats -->
-            <div class="flex justify-between">
+            <div class="flex justify-between items-start">
                 <h4 class="text-lg text-primary font-semibold mb-3">Number of Seats</h4>
 
 
@@ -167,7 +175,9 @@ async function submit() {
 
                     <!-- number of seats information card -->
                     <div class="absolute w-96 z-10 top-full right-0" v-if="showSeatsInfo">
-                        <Information />
+                        <Information>
+                            <p>{{ info.seats }}</p>
+                        </Information>
                     </div>
                 </div>
             </div>
@@ -181,7 +191,7 @@ async function submit() {
 
             <!-- Amount insured -->
             <div class="" v-if="formData?.coverDetails.coverType !== 'Third Party'">
-                <div class="flex justify-between ">
+                <div class="flex justify-between items-start ">
                     <h4 class="text-lg text-primary font-semibold mb-3">Amount Insured</h4>
 
                     <!-- Information on amount insured -->
@@ -195,7 +205,9 @@ async function submit() {
 
                         <!-- amount insured information card -->
                         <div class="absolute w-96 top-full right-0" v-if="showAmountInsuredInfo">
-                            <Information />
+                            <Information>
+                                <p>{{ info.amountInsured }}</p>
+                            </Information>
                         </div>
                     </div>
                 </div>
