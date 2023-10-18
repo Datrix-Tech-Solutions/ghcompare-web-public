@@ -20,7 +20,7 @@ import CheckMark from '../components/CheckMark.vue';
                 <!-- Insurance Cards -->
                 <div class="flex justify-center gap-5 mt-10">
                     <InsuranceCard image="./src/assets/vehicle3.png" text="Motor Insurance" link="MotorInsurance" />
-                    <InsuranceCard image="./src/assets/house2.png" text="Home Insurance" />
+                    <InsuranceCard image="./src/assets/house2.png" text="Home Insurance" link="HomeInsurance" />
                     <InsuranceCard image="./src/assets/travel-luggage2.png" text="Travel Insurance" />
                 </div>
             </div>
