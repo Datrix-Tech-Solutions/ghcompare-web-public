@@ -14,9 +14,12 @@ const formData = ref(store.homeInsuranceData)
 /**
  * function submits form and directs to premium page
  */
-function submit() {
+async function submit() {
     store.homeInsuranceData = formData.value
-    router.push({ name: 'HomePremium' })
+    await store.getHomePremium()
+    if (store.success) {
+        router.push({ name: 'HomePremium' })
+    }
 }
 </script>
 
@@ -52,7 +55,9 @@ function submit() {
 
             <!-- Submit button -->
             <div class="flex justify-end">
-                <button class="group button-primary">Submit
+                <button class="group button-primary" v-if="store.gettingPremium">Submitting...
+                </button>
+                <button class="group button-primary" v-else>Submit
                     <ArrowRightIcon class="w-5 h-5 inline group-hover:translate-x-2 transition" />
                 </button>
             </div>

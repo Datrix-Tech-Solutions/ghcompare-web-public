@@ -3,17 +3,20 @@ import dayjs from 'dayjs'
 import { ref } from 'vue';
 import { useFormDataStore } from '../../store/formData';
 
+//initialize store
 const store = useFormDataStore()
-
+/**
+ * shows that edit mode is
+ */
 const edit = ref(false);
 const formData = ref(store.homeInsuranceData.homeRisks[0])
 
-function saveChanges() {
+async function saveChanges() {
     edit.value = false
     formData.value.startDate = dayjs(formData.value.startDate).toISOString()
     formData.value.endDate = dayjs(formData.value.endDate).toISOString()
     store.homeInsuranceData.homeRisks[0] = formData.value
-    console.log(store.homeInsuranceData)
+    await store.getHomePremium()
 }
 </script>
 
@@ -25,7 +28,7 @@ function saveChanges() {
             </div>
             <div class="w-1/2 text-center">
                 <p class="text-xl mb-2">Total premium payable</p>
-                <p class="text-3xl text-primary font-bold">Gh&#8373;200</p>
+                <p class="text-3xl text-primary font-bold">Gh&#8373;{{ store.homeInsurancePremium }}</p>
             </div>
         </div>
 
@@ -64,6 +67,7 @@ function saveChanges() {
             <div class="flex justify-end my-7 ">
                 <button class="button-transparent" v-if="edit" @click="saveChanges">Save changes</button>
 
+                <button class="button-transparent" v-else-if="!edit && store.gettingPremium">Calculating...</button>
                 <button @click="() => { edit = true }" class="button-transparent" v-else>Change details</button>
             </div>
         </form>
