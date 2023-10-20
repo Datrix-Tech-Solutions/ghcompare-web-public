@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { star_api } from "../api/api";
+import dayjs from "dayjs";
 
 export const useFormDataStore = defineStore("formData", () => {
   /**
@@ -41,8 +42,8 @@ export const useFormDataStore = defineStore("formData", () => {
     homeRisks: [
       {
         sectionCode: "1", // Building
-        startDate: "2021-07-22T00:00:00",
-        endDate: "2022-07-21T00:00:00",
+        startDate: dayjs().format(),
+        endDate: dayjs().add(1, "y").format(),
         sumInsured: 10000,
       },
     ],
@@ -72,7 +73,7 @@ export const useFormDataStore = defineStore("formData", () => {
       ).data;
       //   console.log(data);
       // get total premium for home insurance
-      homeInsurancePremium.value = data.data.homeRisks[0].premium.toFixed(2);
+      homeInsurancePremium.value = data.data.TotalPremium.toFixed(2);
       gettingPremium.value = false;
       success.value = true;
       err.value = false;

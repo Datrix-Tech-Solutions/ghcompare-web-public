@@ -66,7 +66,7 @@ function getFormData(data) {
 onMounted(() => {
     // checks if there is query params and assigns cover_details if there are none
     if (Object.keys(route.query).length === 0) {
-        router.push({ name: 'MotorInsurance', query: { form: 'cover_details' } })
+        router.replace({ name: 'MotorInsurance', query: { form: 'cover_details' } })
     }
 
     //this function runs to display form based on query params

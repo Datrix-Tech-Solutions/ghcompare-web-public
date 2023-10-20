@@ -11,6 +11,12 @@ const store = useFormDataStore()
 const edit = ref(false);
 const formData = ref(store.homeInsuranceData.homeRisks[0])
 
+function editDetails() {
+    formData.value.startDate = dayjs(formData.value.startDate).format('YYYY-MM-DD')
+    formData.value.endDate = dayjs(formData.value.endDate).format('YYYY-MM-DD')
+    edit.value = true
+}
+
 async function saveChanges() {
     edit.value = false
     formData.value.startDate = dayjs(formData.value.startDate).toISOString()
@@ -68,7 +74,7 @@ async function saveChanges() {
                 <button class="button-transparent" v-if="edit" @click="saveChanges">Save changes</button>
 
                 <button class="button-transparent" v-else-if="!edit && store.gettingPremium">Calculating...</button>
-                <button @click="() => { edit = true }" class="button-transparent" v-else>Change details</button>
+                <button @click="editDetails" class="button-transparent" v-else>Change details</button>
             </div>
         </form>
     </div>

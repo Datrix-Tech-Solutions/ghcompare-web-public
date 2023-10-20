@@ -1,12 +1,15 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue';
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 </script>
 
 <template>
   <div class="bg-[#f0f3f5]">
     <!-- navigation bar -->
-    <NavBar />
+    <NavBar :key="route.path" />
 
     <router-view></router-view>
 
@@ -26,7 +29,8 @@ html {
 }
 
 input,
-select {
+select,
+textarea {
   background: transparent;
   border: 1px solid #dcdcdc;
   border-radius: 8px;
@@ -48,5 +52,15 @@ input[type=number] {
 input:focus,
 select:focus {
   outline: 2px solid var(--primary-color)
+}
+
+.glass {
+  /* From https://css.glass */
+  background: rgba(244, 247, 249, 0.41);
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(100, 92, 92, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(205, 213, 215, 0.57);
 }
 </style>

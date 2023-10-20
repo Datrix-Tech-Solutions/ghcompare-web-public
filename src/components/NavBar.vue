@@ -1,12 +1,67 @@
 <script setup>
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
+import DropDown from './DropDown.vue'
 
-// const links = [
-//     {
-//         text: 'Home',
-//         to: 'LandingPage'
-//     },
-// ]
+const links = [
+    {
+        text: 'Home',
+        to: 'LandingPage'
+    },
+    {
+        text: 'Compare',
+        to: '',
+        dropdown: [
+            {
+                text: 'Motor Insurance',
+                to: 'MotorInsurance'
+            },
+            {
+                text: 'Home Insurance',
+                to: 'HomeInsurance'
+            },
+            {
+                text: 'Travel Insurance',
+                to: ''
+            },
+        ]
+    },
+    {
+        text: 'Learn More',
+        to: '',
+        dropdown: [
+            {
+                text: 'Why Insure',
+                to: ''
+            },
+            {
+                text: 'Policies',
+                to: ''
+            },
+            {
+                text: 'About GhCompare',
+                to: ''
+            },
+        ],
+    },
+    {
+        text: 'Support',
+        to: '',
+        dropdown: [
+            {
+                text: 'Contact Us',
+                to: 'ContactUs'
+            },
+            {
+                text: 'FAQs',
+                to: ''
+            },
+            {
+                text: 'Book an Appointment',
+                to: ''
+            },
+        ]
+    },
+]
 </script>
 
 <template>
@@ -22,19 +77,21 @@ import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 
             <!-- Links -->
             <div class="flex items-center gap-7">
-                <div class="links">
-                    <router-link :to="{ name: 'LandingPage' }"
-                        class="font-semibold text-gray-600 mr-7 hover:text-primary transition">Home</router-link>
-                    <a href="#" class="font-semibold text-gray-600 mr-5 hover:text-primary transition">Compare
-                        <ChevronDownIcon class="inline w-4 h-4" />
-                    </a>
-                    <a href="#" class="font-semibold text-gray-600 mr-5 hover:text-primary transition">Learn More
-                        <ChevronDownIcon class="inline w-4 h-4" />
-                    </a>
-                    <a href="#" class="font-semibold text-gray-600 hover:text-primary transition">Support
-                        <ChevronDownIcon class="inline w-4 h-4" />
-                    </a>
+                <div class="links" v-for="(link, index) in links" :key="index">
+                    <div class="group  relative">
+                        <router-link :to="{ name: link.to }"
+                            class="py-1 font-semibold text-gray-600 mr- hover:text-primary transition">{{
+                                link.text }}
+                            <ChevronDownIcon class="inline w-4 h-4" v-if="link.dropdown" />
+                        </router-link>
+                        <!-- dropdown -->
+                        <DropDown v-if="link.dropdown" :links="link.dropdown"
+                            class="absolute right-0 group-hover:block hidden hover:block" />
+
+                    </div>
                 </div>
+
+                <!-- divider -->
                 <div class="w-[2px] bg-gray-600 h-5"></div>
 
                 <!-- Login and sign up -->

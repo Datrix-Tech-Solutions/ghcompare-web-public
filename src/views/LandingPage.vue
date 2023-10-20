@@ -12,7 +12,7 @@ import CheckMark from '../components/CheckMark.vue';
     <main class="">
 
         <!-- compare products -->
-        <section class="py-28 max-width">
+        <section class="py-28 max-width" id="start-comparing">
             <div class="text-center">
                 <h2 class="text-4xl font-semibold">Compare and Get the best deals.</h2>
                 <p class="text-lg mt-3 text-gray-600">Save money by choosing the best deals for the service you need.</p>

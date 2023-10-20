@@ -9,15 +9,25 @@ const routes = [
     component: LandingPage,
   },
 
+  //Contact page
+  {
+    path: "/contact-us",
+    name: "ContactUs",
+    component: () =>
+      import(/* webpackChunkName: "Contact" */ "../views/ContactUs.vue"),
+  },
+
   //Motor insurance
   {
     path: "/motor-insurance",
     name: "MotorInsurance",
     component: () =>
-      import(/* webpackChunkName: "MotorInsurance" */ "../views/MotorInsurance.vue"),
-      meta: {
-        insuranceType: 'motor-insurance'
-      }
+      import(
+        /* webpackChunkName: "MotorInsurance" */ "../views/MotorInsurance.vue"
+      ),
+    meta: {
+      insuranceType: "motor-insurance",
+    },
   },
 
   //Home insurance
@@ -25,10 +35,12 @@ const routes = [
     path: "/home-insurance",
     name: "HomeInsurance",
     component: () =>
-      import(/* webpackChunkName: "HomeInsurance" */ "../views/HomeInsurance.vue"),
-      meta: {
-        insuranceType: 'home-insurance'
-      }
+      import(
+        /* webpackChunkName: "HomeInsurance" */ "../views/HomeInsurance.vue"
+      ),
+    meta: {
+      insuranceType: "home-insurance",
+    },
   },
 
   //display premium ( motor insurance )
@@ -36,7 +48,9 @@ const routes = [
     path: "/:insuranceType/premium",
     name: "Premium",
     component: () =>
-      import(/* webpackChunkName: "MotorInsurancePremium" */ "../views/PremiumPage.vue"),
+      import(
+        /* webpackChunkName: "MotorInsurancePremium" */ "../views/PremiumPage.vue"
+      ),
   },
 
   //display premium ( home insurance )
@@ -54,10 +68,9 @@ const router = createRouter({
   linkActiveClass: "active-link",
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
-      if (to.hash == "#enroll") {
+      if (to.hash == "#start-comparing") {
         return {
           el: to.hash,
-          top: 80,
           behavior: "smooth",
         };
       }

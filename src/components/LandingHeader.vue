@@ -14,9 +14,9 @@ import { ArrowRightIcon } from '@heroicons/vue/24/outline'
                     Save
                     yourself the hassle, with few clicks...</p>
 
-                <a href="#" class="group button-primary py-4 px-8 text-xl">Start Comparing
+                <router-link :to="{ hash: '#start-comparing' }" class="group button-primary py-4 px-8 text-xl">Start Comparing
                     <ArrowRightIcon class="inline w-5 h-5 group-hover:translate-x-2 transition" />
-                </a>
+                </router-link>
             </div>
 
             <div class="w-1/2">

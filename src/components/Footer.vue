@@ -9,12 +9,15 @@ import { PhoneIcon, MapPinIcon, EnvelopeIcon } from "@heroicons/vue/24/outline"
 const compare = [
     {
         text: "Motor Insurance",
+        to: 'MotorInsurance'
     },
     {
         text: "Home Insurance",
+        to: 'HomeInsurance'
     },
     {
         text: "Travel Insurance",
+        to: ''
     },
 ]
 
@@ -23,9 +26,8 @@ const compare = [
  * @type {Array<object>}
  */
 const company = [
-    { text: "Home" },
+    { text: "Home", to: 'LandingPage' },
     { text: "About Us" },
-    { text: "Our Services" },
     { text: "Privacy Policy" },
     { text: "Terms & Condition" },
 ]
@@ -48,7 +50,8 @@ const company = [
             <div class="w-[300px]">
                 <h3 class="font-bold text-xl text-black mb-5">Company</h3>
                 <ul v-for="(item, index) in company" :key="index">
-                    <li class="mb-3"><a href="#" class="hover:text-primary">{{ item.text }}</a></li>
+                    <li class="mb-3"><router-link :to="{ name: item.to }" class="hover:text-primary">{{ item.text
+                    }}</router-link></li>
                 </ul>
             </div>
 
@@ -56,7 +59,8 @@ const company = [
             <div class="w-[300px]">
                 <h3 class="font-bold text-xl text-black mb-5">Compare</h3>
                 <ul v-for="(item, index) in compare" :key="index">
-                    <li class="mb-3"><a href="#" class="hover:text-primary">{{ item.text }}</a></li>
+                    <li class="mb-3"><router-link :to="{ name: item.to }" class="hover:text-primary">{{ item.text
+                    }}</router-link></li>
                 </ul>
             </div>
 
