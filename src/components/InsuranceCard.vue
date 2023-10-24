@@ -15,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-    <div class="group border rounded p-5 w-80 hover:outline-1 hover:outline hover:outline-primary">
+    <div class="group border rounded p-5 w-80 hover:outline-1 hover:outline hover:outline-primary mx-auto">
         <!-- icon image  -->
         <img :src="image" alt="" class="w-28 mx-auto grayscale-[70%] group-hover:grayscale-[10%] transition-all">
         <!-- text -->

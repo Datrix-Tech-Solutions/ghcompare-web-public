@@ -51,7 +51,7 @@ async function submitForm() {
 </script>
 
 <template>
-    <div class="bg-white max-w-2xl py-10 px-14 rounded-lg mx-auto">
+    <div class="bg-white max-w-2xl py-10 md:px-14 px-6 rounded-lg mx-auto">
         <!-- Cover details -->
         <h3 class="text-2xl font-bold mb-5">Cover Details</h3>
 
@@ -71,7 +71,7 @@ async function submitForm() {
                         v-if="showCoverTypeInfo"></div>
 
                     <!-- cover type information card -->
-                    <div class="absolute w-96 top-full z-10 right-0" v-if="showCoverTypeInfo">
+                    <div class="absolute sm:w-96 w-[75vw]  top-full z-10 right-0" v-if="showCoverTypeInfo">
                         <Information>
                             <p class="mb-2">{{ info.coverType.info }}</p>
                             <ul v-for="type in info.coverType.type" :key="type.name">
@@ -109,7 +109,7 @@ async function submitForm() {
                         v-if="showDurationInfo"></div>
 
                     <!-- duration informationm card... -->
-                    <div class="absolute w-96 top-full right-0 z-10" v-if="showDurationInfo">
+                    <div class="absolute sm:w-96 w-[75vw] top-full right-0 z-10" v-if="showDurationInfo">
                         <Information>
                             <p>{{ info.duration }}</p>
                         </Information>

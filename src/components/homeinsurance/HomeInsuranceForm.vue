@@ -24,7 +24,7 @@ async function submit() {
 </script>
 
 <template>
-    <div class="bg-white max-w-2xl py-20 px-14 rounded-lg mx-auto">
+    <div class="bg-white max-w-2xl py-20 md:px-14 px-6 rounded-lg mx-auto">
 
         <h3 class="text-2xl font-bold mb-10">Your Details</h3>
 

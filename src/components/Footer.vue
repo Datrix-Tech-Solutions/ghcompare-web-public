@@ -35,7 +35,7 @@ const company = [
 
 <template>
     <footer class="bg-gray-200  text-gray-600">
-        <div class="max-width flex justify-between gap-5 py-20">
+        <div class="max-width flex md:justify-around mlg:justify-between gap-5 py-20 mlg:flex-nowrap flex-wrap">
             <!-- Logo and description -->
             <div class="w-[350px]">
                 <img src="../assets/logo.png" alt="ghcompare" class="max-w-[200px] mb-5">

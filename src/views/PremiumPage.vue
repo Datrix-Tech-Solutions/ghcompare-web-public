@@ -25,15 +25,15 @@ const formData = store.motorInsuranceData
 
         <!-- Details section -->
         <section class="pt-20">
-            <div class="flex gap-10 items-center ">
+            <div class="flex gap-10 items-center mlg:flex-row flex-col-reverse">
 
                 <!-- Form summary -->
-                <div class="w-1/2">
+                <div class="mlg:w-1/2 w-full">
                     <FormSummary :form-data="formData" />
                 </div>
 
                 <!-- Display premium -->
-                <div class="w-1/2">
+                <div class="mlg:w-1/2 w-full">
                     <p class="text-center font-semibold text-2xl mb-3">
                         Total Premium Payable
                     </p>

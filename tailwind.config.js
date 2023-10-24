@@ -16,6 +16,7 @@ export default {
       screens: {
         xs: "480px",
         sm: "600px",
+        mlg: "930px", //medium large... this is between large and medium
         // => @media (min-width: 992px) { ... }
       },
     },

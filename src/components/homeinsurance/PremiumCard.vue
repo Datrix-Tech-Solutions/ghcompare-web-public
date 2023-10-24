@@ -27,14 +27,14 @@ async function saveChanges() {
 </script>
 
 <template>
-    <div class="glass py-4 p-14 w-[600px]">
-        <div class="flex justify-betweens items-center py-4">
-            <div class="w-1/2">
-                <img src="../../assets/partners/star_assurancee.png" alt="star assurance" class="w-[90%] mx-auto">
+    <div class="glass py-4 md:px-14 px-6 max-w-[600px]">
+        <div class="flex justify-between  py-4 pt-0  flex-col">
+            <div class="">
+                <img src="../../assets/partners/star_assurancee.png" alt="star assurance" class=" w-60 mx-auto">
             </div>
-            <div class="w-1/2 text-center">
+            <div class=" flex justify-between gap-2">
                 <p class="text-xl mb-2">Total premium payable</p>
-                <p class="text-3xl text-primary font-bold">Gh&#8373;{{ store.homeInsurancePremium }}</p>
+                <p class="text-2xl xs:text-3xl text-primary font-bold">Gh&#8373;{{ store.homeInsurancePremium }}</p>
             </div>
         </div>
 

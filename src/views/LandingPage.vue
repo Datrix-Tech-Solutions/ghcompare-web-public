@@ -18,7 +18,7 @@ import CheckMark from '../components/CheckMark.vue';
                 <p class="text-lg mt-3 text-gray-600">Save money by choosing the best deals for the service you need.</p>
 
                 <!-- Insurance Cards -->
-                <div class="flex justify-center gap-5 mt-10">
+                <div class="flex justify-center gap-5 mt-10 flex-col sm:flex-row">
                     <InsuranceCard image="./src/assets/vehicle3.png" text="Motor Insurance" link="MotorInsurance" />
                     <InsuranceCard image="./src/assets/house2.png" text="Home Insurance" link="HomeInsurance" />
                     <InsuranceCard image="./src/assets/travel-luggage2.png" text="Travel Insurance" />
@@ -31,10 +31,10 @@ import CheckMark from '../components/CheckMark.vue';
             <div class="max-width">
                 <h2 class="text-5xl font-bold mb-10">How to buy</h2>
 
-                <div class="flex gap-20 justify-between items-center">
+                <div class="flex mlg:gap-20 gap-10 justify-between items-center">
 
                     <!-- Images overlapping -->
-                    <div class="w-1/2">
+                    <div class="w-1/2 hidden md:block">
                         <div class="relative aspect-[5/4]">
                             <img src="../assets/overlap2.jpg" class="absolute rounded-lg w-[70%]" alt="">
                             <img src="../assets/overlap.jpg" class="absolute rounded-lg bottom-0 right-0 w-[55%]" alt="">
@@ -42,9 +42,9 @@ import CheckMark from '../components/CheckMark.vue';
                     </div>
 
                     <!-- How to buy info -->
-                    <div class="w-1/2">
+                    <div class="md:w-1/2">
                         <!-- get quotes -->
-                        <div class="flex gap-5 items-start">
+                        <div class="flex mlg:gap-5 gap-3 items-start">
                             <!-- checkmark -->
                             <CheckMark />
 
@@ -58,7 +58,7 @@ import CheckMark from '../components/CheckMark.vue';
                         </div>
 
                         <!-- Compare Quotes -->
-                        <div class="flex gap-5 items-start my-8">
+                        <div class="flex mlg:gap-5 gap-3 items-start my-8">
                             <!-- checkmark -->
                             <CheckMark />
 
@@ -71,7 +71,7 @@ import CheckMark from '../components/CheckMark.vue';
                         </div>
 
                         <!-- Buy quotes -->
-                        <div class="flex gap-5 items-start">
+                        <div class="flex mlg:gap-5 gap-3 items-start">
                             <!-- checkmark -->
                             <CheckMark />
 
@@ -90,7 +90,9 @@ import CheckMark from '../components/CheckMark.vue';
 
         <!-- Partners Section -->
         <section class="max-width p-28">
-            <h2 class="text-4xl font-semibold mx-auto text-center max-w-4xl leading-[50px]">Compare genuine, precise Quotes
+            <h2 class="md:text-4xl text-3xl font-semibold mx-auto text-center max-w-4xl md:leading-[50px] leading-[40px]">
+                Compare genuine,
+                precise Quotes
                 from <span class="capitalize text-primary font-semibold">leading insurance providers</span> in the Country.
             </h2>
 

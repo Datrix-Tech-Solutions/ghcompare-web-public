@@ -6,8 +6,9 @@ import MotorInsuranceForm from '../components/motorinsurance/MotorInsuranceForm.
     <main class="max-width py-20">
         <!-- heading and some description -->
         <section>
-            <h2 class="text-5xl font-bold text-center text-primary">Motor Insurance Cover</h2>
-            <p class="m max-w-4xl capitalize mx-auto text-center mt-4 text-xl text-gray-600">Compare motor insurance quotes
+            <h2 class="md:text-5xl text-4xl font-bold text-center text-primary">Motor Insurance Cover</h2>
+            <p class="m max-w-4xl capitalize mx-auto text-center mt-4 md:text-xl text-lg text-gray-600">Compare motor
+                insurance quotes
                 and get the
                 best rates
             </p>

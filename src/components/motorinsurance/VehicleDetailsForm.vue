@@ -71,7 +71,7 @@ async function submit() {
 </script>
 
 <template>
-    <div class="bg-white max-w-2xl py-10 px-14 rounded-lg mx-auto">
+    <div class="bg-white max-w-2xl py-10 md:px-14 px-6 rounded-lg mx-auto">
         <!-- Vehicle details -->
         <h3 class="text-2xl font-bold mb-5">Vehicle Details</h3>
 
@@ -86,12 +86,12 @@ async function submit() {
                     <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
                         @click="() => { showVehicleUseInfo = !showVehicleUseInfo }" />
 
-                    <!-- overlay for hiding vehicle use info card -->
-                    <div class="overlay fixed top-0 bottom-0 left-0 right-0" @click="() => { showVehicleUseInfo = false }"
-                        v-if="showVehicleUseInfo"></div>
+                    <!-- overlay z-10 for hiding vehicle use info card -->
+                    <div class="overlay z-10 fixed top-0 bottom-0 left-0 right-0"
+                        @click="() => { showVehicleUseInfo = false }" v-if="showVehicleUseInfo"></div>
 
                     <!-- vehicle use information card -->
-                    <div class="absolute w-96 z-10 top-full right-0" v-if="showVehicleUseInfo">
+                    <div class="absolute sm:w-96 w-[75vw] z-10 top-full right-0" v-if="showVehicleUseInfo">
                         <Information>
                             <p>{{ info.vehicleUse }}</p>
                         </Information>
@@ -131,12 +131,12 @@ async function submit() {
                         :class="{ disabled: vehicleData.data.vehicleUse == '' }"
                         @click="() => { showRiskTypeInfo = !showRiskTypeInfo }" />
 
-                    <!-- overlay for hiding risk type info card -->
-                    <div class="overlay fixed top-0 bottom-0 left-0 right-0" @click="() => { showRiskTypeInfo = false }"
-                        v-if="showRiskTypeInfo"></div>
+                    <!-- overlay z-10 for hiding risk type info card -->
+                    <div class="overlay z-10 fixed top-0 bottom-0 left-0 right-0"
+                        @click="() => { showRiskTypeInfo = false }" v-if="showRiskTypeInfo"></div>
 
                     <!-- risk type information card -->
-                    <div class="absolute w-96 z-10 top-full right-0" v-if="showRiskTypeInfo">
+                    <div class="absolute sm:w-96 w-[75vw] z-10 top-full right-0" v-if="showRiskTypeInfo">
                         <Information>
                             <p>{{ info.riskType }}</p>
                         </Information>
@@ -169,12 +169,12 @@ async function submit() {
                     <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
                         @click="() => { showSeatsInfo = !showSeatsInfo }" />
 
-                    <!-- overlay for hiding number of seats info card -->
-                    <div class="overlay fixed top-0 bottom-0 left-0 right-0" @click="() => { showSeatsInfo = false }"
+                    <!-- overlay z-10 for hiding number of seats info card -->
+                    <div class="overlay z-10 fixed top-0 bottom-0 left-0 right-0" @click="() => { showSeatsInfo = false }"
                         v-if="showSeatsInfo"></div>
 
                     <!-- number of seats information card -->
-                    <div class="absolute w-96 z-10 top-full right-0" v-if="showSeatsInfo">
+                    <div class="absolute sm:w-96 w-[75vw] z-10 top-full right-0" v-if="showSeatsInfo">
                         <Information>
                             <p>{{ info.seats }}</p>
                         </Information>
@@ -199,12 +199,12 @@ async function submit() {
                         <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
                             @click="() => { showAmountInsuredInfo = !showAmountInsuredInfo }" />
 
-                        <!-- overlay for hiding amount insured info card -->
-                        <div class="overlay fixed top-0 bottom-0 left-0 right-0"
+                        <!-- overlay z-10 for hiding amount insured info card -->
+                        <div class="overlay z-10 fixed top-0 bottom-0 left-0 right-0"
                             @click="() => { showAmountInsuredInfo = false }" v-if="showAmountInsuredInfo"></div>
 
                         <!-- amount insured information card -->
-                        <div class="absolute w-96 top-full right-0" v-if="showAmountInsuredInfo">
+                        <div class="absolute sm:w-96 w-[75vw] top-full right-0" v-if="showAmountInsuredInfo">
                             <Information>
                                 <p>{{ info.amountInsured }}</p>
                             </Information>

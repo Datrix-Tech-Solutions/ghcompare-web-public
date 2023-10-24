@@ -1,5 +1,5 @@
 <script setup>
-import { ChevronDownIcon } from '@heroicons/vue/24/outline'
+import { ChevronDownIcon, Bars3BottomRightIcon } from '@heroicons/vue/24/outline'
 import DropDown from './DropDown.vue'
 
 const links = [
@@ -65,7 +65,7 @@ const links = [
 </script>
 
 <template>
-    <nav class="border-b">
+    <nav class="border-b sticky top-0 bg-[#f0f3f5] z-20">
         <div class="max-width flex justify-between items-center py-3 text-">
 
             <!-- Logo -->
@@ -76,7 +76,7 @@ const links = [
             </div>
 
             <!-- Links -->
-            <div class="flex items-center gap-7">
+            <div class="mlg:flex items-center gap-7 hidden">
                 <div class="links" v-for="(link, index) in links" :key="index">
                     <div class="group  relative">
                         <router-link :to="{ name: link.to }"
@@ -99,6 +99,11 @@ const links = [
                     <a href="#" class="button-primary mr-1">Login</a>
                     <a href="#" class="button-transparent">Sign up</a>
                 </div>
+            </div>
+
+            <!-- Mobile navigation -->
+            <div class="mlg:hidden">
+                <Bars3BottomRightIcon class="w-10 h-10 inline" />
             </div>
         </div>
     </nav>
