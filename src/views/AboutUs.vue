@@ -30,11 +30,12 @@ const whyUs = [
     <main class="max-width">
         <!-- Header -->
         <section class="">
-            <div class="flex items-center gap-10">
+            <div class="flex items-center mlg:gap-10 mlg:flex-row flex-col">
                 <!-- Text -->
-                <div class="w-1/2">
-                    <h2 class="text-6xl  font-bold mb-5">About <span class="text-primary">GhCompare</span></h2>
-                    <p class="text-xl max-w-[600px] text-gray-600">
+                <div class="mlg:w-1/2 mlg:mt-0 mt-10">
+                    <h2 class="md:text-6xl text-center mlg:text-left text-5xl font-bold mb-5">About <span
+                            class="text-primary">GhCompare</span></h2>
+                    <p class="text-xl max-w-[600px] text-gray-600 text-center mlg:text-left">
                         At GhCompare, we are passionate about helping you navigate the complex world of insurance. Our
                         mission is simple: to empower you with the knowledge and tools you need to make informed insurance
                         decisions that protect what matters most to you.
@@ -42,8 +43,8 @@ const whyUs = [
                 </div>
 
                 <!-- Image -->
-                <div class="w-1/2">
-                    <img src="../assets/about-1.png" alt="about-us" class="w-full">
+                <div class="mlg:w-1/2">
+                    <img src="../assets/about-1.png" alt="about-us" class="mlg:w-full sm:w-2/3 w-full mx-auto">
                 </div>
             </div>
         </section>
