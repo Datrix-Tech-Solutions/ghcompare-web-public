@@ -5,6 +5,7 @@ const routes = [
   //Home page
   {
     path: "/",
+    alias: "/home",
     name: "LandingPage",
     component: LandingPage,
   },
@@ -15,6 +16,14 @@ const routes = [
     name: "ContactUs",
     component: () =>
       import(/* webpackChunkName: "Contact" */ "../views/ContactUs.vue"),
+  },
+
+  //Contact page
+  {
+    path: "/about-us",
+    name: "AboutUs",
+    component: () =>
+      import(/* webpackChunkName: "About" */ "../views/AboutUs.vue"),
   },
 
   //Motor insurance

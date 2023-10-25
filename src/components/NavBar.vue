@@ -39,7 +39,7 @@ const links = [
             },
             {
                 text: 'About GhCompare',
-                to: ''
+                to: 'AboutUs'
             },
         ],
     },
