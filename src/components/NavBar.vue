@@ -1,6 +1,8 @@
 <script setup>
-import { ChevronDownIcon, Bars3BottomRightIcon } from '@heroicons/vue/24/outline'
+import { ChevronDownIcon, Bars3BottomRightIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import DropDown from './DropDown.vue'
+import MobileNav from './MobileNav.vue';
+import { ref } from 'vue';
 
 const links = [
     {
@@ -30,8 +32,8 @@ const links = [
         to: '',
         dropdown: [
             {
-                text: 'Why Insure',
-                to: ''
+                text: 'Why Insure?',
+                to: 'WhyInsure'
             },
             {
                 text: 'Policies',
@@ -62,6 +64,8 @@ const links = [
         ]
     },
 ]
+
+const showMobileNav = ref(false)
 </script>
 
 <template>
@@ -101,10 +105,72 @@ const links = [
                 </div>
             </div>
 
-            <!-- Mobile navigation -->
+
+
+            <!-- hamburgar -->
             <div class="mlg:hidden">
-                <Bars3BottomRightIcon class="w-10 h-10 inline" />
+                <Bars3BottomRightIcon class="w-10 h-10 inline cursor-pointer" @click="() => { showMobileNav = true }" />
             </div>
+
+        </div>
+
+        <!-- Mobile navigation -->
+        <div class="">
+
+            <!-- mobile nav -->
+            <Transition name="mobile">
+                <MobileNav v-if="showMobileNav" />
+            </Transition>
+
+            <!-- overlay -->
+            <Transition name="overlay">
+                <div class="inset-0 fixed backdrop-blur-sm bg-[#f4f7f969]" v-if="showMobileNav"
+                    @click="() => { showMobileNav = false }"></div>
+            </Transition>
+
+            <!-- close button -->
+            <Transition name="close">
+                <XMarkIcon class="inline w-12 h-12 fixed top-2 left-2 cursor-pointer" v-if="showMobileNav"
+                    @click="() => { showMobileNav = false }" />
+            </Transition>
         </div>
     </nav>
 </template>
+
+<style scoped>
+/* Mobile transition */
+.mobile-enter-active,
+.mobile-leave-active {
+    transition: transform 0.5s ease;
+    transform: translateX(0)
+}
+
+.mobile-enter-from,
+.mobile-leave-to {
+    transform: translateX(100%);
+}
+
+/* Overlay transition */
+.overlay-enter-active,
+.overlay-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.overlay-enter-from,
+.overlay-leave-to {
+    opacity: 0;
+}
+
+/* close icon transition */
+.close-enter-active,
+.close-leave-active {
+    transition: transform 0.4s ease 0.5s;
+    transform: scale(1, 1);
+}
+
+.close-enter-from,
+.close-leave-to {
+    transition: transform 0.2s ease 0s;
+    transform: scale(0)
+}
+</style>

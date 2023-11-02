@@ -14,7 +14,6 @@ const props = defineProps({
                 <router-link :to="{ name: link.to }"
                     class="my-4 font-semibold text-gray-600 block hover:text-primary transition">{{
                         link.text }}
-                    <ChevronDownIcon class="inline w-4 h-4" v-if="link.dropdown" />
                 </router-link>
             </template>
         </div>

@@ -18,7 +18,7 @@ const routes = [
       import(/* webpackChunkName: "Contact" */ "../views/ContactUs.vue"),
   },
 
-  //Contact page
+  //About page
   {
     path: "/about-us",
     name: "AboutUs",
@@ -68,6 +68,14 @@ const routes = [
     name: "HomePremium",
     component: () =>
       import(/* webpackChunkName: "HomePremium" */ "../views/HomePremium.vue"),
+  },
+
+  //Why Insure?
+  {
+    path: "/why-insure",
+    name: "WhyInsure",
+    component: () =>
+      import(/* webpackChunkName: "HomePremium" */ "../views/WhyInsure.vue"),
   },
 ];
 
