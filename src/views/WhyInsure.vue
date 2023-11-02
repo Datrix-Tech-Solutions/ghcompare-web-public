@@ -10,7 +10,7 @@ import { motorInsurance, insuranceAspects } from '../data/insurance_policies_dat
     <main class="max-width">
         <!-- Header - What is insurance -->
         <section class="my-10">
-            <div class="flex items-center mlg:gap-10 mlg:flex-row flex-col">
+            <div class="flex items-center gap-10 mlg:flex-row flex-col">
                 <!-- Text -->
                 <div class="mlg:w-1/2 mlg:mt-0 mt-10">
                     <h2 class="md:text-6xl text-center mlg:text-left text-5xl font-bold mb-5">What is <span
@@ -26,7 +26,7 @@ import { motorInsurance, insuranceAspects } from '../data/insurance_policies_dat
 
                 <!-- Image -->
                 <div class="mlg:w-1/2">
-                    <img src="../assets/what-is-insurance.jpg" alt="insurance" class="mlg:w-full sm:w-2/3 w-full mx-auto">
+                    <img src="../assets/why-insure.png" alt="insurance" class="mlg:w-full sm:w-2/3 w-full mx-auto">
                 </div>
             </div>
         </section>
