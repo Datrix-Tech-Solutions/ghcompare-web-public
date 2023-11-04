@@ -63,4 +63,14 @@ select:focus {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid #cdd5d791;
 }
+
+.scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #ccc;
+}
 </style>

@@ -115,8 +115,7 @@ const showMobileNav = ref(false)
         </div>
 
         <!-- Mobile navigation -->
-        <div class="">
-
+        <div class="mlg:hidden">
             <!-- mobile nav -->
             <Transition name="mobile">
                 <MobileNav v-if="showMobileNav" />
