@@ -75,7 +75,15 @@ const routes = [
     path: "/why-insure",
     name: "WhyInsure",
     component: () =>
-      import(/* webpackChunkName: "HomePremium" */ "../views/WhyInsure.vue"),
+      import(/* webpackChunkName: "Whyinsure" */ "../views/WhyInsure.vue"),
+  },
+
+  //Policies
+  {
+    path: "/policies",
+    name: "Policies",
+    component: () =>
+      import(/* webpackChunkName: "Policies" */ "../views/PoliciesDetail.vue"),
   },
 ];
 

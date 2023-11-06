@@ -1,7 +1,8 @@
 <script setup>
+import ComparePolicies from '../components/ComparePolicies.vue';
 import HowToBuy from '../components/HowToBuy.vue';
 import Partners from '../components/Partners.vue';
-import { motorInsurance, insuranceAspects } from '../data/insurance_policies_data'
+import { insuranceAspects } from '../data/insurance_policies_data'
 
 
 </script>
@@ -72,45 +73,15 @@ import { motorInsurance, insuranceAspects } from '../data/insurance_policies_dat
         <!-- How to buy -->
         <HowToBuy class="rounded-3xl my-32" />
 
-        <!-- Motor Insurance -->
-        <section class="max-w-[1000px] mx-auto text-lg text-gray-600 my-32">
-            <div class="">
-                <h3 class="text-4xl text-primary font-bold mb-5">Motor Insurance</h3>
+        <!-- compare policies -->
+        <ComparePolicies />
 
-                <!-- description -->
-                <p class="">
-                    Motor insurance, also known as auto insurance or car insurance, is a type of insurance policy that
-                    provides financial protection for vehicle owners and drivers in the event of accidents, theft, damage,
-                    and other unexpected incidents related to their vehicles. It is designed to help policyholders cover the
-                    financial costs associated with these events and can vary in terms of coverage types and options. </p>
-
-                <p class="mt-3">Here are some key aspects of motor insurance:</p>
-
-                <div class="my-10" v-for="(item, index) in motorInsurance" :key="index">
-                    <!-- Term -->
-                    <h3 class="text-2xl text-primary font-bold">{{ item.term }}</h3>
-
-                    <!-- description -->
-                    <p class=""> {{ item.description }}</p>
-
-                    <!-- types of term: if any -->
-                    <div class="my-5 ml-5" v-for="(type, count) in item?.types" :key="count">
-                        <p class="">
-                            <span class="text-primary font-bold">{{ type?.name }}</span>: {{ type?.description }}
-                        </p>
-                        <!-- examples in descripiton if any -->
-                        <ul class="ml-5" v-for="example in type?.examples">
-                            <li class="list-disc">{{ example }}</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- partners -->
         <section class="my-32">
             <Partners />
         </section>
+
 
 
     </main>

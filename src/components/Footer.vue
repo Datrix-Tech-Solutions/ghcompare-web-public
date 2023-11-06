@@ -40,7 +40,8 @@ const company = [
             <div class="w-[350px]">
                 <img src="../assets/logo.png" alt="ghcompare" class="max-w-[200px] mb-5">
 
-                <p class="leading-[30px] w-[300px]">Save time and money. Compare quotes from top insurance companies in the
+                <p class="leading-[30px] xs:w-[300px]">Save time and money. Compare quotes from top insurance companies in
+                    the
                     country
                     easily all on one website
                 </p>

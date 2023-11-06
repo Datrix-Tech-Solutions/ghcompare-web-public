@@ -72,7 +72,7 @@ async function submitForm() {
 
                     <!-- cover type information card -->
                     <div class="absolute sm:w-96 w-[75vw]  top-full z-10 right-0" v-if="showCoverTypeInfo">
-                        <Information>
+                        <Information linkName="Policies" linkHash="">
                             <p class="mb-2">{{ info.coverType.info }}</p>
                             <ul v-for="type in info.coverType.type" :key="type.name">
                                 <li class="mb-2 ml-2"><span class="font-semibold">{{ type.name }}</span>: {{ type.info }}
@@ -110,7 +110,7 @@ async function submitForm() {
 
                     <!-- duration informationm card... -->
                     <div class="absolute sm:w-96 w-[75vw] top-full right-0 z-10" v-if="showDurationInfo">
-                        <Information>
+                        <Information linkName="Policies" linkHash="">
                             <p>{{ info.duration }}</p>
                         </Information>
                     </div>

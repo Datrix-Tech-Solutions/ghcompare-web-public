@@ -9,6 +9,7 @@ export default {
         "primary-green-light": "#61C554",
         grey: "#F3F3F3",
         "grey-text": "#858C95",
+        background: "#f0f3f5",
       },
       fontFamily: {
         inter: ["Inter"], //Occassional usage

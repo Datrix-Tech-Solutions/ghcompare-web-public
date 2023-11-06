@@ -1,7 +1,8 @@
 <script setup>
 import LandingHeader from '../components/LandingHeader.vue';
-import InsuranceCard from '../components/InsuranceCard.vue';
+import ComparePolicies from '../components/ComparePolicies.vue';
 import HowToBuy from '../components/HowToBuy.vue';
+
 </script>
 
 <template>
@@ -11,20 +12,8 @@ import HowToBuy from '../components/HowToBuy.vue';
     <!-- Main content -->
     <main class="">
 
-        <!-- compare products -->
-        <section class="py-28 max-width" id="start-comparing">
-            <div class="text-center">
-                <h2 class="text-4xl font-semibold">Compare and Get the best deals.</h2>
-                <p class="text-lg mt-3 text-gray-600">Save money by choosing the best deals for the service you need.</p>
-
-                <!-- Insurance Cards -->
-                <div class="flex justify-center gap-5 mt-10 flex-col sm:flex-row">
-                    <InsuranceCard image="./src/assets/vehicle3.png" text="Motor Insurance" link="MotorInsurance" />
-                    <InsuranceCard image="./src/assets/house2.png" text="Home Insurance" link="HomeInsurance" />
-                    <InsuranceCard image="./src/assets/travel-luggage2.png" text="Travel Insurance" />
-                </div>
-            </div>
-        </section>
+        <!-- compare policies -->
+        <ComparePolicies />
 
         <!-- How to buy -->
         <HowToBuy />

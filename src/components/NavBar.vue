@@ -3,67 +3,7 @@ import { ChevronDownIcon, Bars3BottomRightIcon, XMarkIcon } from '@heroicons/vue
 import DropDown from './DropDown.vue'
 import MobileNav from './MobileNav.vue';
 import { ref } from 'vue';
-
-const links = [
-    {
-        text: 'Home',
-        to: 'LandingPage'
-    },
-    {
-        text: 'Compare',
-        to: '',
-        dropdown: [
-            {
-                text: 'Motor Insurance',
-                to: 'MotorInsurance'
-            },
-            {
-                text: 'Home Insurance',
-                to: 'HomeInsurance'
-            },
-            {
-                text: 'Travel Insurance',
-                to: ''
-            },
-        ]
-    },
-    {
-        text: 'Learn More',
-        to: '',
-        dropdown: [
-            {
-                text: 'Why Insure?',
-                to: 'WhyInsure'
-            },
-            {
-                text: 'Policies',
-                to: ''
-            },
-            {
-                text: 'About GhCompare',
-                to: 'AboutUs'
-            },
-        ],
-    },
-    {
-        text: 'Support',
-        to: '',
-        dropdown: [
-            {
-                text: 'Contact Us',
-                to: 'ContactUs'
-            },
-            {
-                text: 'FAQs',
-                to: ''
-            },
-            {
-                text: 'Book an Appointment',
-                to: ''
-            },
-        ]
-    },
-]
+import { links } from '../data/links';
 
 const showMobileNav = ref(false)
 </script>
@@ -83,11 +23,16 @@ const showMobileNav = ref(false)
             <div class="mlg:flex items-center gap-7 hidden">
                 <div class="links" v-for="(link, index) in links" :key="index">
                     <div class="group  relative">
-                        <router-link :to="{ name: link.to }"
+                        <router-link :to="{ name: link.to }" v-if="!link.dropdown"
                             class="py-1 font-semibold text-gray-600 mr- hover:text-primary transition">{{
                                 link.text }}
                             <ChevronDownIcon class="inline w-4 h-4" v-if="link.dropdown" />
                         </router-link>
+                        <span v-else
+                            class="py-1 cursor-pointer font-semibold text-gray-600 mr- hover:text-primary transition">{{
+                                link.text }}
+                            <ChevronDownIcon class="inline w-4 h-4" v-if="link.dropdown" />
+                        </span>
                         <!-- dropdown -->
                         <DropDown v-if="link.dropdown" :links="link.dropdown"
                             class="absolute right-0 group-hover:block hidden hover:block" />
@@ -129,7 +74,7 @@ const showMobileNav = ref(false)
 
             <!-- close button -->
             <Transition name="close">
-                <XMarkIcon class="inline w-12 h-12 fixed top-2 left-2 cursor-pointer" v-if="showMobileNav"
+                <XMarkIcon class="inline w-12 h-12 z-30 fixed top-2 left-2 cursor-pointer" v-if="showMobileNav"
                     @click="() => { showMobileNav = false }" />
             </Transition>
         </div>
@@ -171,5 +116,9 @@ const showMobileNav = ref(false)
 .close-leave-to {
     transition: transform 0.2s ease 0s;
     transform: scale(0)
+}
+
+.active-link {
+    color: var(--primary-color)
 }
 </style>

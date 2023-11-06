@@ -1,8 +1,23 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+    linkName: {
+        type: String,
+        default: "Policies"
+    },
+    linkHash: {
+        type: String,
+        default: ""
+    },
+})
+</script>
 
 <template>
     <div class=" rounded p-3 w-full glass text-sm">
         <slot></slot>
+        <div class="text-right">
+            <router-link :to="{ name: props.linkName, hash: props.linkHash }" class=" text-primary hover:underline">Learn
+                More</router-link>
+        </div>
     </div>
 </template>
 

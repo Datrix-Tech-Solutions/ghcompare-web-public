@@ -1,74 +1,14 @@
 <script setup>
 import { PaperClipIcon } from '@heroicons/vue/24/outline';
 import { useRouter } from 'vue-router';
-
-const links = [
-    {
-        text: 'Home',
-        to: 'LandingPage'
-    },
-    {
-        text: 'Compare',
-        to: '',
-        dropdown: [
-            {
-                text: 'Motor Insurance',
-                to: 'MotorInsurance'
-            },
-            {
-                text: 'Home Insurance',
-                to: 'HomeInsurance'
-            },
-            {
-                text: 'Travel Insurance',
-                to: ''
-            },
-        ]
-    },
-    {
-        text: 'Learn More',
-        to: '',
-        dropdown: [
-            {
-                text: 'Why Insure?',
-                to: 'WhyInsure'
-            },
-            {
-                text: 'Policies',
-                to: ''
-            },
-            {
-                text: 'About GhCompare',
-                to: 'AboutUs'
-            },
-        ],
-    },
-    {
-        text: 'Support',
-        to: '',
-        dropdown: [
-            {
-                text: 'Contact Us',
-                to: 'ContactUs'
-            },
-            {
-                text: 'FAQs',
-                to: ''
-            },
-            {
-                text: 'Book an Appointment',
-                to: ''
-            },
-        ]
-    },
-]
+import { links } from '../data/links';
 
 const router = useRouter()
 
 </script>
 
 <template>
-    <nav class="m w-80 top-0 bottom-0 right-0 fixed bg-white z-20 py-4 px-6">
+    <nav class="m v-width top-0 bottom-0 right-0 fixed bg-white z-20 py-4 px-6">
         <div class="flex flex-col justify-between h-full">
             <div class="overflow-y-auto scrollbar">
                 <div class="image pb-4">
@@ -113,4 +53,8 @@ const router = useRouter()
 </template>
 
 
-<style scoped></style>
+<style scoped>
+.v-width {
+    width: min(100%, 320px);
+}
+</style>
