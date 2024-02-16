@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const base = "https://api.starassurance.com/api/";
-const baseUrl = "http://test.ghcompare.nsupak.com/"
+const baseUrl = "https://test.ghcompare.nsupak.com/"
 
 export const api = axios.create({
   baseURL: baseUrl,
-  timeout: 5000000,
+  timeout: 50000,
   headers: {
     // 'Access-Control-Allow-Origin': 'http://localhost:5173'
   },

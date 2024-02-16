@@ -23,7 +23,7 @@
 
             <hr class="my-4">
 
-            <p class="font-bold text-4xl text-center my-8">&#8373;{{ premium?.Premium }}</p>
+            <p class="font-bold text-4xl text-center my-8">&#8373;{{ premium?.premium }}</p>
         </div>
 
         <div class="">
