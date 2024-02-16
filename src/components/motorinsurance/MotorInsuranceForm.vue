@@ -85,8 +85,5 @@ onMounted(() => {
             <component :is="forms[activeForm]" :form-data="formData" @sendFormData="getFormData">
             </component>
         </KeepAlive>
-
-        {{ formData.coverDetails }}
-        {{ formData.vehicleDetails }}
     </div>
 </template>
