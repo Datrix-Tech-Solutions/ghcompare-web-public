@@ -1,13 +1,16 @@
 <script setup>
 // @ts-check
-import { ArrowLeftIcon, ArrowRightIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
+import { ArrowLeftIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
 import { privateUse, commercialUse } from '../../data/car_data';
 import { helpInfo } from '../../data/help_data'
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { useFormDataStore } from '../../store/formData'
 
 // initialise router object
 const router = useRouter()
+
+const store = useFormDataStore()
 
 // props
 const props = defineProps({
@@ -48,8 +51,8 @@ const emit = defineEmits(['sendFormData', 'updateForm'])
  * @param {String} vehicleUse - Use of vehicle - either private or commercial
  */
 function updateVehicleUse(vehicleUse) {
-    vehicleData.value.data.vehicleUse = vehicleUse
-    vehicleData.value.data.riskType = ""
+    vehicleData.value.data.vehicle_use = vehicleUse
+    vehicleData.value.data.vehicle_class = ""
 }
 
 
@@ -103,7 +106,7 @@ async function submit() {
                 <!-- commercial -->
                 <div class="border rounded-lg p-3 w-28 cursor-pointer hover:outline hover:outline-2 hover:outline-primary"
                     tabindex="0" @click="updateVehicleUse('Commercial')"
-                    :class="{ selected: vehicleData.data.vehicleUse == 'Commercial' }">
+                    :class="{ selected: vehicleData.data.vehicle_use == 'Commercial' }">
                     <img src="../../assets/commercial.png" alt="commercial" class="w-16 mx-auto">
                     <p class="text-sm text-gray-600 font-semibold text-center">Commercial</p>
                 </div>
@@ -111,7 +114,7 @@ async function submit() {
                 <!-- personal -->
                 <div class="border rounded-lg p-3 w-28 cursor-pointer hover:outline hover:outline-2 hover:outline-primary"
                     tabindex="0" @click="updateVehicleUse('Private')"
-                    :class="{ selected: vehicleData.data.vehicleUse == 'Private' }">
+                    :class="{ selected: vehicleData.data.vehicle_use == 'Private' }">
                     <img src="../../assets/private.png" alt="personal" class="w-16 mx-auto">
                     <p class="text-sm text-gray-600 font-semibold text-center">Private</p>
                 </div>
@@ -122,34 +125,16 @@ async function submit() {
             <!-- Risk Type -->
             <div class="flex justify-between items-start">
                 <h4 class="text-lg text-primary font-semibold mb-3"
-                    :class="{ disabled: vehicleData.data.vehicleUse == '' }">
-                    Risk Type </h4>
-
-                <!-- Information on risk type -->
-                <div class="relative">
-                    <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer !pointer-events-auto"
-                        :class="{ disabled: vehicleData.data.vehicleUse == '' }"
-                        @click="() => { showRiskTypeInfo = !showRiskTypeInfo }" />
-
-                    <!-- overlay z-10 for hiding risk type info card -->
-                    <div class="overlay z-10 fixed top-0 bottom-0 left-0 right-0"
-                        @click="() => { showRiskTypeInfo = false }" v-if="showRiskTypeInfo"></div>
-
-                    <!-- risk type information card -->
-                    <div class="absolute sm:w-96 w-[75vw] z-10 top-full right-0" v-if="showRiskTypeInfo">
-                        <Information>
-                            <p>{{ info.riskType }}</p>
-                        </Information>
-                    </div>
-                </div>
+                    :class="{ disabled: vehicleData.data.vehicle_use == '' }">
+                    Vehicle Class </h4>
             </div>
 
-            <div class="" :title="vehicleData.data.vehicleUse ? '' : 'Please select vehicle use value'">
-                <select name="risktype" id="risktype" v-model="vehicleData.data.riskType" class="w-full" required
-                    :class="{ disabled: vehicleData.data.vehicleUse == '' }">
+            <div class="" :title="vehicleData.data.vehicle_use ? '' : 'Please select vehicle use value'">
+                <select name="risktype" id="risktype" v-model="vehicleData.data.vehicle_class" class="w-full" required
+                    :class="{ disabled: vehicleData.data.vehicle_use == '' }">
                     <option disabled value="">Please select risk type</option>
                     <template
-                        v-for="(risk, index) in vehicleData.data.vehicleUse == 'Commercial' ? vehicleDetails.commercialUse : vehicleDetails.privateUse"
+                        v-for="(risk, index) in vehicleData.data.vehicle_use == 'Commercial' ? vehicleDetails.commercialUse : vehicleDetails.privateUse"
                         :key="index">
                         <option> {{ risk.risk }}</option>
                     </template>
@@ -159,71 +144,55 @@ async function submit() {
 
             <hr class="my-8">
 
-            <!-- Number of seats -->
-            <div class="flex justify-between items-start">
-                <h4 class="text-lg text-primary font-semibold mb-3">Number of Seats</h4>
-
-
-                <!-- Information on number of seats -->
-                <div class="relative">
-                    <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
-                        @click="() => { showSeatsInfo = !showSeatsInfo }" />
-
-                    <!-- overlay z-10 for hiding number of seats info card -->
-                    <div class="overlay z-10 fixed top-0 bottom-0 left-0 right-0" @click="() => { showSeatsInfo = false }"
-                        v-if="showSeatsInfo"></div>
-
-                    <!-- number of seats information card -->
-                    <div class="absolute sm:w-96 w-[75vw] z-10 top-full right-0" v-if="showSeatsInfo">
-                        <Information>
-                            <p>{{ info.seats }}</p>
-                        </Information>
-                    </div>
+            <div class="flex gap-5">
+                <!-- Number of seats -->
+                <div class="w-1/2">
+                    <h4 class="text-lg text-primary font-semibold mb-3">Number of Seats</h4>
+                    <input type="number" name="seats" id="seats" class="w-full" required
+                        v-model="vehicleData.data.number_of_seats" placeholder="e.g. 12">
                 </div>
-            </div>
 
-            <div class="">
-                <input type="number" name="seats" id="seats" class="max-w-[120px]" required
-                    v-model="vehicleData.data.numberOfSeats" placeholder="e.g. 12">
+                <!-- Vehicle Registration Year -->
+                <div class="w-1/2">
+                    <h4 class="text-lg text-primary font-semibold mb-3">Vehicle Registration Year</h4>
+                    <input type="number" name="seats" id="seats" class="w-full" required
+                        v-model="vehicleData.data.vehicle_reg_year" placeholder="e.g. 2003">
+                </div>
             </div>
 
             <hr class="my-8">
 
-            <!-- Amount insured -->
-            <div class="" v-if="formData?.coverDetails.coverType !== 'Third Party'">
-                <div class="flex justify-between items-start ">
-                    <h4 class="text-lg text-primary font-semibold mb-3">Amount Insured</h4>
+            <div class="flex gap-5">
+                <!-- Year of Manufacture -->
+                <div class="w-1/2">
+                    <h4 class="text-lg text-primary font-semibold mb-3">Year of Manufacture</h4>
 
-                    <!-- Information on amount insured -->
-                    <div class="relative">
-                        <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
-                            @click="() => { showAmountInsuredInfo = !showAmountInsuredInfo }" />
+                    <input type="number" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" name="amountinsured"
+                        id="amountinsured" class="w-full" placeholder="e.g. 1990" required
+                        v-model="vehicleData.data.year_of_manufacture">
 
-                        <!-- overlay z-10 for hiding amount insured info card -->
-                        <div class="overlay z-10 fixed top-0 bottom-0 left-0 right-0"
-                            @click="() => { showAmountInsuredInfo = false }" v-if="showAmountInsuredInfo"></div>
-
-                        <!-- amount insured information card -->
-                        <div class="absolute sm:w-96 w-[75vw] top-full right-0" v-if="showAmountInsuredInfo">
-                            <Information>
-                                <p>{{ info.amountInsured }}</p>
-                            </Information>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="">
-                    <span class="mr-2">GH&#8373;</span>
-                    <input type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" name="amountinsured"
-                        id="amountinsured" class="max-w-[120px]" placeholder="e.g. 1200" required
-                        v-model="vehicleData.data.amountInsured">
+                <!-- Amount insured -->
+                <div class="w-1/2" v-if="formData?.coverDetails.coverType !== 'Third Party'">
+
+                    <h4 class="text-lg text-primary font-semibold mb-3">Vehicle Value</h4>
+
+
+                    <div class="w-full">
+                        <span class="mr-2">GH&#8373;</span>
+                        <input type="number" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" name="amountinsured"
+                            id="amountinsured" class="" placeholder="e.g. 12000" required
+                            v-model="vehicleData.data.vehicle_value">
+                    </div>
                 </div>
             </div>
 
             <div class="flex justify-between flex-row-reverse mt-10">
                 <!-- next -->
-                <button class="group button-primary">Next
-                    <ArrowRightIcon class="w-5 h-5 inline group-hover:translate-x-2 transition  " />
+                <button class="group button-primary">
+                    <span v-if="!store.gettingPremium">Submit</span>
+                    <span v-else>Submitting...</span>
                 </button>
 
                 <!-- back -->

@@ -4,10 +4,10 @@ export const coverTypeList = [
     { id: 3, name: "Third Party" },
 ];
 export const durationList = [
-    { id: 1, name: "1 Month" },
-    { id: 2, name: "3 Months" },
-    { id: 3, name: "6 Months" },
-    { id: 4, name: "Full Year" },
+    { id: 1, name: "1 Month", value: 1 },
+    { id: 2, name: "3 Months", value: 3 },
+    { id: 3, name: "6 Months", value: 6 },
+    { id: 4, name: "Full Year", value: 12 },
 ];
 export const motorTypeList = [
     { id: 1, name: "Private Individual" },

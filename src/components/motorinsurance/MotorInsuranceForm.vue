@@ -47,19 +47,23 @@ function updateForm() {
  * function gets data from the various forms
  * @param {object} data - data payload from form
  */
-function getFormData(data) {
+async function getFormData(data) {
     //capture details
     if (data.formType == 'cover details') {
         formData.value.coverDetails = data.data
+        store.motorInsuranceData = formData.value
     } else if (data.formType == 'vehicle details') {
         formData.value.vehicleDetails = data.data
+        store.motorInsuranceData = formData.value
+        await store.getMotorPremium()
 
         //Navigate user to premium page
-        router.push({ name: 'Premium', 'params': { insuranceType: route.meta.insuranceType } })
+        if (store.success) {
+            await router.push({ name: 'Premium', 'params': { insuranceType: route.meta.insuranceType } })
+        } else {
+            alert('something went wrong')
+        }
     }
-
-    //save the data in the formData store
-    store.motorInsuranceData = formData.value
     console.log(formData.value)
 }
 
@@ -81,5 +85,8 @@ onMounted(() => {
             <component :is="forms[activeForm]" :form-data="formData" @sendFormData="getFormData">
             </component>
         </KeepAlive>
+
+        {{ formData.coverDetails }}
+        {{ formData.vehicleDetails }}
     </div>
 </template>

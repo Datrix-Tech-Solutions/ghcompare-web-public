@@ -3,6 +3,7 @@
 
 import Partners from '../components/Partners.vue';
 import FormSummary from '../components/motorinsurance/FormSummary.vue';
+import PremiumCard from '../components/PremiumCard.vue';
 import { useFormDataStore } from '../store/formData';
 
 const store = useFormDataStore() //initialize store
@@ -26,28 +27,42 @@ const formData = store.motorInsuranceData
 
         <!-- Details section -->
         <section class="pt-20">
-            <div class="flex gap-10 items-center mlg:flex-row flex-col-reverse">
+            <div class=" gap-10 items-center mlg:flex-row flex-col-reverse">
 
                 <!-- Form summary -->
-                <div class="mlg:w-1/2 w-full">
+
+                <div class=" w-full">
                     <FormSummary :form-data="formData" />
                 </div>
 
                 <!-- Display premium -->
-                <div class="mlg:w-1/2 w-full">
+                <!-- <div class="mlg:w-1/2 w-full">
                     <p class="text-center font-semibold text-2xl mb-3">
                         Total Premium Payable
                     </p>
-                    <p class="text-center text-primary text-5xl font-bold">Gh&#8373;200</p>
+                    <p class="text-center text-primary text-5xl font-bold">Gh&#8373;200</p> -->
 
-                    <!-- button to compare offers -->
-                    <div class="flex mt-10 justify-center">
+                <!-- button to compare offers -->
+                <!-- <div class="flex mt-10 justify-center">
                         <button class="group button-primary w-1/2">Compare Offers
                         </button>
                     </div>
 
+                </div> -->
+            </div>
+        </section>
+
+        <section class="pt-28">
+            <div class="mb-8">
+                <h2 class="text-4xl font-bold  text-gray-600">Compare Premiums</h2>
+                <p class="text-lg">Maximize value, minimize hassle – discover the best premium for you!</p>
+            </div>
+            <div class="flex gap-5">
+                <div v-for="(value, key) in store.motorInsurancePremium " :key="key">
+                    <PremiumCard :premium="value" />
                 </div>
             </div>
+            <!-- {{ store.motorInsurancePremium }} -->
         </section>
 
         <!-- partners section -->

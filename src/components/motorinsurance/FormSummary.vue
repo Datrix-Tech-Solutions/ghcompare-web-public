@@ -1,5 +1,6 @@
 <script setup>
 import { PencilSquareIcon } from '@heroicons/vue/24/outline';
+import dayjs from 'dayjs';
 
 //props
 defineProps({
@@ -10,12 +11,12 @@ defineProps({
 </script>
 
 <template>
-    <div class="max max-w-lg mx-auto bg-white p-10 rounded-lg">
+    <div class="max  mx-auto bg-white p-5 py-8   rounded-lg">
         <!-- summary -->
-        <h3 class="text-2xl font-bold text-center mb-8 text-gray-600">Summary</h3>
+        <h2 class="text-2xl font-bold mb-4 text-gray-600">Vehicle Details Summary</h2>
 
         <!-- Cover details -->
-        <div class="flex justify-between">
+        <div class="flex justify-start gap-5">
             <h3 class="text-xl font-semibold text-primary mb-3">Cover Details</h3>
 
             <!-- edit cover details -->
@@ -26,21 +27,29 @@ defineProps({
         </div>
 
         <!-- cover type -->
-        <p class="flex justify-between">
-            <span>Cover type:</span>
-            <span>{{ formData.coverDetails?.coverType }}</span>
-        </p>
+        <div class="flex items-center gap-10 flex-wrap">
+            <div class="">
+                <p class="font-semibold text-lg">Cover type</p>
+                <p>{{ formData.coverDetails?.prefered_cover }}</p>
+            </div>
 
-        <!-- duration -->
-        <p class="flex justify-between my-1">
-            <span>Duration:</span>
-            <span>{{ formData.coverDetails?.duration }}</span>
-        </p>
+            <!-- duration -->
+            <div class=" ">
+                <p class="font-semibold text-lg">Duration</p>
+                <p>{{ formData.coverDetails?.period_cover }} months</p>
+            </div>
+
+            <!-- startDate -->
+            <div class=" ">
+                <p class="font-semibold text-lg">Start Date</p>
+                <p>{{ dayjs(formData.coverDetails?.start_date).format('DD, MMMM YYYY') }} </p>
+            </div>
+        </div>
 
         <hr class="my-5">
 
         <!-- Vehicle Details -->
-        <div class="flex justify-between">
+        <div class="flex justify-start gap-5">
             <h3 class="text-xl font-semibold text-primary mb-3">Vehicle Details</h3>
 
             <!-- edit vehicle details -->
@@ -51,28 +60,44 @@ defineProps({
         </div>
 
         <!-- vehicle use -->
-        <p class="flex justify-between">
-            <span>Vehicle use:</span>
-            <span>{{ formData.vehicleDetails?.vehicleUse }}</span>
-        </p>
+        <div class="flex items-center gap-10 flex-wrap">
+            <div class="">
+                <p class="font-semibold text-lg">Vehicle use:</p>
+                <p>{{ formData.vehicleDetails?.vehicle_use }}</p>
+            </div>
 
-        <!-- risk type -->
-        <p class="flex justify-between my-1">
-            <span> Risk type:</span>
-            <span class="!capitalize">{{ formData.vehicleDetails?.riskType.toLowerCase() }}</span>
-        </p>
+            <!-- risk type -->
+            <div class="">
+                <p class="font-semibold text-lg"> Vehicle Class:</p>
+                <p class="!capitalize">{{ formData.vehicleDetails?.vehicle_class.toLowerCase() }}</p>
+            </div>
 
-        <!-- number of seats -->
-        <p class="flex justify-between my-1">
-            <span> Number of seats:</span>
-            <span>{{ formData.vehicleDetails?.numberOfSeats }}</span>
-        </p>
+            <!-- number of seats -->
+            <div class="">
+                <p class="font-semibold text-lg"> Number of seats:</p>
+                <p>{{ formData.vehicleDetails?.number_of_seats }}</p>
+            </div>
 
-        <!-- Amount insured -->
-        <p class="flex justify-between my-1" v-if="formData?.coverDetails?.coverType !== 'Third Party'">
-            <span> Amount Insured:</span>
-            <span>{{ formData.vehicleDetails?.amountInsured
-            }}</span>
-        </p>
+            <!-- Amount insured -->
+            <div class="" v-if="formData?.coverDetails?.coverType !== 'Third Party'">
+                <p class="font-semibold text-lg"> Vehicle Value:</p>
+                <p>{{ formData.vehicleDetails?.vehicle_value
+                }}</p>
+            </div>
+
+            <!-- year of manufacture -->
+            <div class="">
+                <p class="font-semibold text-lg"> Year of Manufacture</p>
+                <p>{{ formData.vehicleDetails?.year_of_manufacture
+                }}</p>
+            </div>
+
+            <!-- year of registration -->
+            <div class="">
+                <p class="font-semibold text-lg"> Registration Year</p>
+                <p>{{ formData.vehicleDetails?.vehicle_reg_year
+                }}</p>
+            </div>
+        </div>
     </div>
 </template>
