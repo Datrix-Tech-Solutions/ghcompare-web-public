@@ -64,7 +64,7 @@ import ContactForm from '../components/ContactForm.vue'
 
                 <!-- Contact form -->
                 <div class="w-[600px]">
-                    <h3 class="text-4xl text-primary font-semibold mb-5">Send Us a Message</h3>
+                    <!-- <h3 class="text-4xl text-primary font-semibold mb-5">Send Us a Message</h3> -->
                     <p class="text-gray-600 text-lg mb-5">We're happy to answer any questions you have or provide you with
                         an
                         estimate.

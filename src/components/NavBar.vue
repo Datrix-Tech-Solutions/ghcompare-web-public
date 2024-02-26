@@ -46,7 +46,7 @@ const showMobileNav = ref(false)
                 <!-- Login and sign up -->
                 <div class="buttons">
                     <a href="#" class="button-primary mr-1">Login</a>
-                    <a href="#" class="button-transparent">Sign up</a>
+                    <!-- <a href="#" class="button-transparent">Sign up</a> -->
                 </div>
             </div>
 

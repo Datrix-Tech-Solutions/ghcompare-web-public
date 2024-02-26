@@ -9,15 +9,18 @@ import { PhoneIcon, MapPinIcon, EnvelopeIcon } from "@heroicons/vue/24/outline"
 const compare = [
     {
         text: "Motor Insurance",
-        to: 'MotorInsurance'
+        to: 'MotorInsurance',
+        soon: false
     },
     {
         text: "Home Insurance",
-        to: 'HomeInsurance'
+        to: '',
+        soon: true,
     },
     {
         text: "Travel Insurance",
-        to: ''
+        to: '',
+        soon: true,
     },
 ]
 
@@ -27,8 +30,8 @@ const compare = [
  */
 const company = [
     { text: "Home", to: 'LandingPage' },
-    { text: "About Us" },
-    { text: "Privacy Policy" },
+    { text: "About GhCompare", to: 'AboutUs' },
+    { text: "Privacy Policy", },
     { text: "Terms & Condition" },
 ]
 </script>
@@ -51,8 +54,10 @@ const company = [
             <div class="w-[300px]">
                 <h3 class="font-bold text-xl text-black mb-5">Company</h3>
                 <ul v-for="(item, index) in company" :key="index">
-                    <li class="mb-3"><router-link :to="{ name: item.to }" class="hover:text-primary">{{ item.text
-                    }}</router-link></li>
+                    <li class="mb-3"><router-link :to="{ name: item.to ? item.to : '', hash: item.to ? '' : '#' }"
+                            class="hover:text-primary" :class="{ 'hover:text-gray-600 cursor-not-allowed': !item.to }">{{
+                                item.text
+                            }}</router-link></li>
                 </ul>
             </div>
 
@@ -60,8 +65,12 @@ const company = [
             <div class="w-[300px]">
                 <h3 class="font-bold text-xl text-black mb-5">Compare</h3>
                 <ul v-for="(item, index) in compare" :key="index">
-                    <li class="mb-3"><router-link :to="{ name: item.to }" class="hover:text-primary">{{ item.text
-                    }}</router-link></li>
+                    <li class="mb-3"><router-link :to="{ name: item.soon ? '' : item.to, hash: item.soon ? '#' : '' }"
+                            class="hover:text-primary" :class="{ 'hover:text-gray-600 cursor-not-allowed': item.soon }">{{
+                                item.text
+                            }} <span v-if="item.soon"
+                                class="text-white rounded-full bg-red-500 px-1 text-xs relative  -top-2 ">Soon</span></router-link>
+                    </li>
                 </ul>
             </div>
 

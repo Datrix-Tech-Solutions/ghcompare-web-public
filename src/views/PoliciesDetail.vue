@@ -6,7 +6,7 @@ import { motorInsurance } from '../data/insurance_policies_data'
 <template>
     <main class="mt-20">
         <section class="mb-10">
-            <h2 class="md:text-6xl text-center text-5xl font-bold mb-5 ">Our <span class="text-primary">Policies</span>
+            <h2 class="md:text-6xl text-center text-5xl font-bold mb-5 "> <span class="text-primary">Policies</span>
             </h2>
 
             <p class="text-xl text-gray-600 text-center ">Learn more about Insurance policies we offer services for.</p>

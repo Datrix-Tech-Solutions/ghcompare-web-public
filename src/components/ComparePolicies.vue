@@ -13,8 +13,8 @@ import InsuranceCard from '../components/InsuranceCard.vue';
             <!-- Insurance Cards -->
             <div class="flex justify-center gap-5 mt-10 flex-col sm:flex-row">
                 <InsuranceCard image="vehicle3.png" text="Motor Insurance" link="MotorInsurance" class="" />
-                <InsuranceCard image="house2.png" text="Home Insurance" link="HomeInsurance" />
-                <InsuranceCard image="travel-luggage2.png" text="Travel Insurance" />
+                <InsuranceCard image="house2.png" text="Home Insurance" link="HomeInsurance" :soon=true />
+                <InsuranceCard image="travel-luggage2.png" text="Travel Insurance" :soon="true" />
             </div>
         </div>
     </section>

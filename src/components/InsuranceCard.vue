@@ -11,6 +11,9 @@ defineProps({
     link: {
         type: String
     },
+    soon: {
+        type: Boolean
+    }
 })
 
 </script>
@@ -23,7 +26,9 @@ defineProps({
         <!-- text -->
         <h2 class="text-2xl font-bold my-5">{{ text }}</h2>
         <!-- button link -->
-        <router-link :to="{ name: link }" class="button-primary text-center w-full ">Get Started</router-link>
+        <router-link :to="{ name: soon ? '' : link, hash: soon ? '#' : '' }" class="button-primary text-center w-full"
+            :class="{ 'bg-neutral-400 border-neutral-400 cursor-default hover:bg-neutral-400 hover:border-neutral-400': soon }">{{
+                soon ? 'Coming Soon' : 'Get Started' }}</router-link>
     </div>
 </template>
 

@@ -10,14 +10,17 @@ export const links = [
       {
         text: "Motor Insurance",
         to: "MotorInsurance",
+        soon: false,
       },
       {
         text: "Home Insurance",
         to: "HomeInsurance",
+        soon: true,
       },
       {
         text: "Travel Insurance",
         to: "",
+        soon: true,
       },
     ],
   },
@@ -51,10 +54,10 @@ export const links = [
         text: "FAQs",
         to: "",
       },
-      {
-        text: "Book an Appointment",
-        to: "",
-      },
+      // {
+      //   text: "Book an Appointment",
+      //   to: "",
+      // },
     ],
   },
 ];
