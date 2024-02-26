@@ -13,7 +13,7 @@ const props = defineProps({
             <template class="links" v-for="(link, index) in links" :key="index">
                 <router-link :to="{ name: link.soon ? '' : link.to, hash: link.soon ? '#' : '' }"
                     class="my-4 font-semibold text-gray-600 block hover:text-primary transition relative"
-                    :class="{ 'hover:text-gray-600 cursor-not-allowed': link.soon }">{{
+                    :class="{ 'hover:!text-gray-600 cursor-not-allowed': link.soon }">{{
                         link.text }} <span v-if="link.soon"
                         class="text-white rounded-full bg-red-500 px-1 text-xs relative  -top-2 ">Soon</span>
                 </router-link>
