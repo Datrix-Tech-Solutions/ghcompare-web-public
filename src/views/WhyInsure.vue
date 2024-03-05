@@ -4,7 +4,6 @@ import HowToBuy from '../components/HowToBuy.vue';
 import Partners from '../components/Partners.vue';
 import { insuranceAspects } from '../data/insurance_policies_data'
 
-
 </script>
 
 <template>

@@ -31,7 +31,7 @@ const compare = [
 const company = [
     { text: "Home", to: 'LandingPage' },
     { text: "About GhCompare", to: 'AboutUs' },
-    { text: "Privacy Policy", },
+    { text: "Privacy Policy", to: 'PrivacyPolicy' },
     { text: "Terms & Condition" },
 ]
 </script>

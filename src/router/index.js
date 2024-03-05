@@ -85,6 +85,16 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "Policies" */ "../views/PoliciesDetail.vue"),
   },
+
+  //Privacy Policy
+  {
+    path: "/privacy-policy",
+    name: "PrivacyPolicy",
+    component: () =>
+      import(
+        /* webpackChunkName: "PrivacyPolicies" */ "../views/PrivacyPolicy.vue"
+      ),
+  },
 ];
 
 const router = createRouter({
@@ -102,7 +112,7 @@ const router = createRouter({
       return {
         el: to.hash,
         top: 80,
-        //   behavior: 'smooth',
+        behavior: "smooth",
       };
     }
 
