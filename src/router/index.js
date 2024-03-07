@@ -82,8 +82,29 @@ const routes = [
   {
     path: "/policies",
     name: "Policies",
+    redirect: { name: "HomeDetail" },
     component: () =>
       import(/* webpackChunkName: "Policies" */ "../views/PoliciesDetail.vue"),
+    children: [
+      {
+        path: "motor",
+        name: "MotorDetail",
+        component: () =>
+          import(/* webpackChunkName: "Motor" */ "../views/MotorDetail.vue"),
+      },
+      {
+        path: "home",
+        name: "HomeDetail",
+        component: () =>
+          import(/* webpackChunkName: "Home" */ "../views/HomeDetail.vue"),
+      },
+      {
+        path: "travel",
+        name: "TravelDetail",
+        component: () =>
+          import(/* webpackChunkName: "Travel" */ "../views/TravelDetail.vue"),
+      },
+    ],
   },
 
   //Privacy Policy

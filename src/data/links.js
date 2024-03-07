@@ -33,7 +33,7 @@ export const links = [
         to: "WhyInsure",
       },
       {
-        text: "Policies",
+        text: "Insurance Policies",
         to: "Policies",
       },
       {
@@ -43,21 +43,21 @@ export const links = [
     ],
   },
   {
-    text: "Support",
-    to: "",
-    dropdown: [
-      {
-        text: "Contact Us",
-        to: "ContactUs",
-      },
-      {
-        text: "FAQs",
-        to: "",
-      },
-      // {
-      //   text: "Book an Appointment",
-      //   to: "",
-      // },
-    ],
+    text: "Contact Us",
+    to: "ContactUs",
+    // dropdown: [
+    //   {
+    //     text: "Contact Us",
+    //     to: "ContactUs",
+    //   },
+    // {
+    //   text: "FAQs",
+    //   to: "",
+    // },
+    // {
+    //   text: "Book an Appointment",
+    //   to: "",
+    // },
+    // ],
   },
 ];

@@ -20,10 +20,12 @@ import HowToBuy from '../components/HowToBuy.vue';
 
         <!-- Partners Section -->
         <section class="max-width p-28">
-            <h2 class="md:text-4xl text-3xl font-semibold mx-auto text-center max-w-4xl md:leading-[50px] leading-[40px]">
+            <h2
+                class="md:text-4xl text-3xl font-semibold mx-auto text-center max-w-4xl md:leading-[50px] leading-[40px]">
                 Compare genuine,
                 precise Quotes
-                from <span class="capitalize text-primary font-semibold">leading insurance providers</span> in the Country.
+                from <span class="capitalize text-primary font-semibold">leading insurance providers</span> in the
+                Country.
             </h2>
 
             <!-- logos of partners -->

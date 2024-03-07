@@ -2,7 +2,8 @@
 
 <template>
     <div class="">
-        <h2 class="text-4xl font-semibold mx-auto text-center max-w-4xl leading-[50px]">Partners
+        <h2 class="text-4xl font-semibold mx-auto text-center max-w-4xl leading-[50px]">Well-known insurance brands we
+            work with
         </h2>
 
         <!-- logos of partners -->
