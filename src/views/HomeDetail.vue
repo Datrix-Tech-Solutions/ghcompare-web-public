@@ -2,6 +2,7 @@
 import GetUnbeatablePrices from '../components/GetUnbeatablePrices.vue';
 import Partners from '../components/Partners.vue';
 import HowToBuy from '../components/HowToBuy.vue';
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/vue/24/outline';
 
 
 </script>
@@ -32,7 +33,7 @@ import HowToBuy from '../components/HowToBuy.vue';
 
                 <!-- Image -->
                 <div class="mlg:w-1/2">
-                    <img src="../assets/home-insurance.jpg" alt="insurance" class="mlg:w-full sm:w-2/3 w-full mx-auto">
+                    <img src="../assets/home-insurance.png" alt="insurance" class="mlg:w-full sm:w-2/3 w-full mx-auto">
                 </div>
             </div>
         </div>
@@ -48,6 +49,61 @@ import HowToBuy from '../components/HowToBuy.vue';
         <!-- what is covered -->
         <div class="my-32">
             <h3 class="text-primary text-4xl font-bold text-center">What is covered</h3>
+
+            <div class="my-10 flex justify-center gap-10 md:flex-row flex-col items-center md:items-start">
+                <div class="w-[300px]">
+                    <img src="../assets/house-burglar.jpg" alt="house-burglar"
+                        class=" aspect-[6/4] w-full object-cover">
+                    <div class=" flex gap-2 my-2">
+                        <div class="w-[10%]">
+                            <XCircleIcon class="w-full text-red-500 inline" />
+                        </div>
+                        <span class="w-[90%]">A burglar enters your unlocked room
+                            and
+                            steals all your precious
+                            jewellery! </span>
+                    </div>
+                    <div class="flex gap-2 my-2">
+                        <div class="w-[10%]">
+                            <CheckCircleIcon class="w-full text-green-500 inline" />
+                        </div>
+                        <span class="w-[90%]">A burglar forcibly enters your
+                            home,
+                            your precious jewellery, TV and
+                            other valuables gone!</span>
+                    </div>
+                </div>
+                <div class="w-[300px]">
+                    <img src="../assets/house-fire.jpg" alt="house-burglar" class=" aspect-[6/4] w-full object-cover">
+                    <div class=" flex gap-2 my-2">
+                        <div class="w-[10%]">
+                            <XCircleIcon class="w-full text-red-500 inline" />
+                        </div>
+                        <span class="w-[90%]">You intentionally start a fire</span>
+                    </div>
+                    <div class="flex gap-2 my-2">
+                        <div class="w-[10%]">
+                            <CheckCircleIcon class="w-full text-green-500 inline" />
+                        </div>
+                        <span class="w-[90%]">A fire starts in the house accidentally</span>
+                    </div>
+                </div>
+                <div class="w-[300px]">
+                    <img src="../assets/house-flood.jpg" alt="house-burglar" class=" aspect-[6/4] w-full object-cover">
+                    <div class=" flex gap-2 my-2">
+                        <div class="w-[10%]">
+                            <XCircleIcon class="w-full text-red-500 inline" />
+                        </div>
+                        <span class="w-[90%]">Poorly built house collapses </span>
+                    </div>
+                    <div class="flex gap-2 my-2">
+                        <div class="w-[10%]">
+                            <CheckCircleIcon class="w-full text-green-500 inline" />
+                        </div>
+                        <span class="w-[90%]">Gradual assimilation of water causing your house to flood</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Advert -->

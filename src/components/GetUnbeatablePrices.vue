@@ -5,11 +5,11 @@
             to make this process easy and hassle free.
         </p>
 
-        <div class="flex gap-10 my-10 items-center">
-            <div class="w-1/2">
-                <img src="../assets/unbeatable-prices.jpg" alt="">
+        <div class="flex gap-10 my-10 items-center md:flex-row flex-col">
+            <div class="md:w-1/2">
+                <img src="../assets/unbeatable-prices.png" alt="">
             </div>
-            <div class="w-1/2 text-center">
+            <div class="md:w-1/2 text-center">
                 <p class="text-4xl font-bold text-primary">Get Unbeatable Prices on GhCompare... </p>
                 <router-link :to="{ name: link }" v-if="link">
                     <button class="button-primary mt-5">Shop Now</button>
