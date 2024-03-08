@@ -9,7 +9,7 @@ const showMobileNav = ref(false)
 </script>
 
 <template>
-    <nav class="border-b sticky top-0 bg-[#f0f3f5] z-20">
+    <nav class="border-b sticky top-0 bg-[#f0f3f5] z-30">
         <div class="max-width flex justify-between items-center py-3 text-">
 
             <!-- Logo -->
@@ -25,12 +25,12 @@ const showMobileNav = ref(false)
                     <div class="group  relative">
                         <router-link :to="{ name: link.to }" v-if="!link.dropdown"
                             class="py-1 font-semibold text-gray-600 mr- hover:text-primary transition">{{
-                                link.text }}
+                    link.text }}
                             <ChevronDownIcon class="inline w-4 h-4" v-if="link.dropdown" />
                         </router-link>
                         <span v-else
                             class="py-1 cursor-pointer font-semibold text-gray-600 mr- hover:text-primary transition">{{
-                                link.text }}
+                    link.text }}
                             <ChevronDownIcon class="inline w-4 h-4" v-if="link.dropdown" />
                         </span>
                         <!-- dropdown -->
