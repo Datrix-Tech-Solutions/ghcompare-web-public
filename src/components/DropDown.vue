@@ -15,7 +15,8 @@ const props = defineProps({
                     class="my-4 font-semibold text-gray-600 block hover:text-primary transition relative"
                     :class="{ 'hover:!text-gray-600 cursor-not-allowed': link.soon }">{{
                 link.text }} <span v-if="link.soon"
-                        class="text-white rounded-full bg-red-500 px-1 text-xs relative  -top-2 ">Soon</span>
+                        class="text-white rounded-full bg-red-500 px-1 py-1 text-[8px] relative  -top-3 ">Coming
+                        soon</span>
                 </router-link>
             </template>
         </div>
