@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import {  api, star_api } from "../api/api";
+import { api, star_api } from "../api/api";
 import dayjs from "dayjs";
 
 export const useFormDataStore = defineStore("formData", () => {
@@ -30,11 +30,10 @@ export const useFormDataStore = defineStore("formData", () => {
       vehicle_reg_year: "",
       year_of_manufacture: "",
       vehicle_value: "",
-
     },
   });
 
-  const motorInsurancePremium = ref(null)
+  const motorInsurancePremium = ref(null);
 
   const getMotorPremium = async () => {
     try {
@@ -42,9 +41,12 @@ export const useFormDataStore = defineStore("formData", () => {
 
       //fetching data
       const data = (
-        await api.post("motor/getpremium", {...motorInsuranceData.value.coverDetails, ...motorInsuranceData.value.vehicleDetails, vehicle_class: 2})
+        await api.post("motor/getpremium", {
+          ...motorInsuranceData.value.coverDetails,
+          ...motorInsuranceData.value.vehicleDetails,
+        })
       ).data;
-        console.log(data);
+      console.table(data);
       // get total premium for home insurance
       motorInsurancePremium.value = data;
       gettingPremium.value = false;
@@ -56,7 +58,7 @@ export const useFormDataStore = defineStore("formData", () => {
       err.value = true;
       success.value = false;
     }
-  }
+  };
 
   /**
    * Home insurance Data to be sent to server

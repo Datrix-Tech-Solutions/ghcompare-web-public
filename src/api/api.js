@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const base = "https://api.starassurance.com/api/";
-const baseUrl = "https://test.ghcompare.nsupak.com/"
+const baseUrl = "https://test.ghcompare.skycashonline.com/";
 
 export const api = axios.create({
   baseURL: baseUrl,
@@ -11,17 +11,6 @@ export const api = axios.create({
   },
 });
 
-
-
-
-
-
-
-
-
-
-
-
 export const star_api = axios.create({
   base,
   timeout: 50000,
@@ -30,4 +19,3 @@ export const star_api = axios.create({
       "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9",
   },
 });
-
