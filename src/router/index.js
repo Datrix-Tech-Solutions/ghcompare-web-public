@@ -62,6 +62,14 @@ const routes = [
       ),
   },
 
+  // Underwriting page
+  {
+    path: "/underwriting",
+    name: "TravelDetail",
+    component: () =>
+      import(/* webpackChunkName: "Travel" */ "../views/TravelDetail.vue"),
+  },
+
   //display premium ( home insurance )
   {
     path: "/home-insurance/premium",
