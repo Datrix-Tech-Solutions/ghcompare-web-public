@@ -10,7 +10,7 @@
                     Underwriting Form</h2>
 
                 <div class="max-w-[800px] mx-auto">
-                    <UnderwritingForm @sendData="getData" />
+                    <UnderwritingForm @sendData="submitData" />
                 </div>
             </div>
         </main>
@@ -21,12 +21,22 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useFormDataStore } from '../store/formData';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { api, star_api } from "../api/api";
 import UnderwritingForm from '../components/UnderwritingForm.vue';
 
 const formDataStore = useFormDataStore()
 const route = useRoute()
+const router = useRouter()
 const institutionData = ref({})
+
+async function submitData(buyerData) {
+    let underwriting = {
+        buyerData, premiumData: institutionData.value, generatePremiumData: { ...formDataStore.motorInsuranceData.coverDetails, ...formDataStore.motorInsuranceData.vehicleDetails }
+    }
+    const { data } = await api.post(`motor/underwriting/${institutionData.value?.institution[0]?.id}`, underwriting)
+    window.open(data.paymentData.url, '_blank')
+}
 
 onMounted(() => {
     let values = Object.values(formDataStore.motorInsurancePremium)

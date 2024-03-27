@@ -115,6 +115,71 @@
                         </div>
                     </div>
 
+                    <div class="sm:col-span-3">
+                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Chassis
+                            Number</label>
+                        <div class="mt-2">
+                            <input required type="text" name="vehicle-color" id="vehicle-color"
+                                autocomplete="vehicle-color" v-model="buyerData.chassis_number"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Body type</label>
+                        <div class="mt-2">
+                            <input required id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
+                                v-model="buyerData.body_type"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Body type
+                            code</label>
+                        <div class="mt-2">
+                            <input required type="text" name="vehicle-color" id="vehicle-color"
+                                autocomplete="vehicle-color" v-model="buyerData.body_type_code"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Model Code</label>
+                        <div class="mt-2">
+                            <input required id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
+                                v-model="buyerData.model_code"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Customer
+                            Code</label>
+                        <div class="mt-2">
+                            <input required type="text" name="vehicle-color" id="vehicle-color"
+                                autocomplete="vehicle-color" v-model="buyerData.customer_code"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                            Risk</label>
+                        <div class="mt-2">
+                            <input required id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
+                                v-model="buyerData.vehicle_risk"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-full">
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Branch</label>
+                        <div class="mt-2">
+                            <input required id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
+                                v-model="buyerData.branch"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+
                     <div class="sm:col-span-full mt-10">
                         <button class="button-primary w-1/2 mx-auto block">Submit</button>
                     </div>
@@ -129,16 +194,23 @@
 import { reactive } from 'vue';
 
 const buyerData = reactive({
-    first_name: "",
-    last_name: "",
-    mobile_number: null,
-    vehicle_make: "",
-    vehicle_model: "",
-    registration_number: "",
-    vehicle_colour: "",
-    email: "",
+    first_name: "Francis",
+    last_name: "Doh",
+    mobile_number: "0242762412",
+    vehicle_make: "Opel",
+    vehicle_model: "Astra",
+    registration_number: "GW 147-V",
+    vehicle_colour: "White",
+    email: "camoakohene84@gmail.com",
     id_type: "National ID",
-    id_number: "",
+    id_number: "GHA-00000000-9",
+    chassis_number: "8743923472497429",
+    body_type: "Saloon",
+    body_type_code: "SALOON",
+    model_code: "100269",
+    customer_code: "ID0134348",
+    vehicle_risk: "AMBULANCE",
+    branch: "AMBULANCE"
 })
 </script>
 
