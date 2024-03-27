@@ -64,10 +64,12 @@ const routes = [
 
   // Underwriting page
   {
-    path: "/underwriting",
-    name: "TravelDetail",
+    path: "/:insuranceType/:institution",
+    name: "Underwriting",
     component: () =>
-      import(/* webpackChunkName: "Travel" */ "../views/TravelDetail.vue"),
+      import(
+        /* webpackChunkName: "underwriting" */ "../views/UnderwritingPage.vue"
+      ),
   },
 
   //display premium ( home insurance )

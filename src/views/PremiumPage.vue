@@ -59,7 +59,7 @@ const formData = store.motorInsuranceData
             </div>
             <div class="flex gap-5">
                 <div v-for="(value, key) in store.motorInsurancePremium " :key="key">
-                    <PremiumCard :premium="value" />
+                    <PremiumCard :premium="value" :insurance-type="$route.params.insuranceType" />
                 </div>
             </div>
             <!-- {{ store.motorInsurancePremium }} -->

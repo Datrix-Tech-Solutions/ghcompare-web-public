@@ -24,7 +24,10 @@
         </div>
 
         <div class="">
-            <button class="button-primary w-full">Buy</button>
+            <router-link
+                :to="{ name: 'Underwriting', params: { insuranceType: insuranceType, institution: premium?.institution[0]?.slug } }">
+                <button class="button-primary w-full">Buy</button>
+            </router-link>
         </div>
 
     </div>
@@ -33,7 +36,7 @@
 <script setup>
 import { CheckIcon } from '@heroicons/vue/24/outline';
 
-defineProps(['premium'])
+defineProps(['premium', 'insuranceType'])
 </script>
 
 <style scoped></style>
