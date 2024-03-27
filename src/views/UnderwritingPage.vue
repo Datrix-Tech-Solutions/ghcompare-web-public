@@ -35,7 +35,8 @@ async function submitData(buyerData) {
         buyerData, premiumData: institutionData.value, generatePremiumData: { ...formDataStore.motorInsuranceData.coverDetails, ...formDataStore.motorInsuranceData.vehicleDetails }
     }
     const { data } = await api.post(`motor/underwriting/${institutionData.value?.institution[0]?.id}`, underwriting)
-    window.open(data.paymentData.url, '_blank')
+    console.log(data.data.paymentData.url)
+    window.open(data.data.paymentData.url, '_blank')
 }
 
 onMounted(() => {
