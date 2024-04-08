@@ -6,19 +6,16 @@ import dayjs from "dayjs";
 export const useFormDataStore = defineStore(
   "formData",
   () => {
-    /**
-     * Api call wass successful
-     */
+    // /Api call wass successful
     const success = ref(false);
-
-    /**
-     * Api call failed
-     */
+    // Api call failed
     const err = ref(false);
+    // fetching premium
+    const gettingPremium = ref(false);
+    const motorInsurancePremium = ref(null);
+    const processing = ref(false); //for when api is being hit
 
-    /**
-     * Motor insurance Data to be sent to server
-     */
+    // Motor insurance Data to be sent to server
     const motorInsuranceData = ref({
       coverDetails: {
         prefered_cover: "",
@@ -35,7 +32,29 @@ export const useFormDataStore = defineStore(
       },
     });
 
-    const motorInsurancePremium = ref(null);
+    const underwritingData = ref({
+      personalData: {
+        first_name: "Francis",
+        last_name: "Doh",
+        mobile_number: "0242762412",
+        email: "camoakohene84@gmail.com",
+        id_type: "",
+        id_number: "GHA-00000000-9",
+        branch: "",
+      },
+      vehicleData: {
+        vehicle_make: "",
+        vehicle_model: "",
+        registration_number: "GW 147-V",
+        vehicle_colour: "White",
+        chassis_number: "8743923472497429",
+        body_type: "",
+        body_type_code: "",
+        model_code: "",
+        customer_code: "ID0134348",
+        vehicle_risk: "AMBULANCE",
+      },
+    });
 
     const getMotorPremium = async () => {
       try {
@@ -62,6 +81,80 @@ export const useFormDataStore = defineStore(
       }
     };
 
+    const submitUnderwritingData = async (premiumData, id) => {
+      let underwriting = {
+        buyerData: {
+          ...underwritingData.value.vehicleData,
+          ...underwritingData.value.personalData,
+        },
+        premiumData,
+        generatePremiumData: {
+          ...motorInsuranceData.value.coverDetails,
+          ...motorInsuranceData.value.vehicleDetails,
+        },
+      };
+      try {
+        processing.value = true;
+        const { data } = await api.post(
+          `motor/underwriting/${id}`,
+          underwriting
+        );
+        processing.value = false;
+        return data;
+      } catch (error) {
+        console.log(error);
+        processing.value = false;
+      }
+    };
+
+    const getCarBrands = async () => {
+      try {
+        processing.value = true;
+        const { data } = await api.get(`/vehicle/brands`);
+        processing.value = false;
+        return data;
+      } catch (error) {
+        console.log(error);
+        processing.value = false;
+      }
+    };
+
+    const getVehicleMake = async (id, brand) => {
+      try {
+        processing.value = true;
+        const { data } = await api.get(`/vehicle/make/${id}/${brand}`);
+        processing.value = false;
+        return data;
+      } catch (error) {
+        console.log(error);
+        processing.value = false;
+      }
+    };
+
+    const getVehicleModel = async (id, brand) => {
+      try {
+        processing.value = true;
+        const { data } = await api.get(`/vehicle/model/${id}/${brand}`);
+        processing.value = false;
+        return data;
+      } catch (error) {
+        console.log(error);
+        processing.value = false;
+      }
+    };
+
+    const getVehicleBodyType = async (id) => {
+      try {
+        processing.value = true;
+        const { data } = await api.get(`/vehicle/body-types/${id}`);
+        processing.value = false;
+        return data;
+      } catch (error) {
+        console.log(error);
+        processing.value = false;
+      }
+    };
+
     /**
      * Home insurance Data to be sent to server
      */
@@ -85,11 +178,6 @@ export const useFormDataStore = defineStore(
      * Premium for home Insurance after generation
      */
     const homeInsurancePremium = ref();
-
-    /**
-     * fetching premium
-     */
-    const gettingPremium = ref(false);
 
     /**
      * @function
@@ -120,14 +208,25 @@ export const useFormDataStore = defineStore(
     return {
       success,
       err,
+      processing,
       gettingPremium,
       motorInsuranceData,
+      underwritingData,
+      getCarBrands,
+      getVehicleMake,
+      getVehicleModel,
+      getVehicleBodyType,
       homeInsuranceData,
       homeInsurancePremium,
       getHomePremium,
       getMotorPremium,
       motorInsurancePremium,
+      submitUnderwritingData,
     };
   },
-  { persist: true }
+  {
+    persist: {
+      paths: ["motorInsuranceData", "motorInsurancePremium"],
+    },
+  }
 );

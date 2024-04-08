@@ -19,29 +19,29 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, provide } from 'vue';
 import { useFormDataStore } from '../store/formData';
 import { useRoute, useRouter } from 'vue-router';
 import { api, star_api } from "../api/api";
-import UnderwritingForm from '../components/UnderwritingForm.vue';
+import UnderwritingForm from '../components/underwriting/UnderwritingForm.vue';
+
 
 const formDataStore = useFormDataStore()
 const route = useRoute()
-const router = useRouter()
 const institutionData = ref({})
 
+
 async function submitData(buyerData) {
-    let underwriting = {
-        buyerData, premiumData: institutionData.value, generatePremiumData: { ...formDataStore.motorInsuranceData.coverDetails, ...formDataStore.motorInsuranceData.vehicleDetails }
-    }
-    const { data } = await api.post(`motor/underwriting/${institutionData.value?.institution[0]?.id}`, underwriting)
-    console.log(data.data.paymentData.url)
+    let premiumData = institutionData.value
+    let data = await formDataStore.submitUnderwritingData(premiumData, institutionData.value?.institution[0]?.id)
+    console.log(data)
     window.open(data.data.paymentData.url, '_blank')
 }
 
 onMounted(() => {
     let values = Object.values(formDataStore.motorInsurancePremium)
     institutionData.value = (values.find(item => { return item.institution[0].slug === route.params.institution }))
+    provide('institutionId', institutionData.value?.institution[0]?.id)
 })
 </script>
 

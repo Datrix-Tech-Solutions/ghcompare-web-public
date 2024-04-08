@@ -24,7 +24,7 @@ const router = useRouter()
                         <!-- Home or category -->
                         <router-link :to="{ name: link.to }" :class="{ 'cursor-default': link.dropdown, }">
                             <p class="font-semibold" :class="{ 'hover:text-primary': !link.dropdown }">{{ link.text
-                            }}
+                                }}
                                 <PaperClipIcon v-if="!link.dropdown" class="inline w-3 h-3" />
                             </p>
                         </router-link>
@@ -44,10 +44,10 @@ const router = useRouter()
             </div>
 
             <!-- buttons -->
-            <div class="flex py-3">
+            <!-- <div class="flex py-3">
                 <a href="#" class="button-primary mr-1 w-1/2 text-center">Login</a>
                 <a href="#" class="button-transparent w-1/2 text-center">Sign up</a>
-            </div>
+            </div> -->
         </div>
     </nav>
 </template>

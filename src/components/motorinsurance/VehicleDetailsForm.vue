@@ -6,6 +6,7 @@ import { helpInfo } from '../../data/help_data'
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useFormDataStore } from '../../store/formData'
+import Loader from '../ui/Loader.vue';
 
 // initialise router object
 const router = useRouter()
@@ -192,7 +193,9 @@ async function submit() {
                 <!-- next -->
                 <button class="group button-primary">
                     <span v-if="!store.gettingPremium">Submit</span>
-                    <span v-else>Submitting...</span>
+                    <span v-else>
+                        <Loader />
+                    </span>
                 </button>
 
                 <!-- back -->

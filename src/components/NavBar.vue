@@ -41,13 +41,13 @@ const showMobileNav = ref(false)
                 </div>
 
                 <!-- divider -->
-                <div class="w-[2px] bg-gray-600 h-5"></div>
+                <!-- <div class="w-[2px] bg-gray-600 h-5"></div> -->
 
                 <!-- Login and sign up -->
-                <div class="buttons">
-                    <a href="#" class="button-primary mr-1">Login</a>
-                    <!-- <a href="#" class="button-transparent">Sign up</a> -->
-                </div>
+                <!-- <div class="buttons">
+                    <a href="#" class="button-primary mr-1">Login</a> -->
+                <!-- <a href="#" class="button-transparent">Sign up</a> -->
+                <!-- </div> -->
             </div>
 
 
