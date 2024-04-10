@@ -183,7 +183,7 @@
 
                     <div class="sm:col-span-full mt-10 flex justify-between flex-row-reverse">
                         <button class="button-primary px-10  block">
-                            <span v-if="!formDataStore?.processing">
+                            <span v-if="!underwritingDataStore?.processing">
                                 Submit
                             </span>
                             <span v-else>
@@ -205,10 +205,10 @@
 import { reactive, ref } from 'vue';
 import ButtonWithArrow from '../../components/ui/ButtonWithArrow.vue'
 import Loader from '../ui/Loader.vue';
-import { useFormDataStore } from '../../store/formData';
+import { useUnderwritingDataStore } from '../../store/underwritingData';
 
-const formDataStore = useFormDataStore()
-const buyerData = ref({ ...formDataStore.underwritingData.personalData, ...formDataStore.underwritingData.vehicleData })
+const underwritingDataStore = useUnderwritingDataStore()
+const buyerData = ref({ ...underwritingDataStore.underwritingData.personalData, ...underwritingDataStore.underwritingData.vehicleData })
 </script>
 
 <style scoped></style>

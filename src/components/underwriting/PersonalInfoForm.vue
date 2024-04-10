@@ -1,5 +1,15 @@
 <template>
-    <div class="bg-white md:p-16 p-10 rounded-lg">
+    <div class="bg-white md:p-16 p-10 rounded-lg relative">
+
+        <!-- form loader -->
+        <div class="absolute top-0 bottom-0 right-0 left-0 bg-black/10 z-20 rounded-lg flex justify-center items-center"
+            v-if="underwritingDataStore.processing">
+            <div class="bg-black relative z-30 px-5 py-3 rounded-lg">
+                <Loader />
+            </div>
+        </div>
+
+        <!-- form -->
         <form @submit.prevent="$emit('sendData', { personalData })" class="">
             <div class="mb-10">
                 <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
@@ -52,11 +62,12 @@
                         </label>
                         <div class="mt-2">
                             <select required name="" id="" v-model="personalData.id_type"
+                                :disabled="underwritingDataStore.processing"
                                 class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 <option value="" disabled>Select Identification</option>
-                                <option>National ID</option>
-                                <option>Driver Licence</option>
-                                <option>Voter ID</option>
+                                <template v-for="id in idTypes" :key="id">
+                                    <option :value='id' v-if="id">{{ id }}</option>
+                                </template>
                             </select>
                         </div>
                     </div>
@@ -75,11 +86,13 @@
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Branch</label>
                         <div class="mt-2">
                             <select required name="" id="" v-model="personalData.branch"
+                                :disabled="underwritingDataStore.processing"
                                 class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 <option value="" disabled>Select your branch</option>
-                                <option>Abeka</option>
-                                <option>Accra</option>
-                                <option>Teshie</option>
+                                <template v-for="branch in branches" :key="branch.brndesc">
+                                    <option :value='branch.brndesc'>{{ branch.brndesc }}
+                                    </option>
+                                </template>
                             </select>
                             <!-- <input required id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
                                 v-model="personalData.branch"
@@ -100,13 +113,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import ButtonWithArrow from '../../components/ui/ButtonWithArrow.vue'
-import { useFormDataStore } from '../../store/formData';
+import { useUnderwritingDataStore } from '../../store/underwritingData';
+import Loader from '../ui/Loader.vue';
 
-const formDataStore = useFormDataStore()
+const underwritingDataStore = useUnderwritingDataStore()
 
-const personalData = ref(formDataStore.underwritingData.personalData)
+const personalData = ref(underwritingDataStore.underwritingData.personalData)
+const idTypes = ref([])
+const branches = ref([])
+
+onMounted(async () => {
+    idTypes.value = await underwritingDataStore.getIdTypes()
+    branches.value = await underwritingDataStore.getBranches()
+    console.log(idTypes.value, branches.value)
+})
 </script>
 
 <style lang="scss" scoped></style>

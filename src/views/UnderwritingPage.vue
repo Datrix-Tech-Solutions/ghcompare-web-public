@@ -21,19 +21,22 @@
 <script setup>
 import { onMounted, ref, provide } from 'vue';
 import { useFormDataStore } from '../store/formData';
+import { useUnderwritingDataStore } from '../store/underwritingData'
 import { useRoute, useRouter } from 'vue-router';
-import { api, star_api } from "../api/api";
+// import { api, star_api } from "../api/api";
 import UnderwritingForm from '../components/underwriting/UnderwritingForm.vue';
 
 
 const formDataStore = useFormDataStore()
+const underwritingDataStore = useUnderwritingDataStore()
 const route = useRoute()
 const institutionData = ref({})
 
 
 async function submitData(buyerData) {
     let premiumData = institutionData.value
-    let data = await formDataStore.submitUnderwritingData(premiumData, institutionData.value?.institution[0]?.id)
+    let generatePremiumData = { ...formDataStore.motorInsuranceData.coverDetails, ...formDataStore.motorInsuranceData.coverDetails }
+    let data = await underwritingDataStore.submitUnderwritingData(premiumData, generatePremiumData, institutionData.value?.institution[0]?.id)
     console.log(data)
     window.open(data.data.paymentData.url, '_blank')
 }

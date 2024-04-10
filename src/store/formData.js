@@ -32,29 +32,29 @@ export const useFormDataStore = defineStore(
       },
     });
 
-    const underwritingData = ref({
-      personalData: {
-        first_name: "Francis",
-        last_name: "Doh",
-        mobile_number: "0242762412",
-        email: "camoakohene84@gmail.com",
-        id_type: "",
-        id_number: "GHA-00000000-9",
-        branch: "",
-      },
-      vehicleData: {
-        vehicle_make: "",
-        vehicle_model: "",
-        registration_number: "GW 147-V",
-        vehicle_colour: "White",
-        chassis_number: "8743923472497429",
-        body_type: "",
-        body_type_code: "",
-        model_code: "",
-        customer_code: "ID0134348",
-        vehicle_risk: "AMBULANCE",
-      },
-    });
+    // const underwritingData = ref({
+    //   personalData: {
+    //     first_name: "Francis",
+    //     last_name: "Doh",
+    //     mobile_number: "0242762412",
+    //     email: "camoakohene84@gmail.com",
+    //     id_type: "",
+    //     id_number: "GHA-00000000-9",
+    //     branch: "",
+    //   },
+    //   vehicleData: {
+    //     vehicle_make: "",
+    //     vehicle_model: "",
+    //     registration_number: "GW 147-V",
+    //     vehicle_colour: "White",
+    //     chassis_number: "8743923472497429",
+    //     body_type: "",
+    //     body_type_code: "",
+    //     model_code: "",
+    //     customer_code: "ID0134348",
+    //     vehicle_risk: "AMBULANCE",
+    //   },
+    // });
 
     const getMotorPremium = async () => {
       try {
@@ -81,79 +81,79 @@ export const useFormDataStore = defineStore(
       }
     };
 
-    const submitUnderwritingData = async (premiumData, id) => {
-      let underwriting = {
-        buyerData: {
-          ...underwritingData.value.vehicleData,
-          ...underwritingData.value.personalData,
-        },
-        premiumData,
-        generatePremiumData: {
-          ...motorInsuranceData.value.coverDetails,
-          ...motorInsuranceData.value.vehicleDetails,
-        },
-      };
-      try {
-        processing.value = true;
-        const { data } = await api.post(
-          `motor/underwriting/${id}`,
-          underwriting
-        );
-        processing.value = false;
-        return data;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const submitUnderwritingData = async (premiumData, id) => {
+    //   let underwriting = {
+    //     buyerData: {
+    //       ...underwritingData.value.vehicleData,
+    //       ...underwritingData.value.personalData,
+    //     },
+    //     premiumData,
+    //     generatePremiumData: {
+    //       ...motorInsuranceData.value.coverDetails,
+    //       ...motorInsuranceData.value.vehicleDetails,
+    //     },
+    //   };
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.post(
+    //       `motor/underwriting/${id}`,
+    //       underwriting
+    //     );
+    //     processing.value = false;
+    //     return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
-    const getCarBrands = async () => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/vehicle/brands`);
-        processing.value = false;
-        return data;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getCarBrands = async () => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/vehicle/brands`);
+    //     processing.value = false;
+    //     return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
-    const getVehicleMake = async (id, brand) => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/vehicle/make/${id}/${brand}`);
-        processing.value = false;
-        return data;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getVehicleMake = async (id, brand) => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/vehicle/make/${id}/${brand}`);
+    //     processing.value = false;
+    //     return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
-    const getVehicleModel = async (id, brand) => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/vehicle/model/${id}/${brand}`);
-        processing.value = false;
-        return data;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getVehicleModel = async (id, brand) => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/vehicle/model/${id}/${brand}`);
+    //     processing.value = false;
+    //     return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
-    const getVehicleBodyType = async (id) => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/vehicle/body-types/${id}`);
-        processing.value = false;
-        return data;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getVehicleBodyType = async (id) => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/vehicle/body-types/${id}`);
+    //     processing.value = false;
+    //     return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
     /**
      * Home insurance Data to be sent to server
@@ -211,17 +211,17 @@ export const useFormDataStore = defineStore(
       processing,
       gettingPremium,
       motorInsuranceData,
-      underwritingData,
-      getCarBrands,
-      getVehicleMake,
-      getVehicleModel,
-      getVehicleBodyType,
+      // underwritingData,
+      // getCarBrands,
+      // getVehicleMake,
+      // getVehicleModel,
+      // getVehicleBodyType,
       homeInsuranceData,
       homeInsurancePremium,
       getHomePremium,
       getMotorPremium,
       motorInsurancePremium,
-      submitUnderwritingData,
+      // submitUnderwritingData,
     };
   },
   {

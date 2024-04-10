@@ -19,17 +19,17 @@ import PersonalInfoForm from './PersonalInfoForm.vue';
 import VehicleInfoForm from './VehicleInfoForm.vue';
 import ReviewForm from './UnderwritingReviewForm.vue'
 import StepperComponent from '../../components/ui/StepperComponent.vue';
-import { useFormDataStore } from '../../store/formData';
+import { useUnderwritingDataStore } from '../../store/underwritingData';
 
-const formDataStore = useFormDataStore()
+const underwritingDataStore = useUnderwritingDataStore()
 
 const forms = ref(['Personal Info', 'Vehicle Info', 'Review'])
 const selectedForm = ref(0)
 
 function getInfo(data) {
-    formDataStore.underwritingData = { ...formDataStore.underwritingData, ...data }
+    underwritingDataStore.underwritingData = { ...underwritingDataStore.underwritingData, ...data }
     selectedForm.value = selectedForm.value + 1;
-    console.log(formDataStore.underwritingData)
+    console.log(underwritingDataStore.underwritingData)
 }
 
 function previousForm() {
