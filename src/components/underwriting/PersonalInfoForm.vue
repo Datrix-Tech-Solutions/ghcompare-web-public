@@ -17,7 +17,29 @@
                 </p>
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-3">
+
+                    <!-- Account Type -->
+                    <div class="sm:col-span-full" v-if="underwritingDataStore.checkFormField('account_type')">
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Account type
+                            (policy)</label>
+                        <div class="mt-2">
+                            <select required name="" id="" v-model="personalData.account_type"
+                                :disabled="underwritingDataStore.processing"
+                                class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option value="" disabled>Select account Type</option>
+                                <template
+                                    v-for="accountType in underwritingDataStore.checkFormField('account_type')?.datalist"
+                                    :key="accountType">
+                                    <option :value='accountType'>{{ accountType }}
+                                    </option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!-- First name -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('first_name')">
                         <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First
                             name</label>
                         <div class="mt-2">
@@ -27,7 +49,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Last Name -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('last_name')">
                         <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last
                             name</label>
                         <div class="mt-2">
@@ -37,7 +60,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- email address -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('email')">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
                             address</label>
                         <div class="mt-2">
@@ -47,7 +71,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Phone number -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('mobile_number')">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Phone
                             Number</label>
                         <div class="mt-2">
@@ -57,7 +82,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Id type -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('id_type')">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">ID type
                         </label>
                         <div class="mt-2">
@@ -72,7 +98,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Id Number -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('id_number')">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">ID
                             Number</label>
                         <div class="mt-2">
@@ -82,7 +109,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-full">
+                    <div class="sm:col-span-full" v-if="underwritingDataStore.checkFormField('branch')">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Branch</label>
                         <div class="mt-2">
                             <select required name="" id="" v-model="personalData.branch"

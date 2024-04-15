@@ -17,15 +17,17 @@
                 <p class="mt-1 text-sm leading-6 text-gray-600">Provide accurate information.</p>
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-3">
-                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Brand
+                    <!-- Vehicle brand -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_make')">
+                        <label for="vehicle-brand" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                            Brand
                         </label>
                         <div class="mt-2">
 
                             <!-- <input required type="text" name="vehicle-make" id="vehicle-make"
                                 autocomplete="vehicle-make" v-model="vehicleData.vehicle_make"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" /> -->
-                            <select id="vehicle-make" v-model="brand" @change="getVehicleDetails()"
+                            <select id="vehicle-brand" v-model="brand" @change="getVehicleDetails()"
                                 class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 <option value="" disabled>Select Vehicle Brand</option>
                                 <template v-for="vbrand in carBrands" :key="vbrand.brand">
@@ -36,7 +38,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- vehicle make -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_make')">
                         <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
                             Make</label>
                         <div class="mt-2">
@@ -51,7 +54,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Vehicle model -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_model')">
                         <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
                             Model</label>
                         <div class="mt-2">
@@ -68,7 +72,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- vehicle color -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_colour')">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
                             Color</label>
                         <div class="mt-2">
@@ -84,7 +89,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Registration number -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('registration_number')">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Registration
                             Number</label>
                         <div class="mt-2">
@@ -94,7 +100,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Chassis number -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('chassis_number')">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Chassis
                             Number</label>
                         <div class="mt-2">
@@ -104,7 +111,9 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+
+                    <!-- Body type -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('body_type')">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Body type</label>
                         <div class="mt-2">
                             <!-- <input required id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
@@ -138,7 +147,9 @@
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
                     </div> -->
-                    <div class="sm:col-span-3">
+
+                    <!-- Customer Code  -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('customer_code')">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Customer
                             Code</label>
                         <div class="mt-2">
@@ -148,7 +159,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Vehicle Risk -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_risk')">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
                             Risk</label>
                         <div class="mt-2">
@@ -159,6 +171,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="sm:col-span-full mt-10 flex justify-between flex-row-reverse">
                 <ButtonWithArrow class="button-primary px-5  block" text="Review"></ButtonWithArrow>
                 <ButtonWithArrow class="button-primary px-5  block" text="Personal Info" :left="true"
@@ -202,13 +216,13 @@ async function getVehicleDetails() {
 function getModelCode() {
     const modelData = vehicleModel.value.find(item => item.name === vehicleData.value.vehicle_model)
     console.log(modelData, vehicleData.value.vehicle_model)
-    vehicleData.value.model_code = modelData?.code
+    if (modelData?.code) { vehicleData.value.model_code = modelData?.code }
 }
 
 function getBodyTypeCode() {
     const modelData = vehicleBodyType.value.find(item => item.NAME === vehicleData.value.body_type)
     console.log(modelData, vehicleData.value.vehicle_model)
-    vehicleData.value.body_type_code = modelData?.CODE
+    if (modelData?.CODE) { vehicleData.value.body_type_code = modelData?.CODE }
 }
 
 onMounted(async () => {

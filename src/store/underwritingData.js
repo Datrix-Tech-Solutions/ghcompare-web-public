@@ -11,9 +11,11 @@ export const useUnderwritingDataStore = defineStore(
     // Api call failed
     const err = ref(false);
     const processing = ref(false); //for when api is being hit
+    const underwritingParams = ref();
 
     const underwritingData = ref({
       personalData: {
+        account_type: "",
         first_name: "John",
         last_name: "Doe",
         mobile_number: "0242762412",
@@ -29,23 +31,42 @@ export const useUnderwritingDataStore = defineStore(
         vehicle_colour: "",
         chassis_number: "8743923472497429",
         body_type: "",
-        body_type_code: "",
-        model_code: "",
+        body_type_code: "SALOON",
+        model_code: "100269",
         customer_code: "ID0134348",
         vehicle_risk: "AMBULANCE",
       },
     });
+
+    const checkFormField = (field) => {
+      return underwritingParams.value?.find((item) => item.params === field);
+    };
 
     const submitUnderwritingData = async (
       premiumData,
       generatePremiumData,
       id
     ) => {
+      // getting user data in one object
+      let ddata = {
+        ...underwritingData.value.vehicleData,
+        ...underwritingData.value.personalData,
+      };
+
+      let buyerData = {}; //initializing object to be passed to api
+
+      //   checking ddata against underwriting params of the institution to get only required fields to pass to api
+      for (let item = 0; item < underwritingParams.value.length; item++) {
+        // if key exists in ddata object, add it to buyerData
+        if (underwritingParams.value[item].params in ddata) {
+          buyerData[underwritingParams.value[item].params] =
+            ddata[underwritingParams.value[item].params];
+        }
+      }
+      console.log(buyerData);
+
       let underwriting = {
-        buyerData: {
-          ...underwritingData.value.vehicleData,
-          ...underwritingData.value.personalData,
-        },
+        buyerData,
         premiumData,
         generatePremiumData,
       };
@@ -55,6 +76,7 @@ export const useUnderwritingDataStore = defineStore(
           `motor/underwriting/${id}`,
           underwriting
         );
+        console.log(underwriting);
         processing.value = false;
         return data;
       } catch (error) {
@@ -194,6 +216,7 @@ export const useUnderwritingDataStore = defineStore(
       err,
       processing,
       underwritingData,
+      underwritingParams,
       getCarBrands,
       getVehicleMake,
       getVehicleModel,
@@ -202,6 +225,7 @@ export const useUnderwritingDataStore = defineStore(
       getBranches,
       getIdTypes,
       submitUnderwritingData,
+      checkFormField,
     };
   }
   //   {

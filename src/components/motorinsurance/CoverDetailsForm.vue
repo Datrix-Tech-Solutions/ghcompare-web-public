@@ -93,7 +93,8 @@ async function submitForm() {
             </div>
             <!-- Date component -->
             <div class="">
-                <input type="date" name="startdate" id="startdate" class="p-1" v-model="coverData.data.start_date">
+                <input required type="date" name="startdate" id="startdate" class="p-1"
+                    v-model="coverData.data.start_date">
             </div>
 
             <!-- next button -->

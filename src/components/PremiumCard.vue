@@ -25,7 +25,7 @@
 
         <div class="">
             <router-link
-                :to="{ name: 'Underwriting', params: { insuranceType: insuranceType, institution: premium?.institution[0]?.slug } }">
+                :to="{ name: 'Underwriting', params: { insuranceType: insuranceType, institutionSlug: premium?.institution[0]?.slug, institutionId: premium?.institution[0]?.id } }">
                 <button class="button-primary w-full">Buy</button>
             </router-link>
         </div>
