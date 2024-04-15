@@ -5,9 +5,21 @@
                 <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
                 <p class="mt-1 text-sm leading-6 text-gray-600">Review information submitted for accuracy
                 </p>
-                {{ buyerData.value }}
+
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-3">
+
+                    <!-- Account Type -->
+                    <div class="sm:col-span-full" v-if="underwritingDataStore.checkFormField('account_type')">
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Account type
+                            (policy)</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.account_type"
+                                class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+
+                    <!-- First name  -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('first_name')">
                         <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First
                             name</label>
                         <div class="mt-2">
@@ -17,7 +29,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Last name -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('last_name')">
                         <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last
                             name</label>
                         <div class="mt-2">
@@ -27,7 +40,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Email -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('email')">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
                             address</label>
                         <div class="mt-2">
@@ -37,7 +51,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Phone number -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('mobile_number')">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Phone
                             Number</label>
                         <div class="mt-2">
@@ -47,7 +62,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- ID type -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('id_type')">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">ID type
                         </label>
                         <div class="mt-2">
@@ -57,12 +73,23 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- ID number -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('id_number')">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">ID
                             Number</label>
                         <div class="mt-2">
                             <input readonly type="text" name="id-number" id="id-number" autocomplete="id-number"
                                 :value="buyerData.id_number"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+
+                    <!-- branch -->
+                    <div class="sm:col-span-full" v-if="underwritingDataStore.checkFormField('branch')">
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Branch</label>
+                        <div class="mt-2">
+                            <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
+                                :value="buyerData.branch"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
                     </div>
@@ -76,8 +103,10 @@
                 </p>
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-3">
-                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Make
+
+                    <!-- Vehicle make -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_make')">
+                        <label for="vehicle-make" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Make
                         </label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-make" id="vehicle-make"
@@ -86,7 +115,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- vehicle model -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_model')">
                         <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
                             Model</label>
                         <div class="mt-2">
@@ -96,8 +126,9 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
-                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                    <!-- Vehicle color -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_colour')">
+                        <label for="vehicle-colr" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
                             Color</label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-color" id="vehicle-color"
@@ -106,7 +137,18 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- body type -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('body_type')">
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Body type</label>
+                        <div class="mt-2">
+                            <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
+                                :value="buyerData.body_type"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+
+                    <!-- Registration number -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('registration_number')">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Registration
                             Number</label>
                         <div class="mt-2">
@@ -116,7 +158,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Chassis number -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('chassis_number')">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Chassis
                             Number</label>
                         <div class="mt-2">
@@ -126,15 +169,8 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Body type</label>
-                        <div class="mt-2">
-                            <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                :value="buyerData.body_type"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                        </div>
-                    </div>
-                    <div class="sm:col-span-3">
+                    <!-- body type code -->
+                    <!-- <div class="sm:col-span-3">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Body type
                             code</label>
                         <div class="mt-2">
@@ -142,17 +178,20 @@
                                 autocomplete="vehicle-color" :value="buyerData.body_type_code"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="sm:col-span-3">
+                    <!-- Model code -->
+                    <!-- <div class="sm:col-span-3">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Model Code</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
                                 :value="buyerData.model_code"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
-                    </div>
-                    <div class="sm:col-span-3">
+                    </div> -->
+
+                    <!-- customer code -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('customer_code')">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Customer
                             Code</label>
                         <div class="mt-2">
@@ -162,21 +201,13 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <!-- Vehicle risk -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_risk')">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
                             Risk</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
                                 :value="buyerData.vehicle_risk"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-full">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Branch</label>
-                        <div class="mt-2">
-                            <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                :value="buyerData.branch"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
                     </div>

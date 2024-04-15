@@ -25,6 +25,7 @@ export const useUnderwritingDataStore = defineStore(
         branch: "",
       },
       vehicleData: {
+        vehicle_brand: "",
         vehicle_make: "",
         vehicle_model: "",
         registration_number: "GW 147-V",

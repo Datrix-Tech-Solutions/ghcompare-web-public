@@ -72,6 +72,24 @@
                         </div>
                     </div>
 
+                    <!-- Body type -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('body_type')">
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Body type</label>
+                        <div class="mt-2">
+                            <!-- <input required id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
+                                v-model="vehicleData.body_type"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" /> -->
+                            <select id="body-type" v-model="vehicleData.body_type" @change="getBodyTypeCode()"
+                                class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option value="" disabled>Select Vehicle Body Type</option>
+                                <template v-for="bodyType in vehicleBodyType" :key="bodyType.CODE || bodyType">
+                                    <option :value='bodyType.NAME || bodyType'>{{ bodyType.NAME || bodyType }}
+                                    </option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+
                     <!-- vehicle color -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_colour')">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
@@ -111,24 +129,6 @@
                         </div>
                     </div>
 
-
-                    <!-- Body type -->
-                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('body_type')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Body type</label>
-                        <div class="mt-2">
-                            <!-- <input required id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                v-model="vehicleData.body_type"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" /> -->
-                            <select id="body-type" v-model="vehicleData.body_type" @change="getBodyTypeCode()"
-                                class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                <option value="" disabled>Select Vehicle Body Type</option>
-                                <template v-for="bodyType in vehicleBodyType" :key="bodyType.CODE || bodyType">
-                                    <option :value='bodyType.NAME || bodyType'>{{ bodyType.NAME || bodyType }}
-                                    </option>
-                                </template>
-                            </select>
-                        </div>
-                    </div>
                     <!-- <div class="sm:col-span-3">
                         <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Body type
                             code</label>

@@ -152,8 +152,12 @@ const idTypes = ref([])
 const branches = ref([])
 
 onMounted(async () => {
-    idTypes.value = await underwritingDataStore.getIdTypes()
-    branches.value = await underwritingDataStore.getBranches()
+    if (underwritingDataStore.checkFormField('id_type')) {
+        idTypes.value = await underwritingDataStore.getIdTypes()
+    }
+    if (underwritingDataStore.checkFormField('branch')) {
+        branches.value = await underwritingDataStore.getBranches()
+    }
     console.log(idTypes.value, branches.value)
 })
 </script>
