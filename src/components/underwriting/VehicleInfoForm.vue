@@ -27,7 +27,7 @@
                             <!-- <input required type="text" name="vehicle-make" id="vehicle-make"
                                 autocomplete="vehicle-make" v-model="vehicleData.vehicle_make"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" /> -->
-                            <select id="vehicle-brand" v-model="brand" @change="getVehicleDetails()"
+                            <select id="vehicle-brand" v-model="vehicleData.vehicle_brand" @change="getVehicleDetails()"
                                 class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 <option value="" disabled>Select Vehicle Brand</option>
                                 <template v-for="vbrand in carBrands" :key="vbrand.brand">
@@ -189,12 +189,16 @@ import ButtonWithArrow from '../../components/ui/ButtonWithArrow.vue'
 import Loader from '../ui/Loader.vue';
 import { useUnderwritingDataStore } from '../../store/underwritingData';
 
+const props = defineProps({
+    carBrands: Array,
+})
+
 const institutionId = inject('institutionId')
 const underwritingDataStore = useUnderwritingDataStore()
 
 const vehicleData = ref(underwritingDataStore.underwritingData.vehicleData)
-const brand = ref('')
-const carBrands = ref([])
+// const brand = ref('')
+// const carBrands = ref([])
 const vehicleMake = ref([])
 const vehicleModel = ref([])
 const vehicleBodyType = ref([])
@@ -202,9 +206,10 @@ const vehicleColors = ref([])
 // const modelData = ref()
 
 async function getVehicleDetails() {
+    console.log('something')
     // let brand = underwritingDataStore.underwritingData.vehicleData.vehicle_make
-    if (brand.value) {
-        const [make, model, body, colors] = await Promise.all([underwritingDataStore.getVehicleMake(institutionId, brand.value), underwritingDataStore.getVehicleModel(institutionId, brand.value), underwritingDataStore.getVehicleBodyType(institutionId), underwritingDataStore.getVehicleColors()])
+    if (vehicleData.value.vehicle_brand) {
+        const [make, model, body, colors] = await Promise.all([underwritingDataStore.getVehicleMake(institutionId, vehicleData.value.vehicle_brand), underwritingDataStore.getVehicleModel(institutionId, vehicleData.value.vehicle_brand), underwritingDataStore.getVehicleBodyType(institutionId), underwritingDataStore.getVehicleColors()])
         vehicleMake.value = make
         vehicleModel.value = model
         vehicleBodyType.value = body
@@ -226,8 +231,8 @@ function getBodyTypeCode() {
 }
 
 onMounted(async () => {
-    carBrands.value = await underwritingDataStore.getCarBrands()
-    console.log(carBrands.value)
+    // carBrands.value = await underwritingDataStore.getCarBrands()
+    // console.log(carBrands.value)
     await getVehicleDetails()
 })
 
