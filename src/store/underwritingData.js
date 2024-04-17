@@ -16,10 +16,10 @@ export const useUnderwritingDataStore = defineStore(
     const underwritingData = ref({
       personalData: {
         account_type: "",
-        first_name: "John",
-        last_name: "Doe",
-        mobile_number: "0242762412",
-        email: "sombody@gmail.com",
+        first_name: "",
+        last_name: "",
+        mobile_number: "",
+        email: "",
         id_type: "",
         id_number: "GHA-00000000-0",
         branch: "",
