@@ -1,5 +1,5 @@
 <template>
-    <div class="rounded-2xl border p-5 pb-8 w-[350px] min-h-[500px] bg-white flex flex-col justify-between">
+    <div class="rounded-2xl border py-10 p-5 pb-8 w-[350px] min-h-[450px] bg-white flex flex-col justify-between">
         <div class="">
             <div class="">
                 <img :src="premium?.institution[0]?.logo" alt="" class="w-44 h-16 object-contain">
@@ -11,7 +11,7 @@
             <div class="">
                 <template v-for="(offer, index) in premium?.offers">
                     <p>
-                        <CheckIcon class="inline w-5 relative bottom-0.5" /> Offer {{ index + 1 }}: {{ offer.offer }}.
+                        <CheckBadgeIcon class="inline w-5 relative bottom-0.5 text-primary" /> {{ offer.offer }}.
                     </p>
                 </template>
 
@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { CheckIcon } from '@heroicons/vue/24/outline';
+import { CheckBadgeIcon } from '@heroicons/vue/24/outline';
 
 defineProps(['premium', 'insuranceType'])
 </script>

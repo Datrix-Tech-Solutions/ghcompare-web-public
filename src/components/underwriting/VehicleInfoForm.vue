@@ -8,6 +8,10 @@
             </div>
         </div>
 
+        <div class="mb-14">
+            <img :src="institutionLogo" alt="" class="max-w-[250px] mx-auto">
+        </div>
+
         <!-- form  -->
         <form @submit.prevent="$emit('sendData', { vehicleData })">
 
@@ -194,6 +198,7 @@ const props = defineProps({
 })
 
 const institutionId = inject('institutionId')
+const institutionLogo = inject('institutionLogo')
 const underwritingDataStore = useUnderwritingDataStore()
 
 const vehicleData = ref(underwritingDataStore.underwritingData.vehicleData)

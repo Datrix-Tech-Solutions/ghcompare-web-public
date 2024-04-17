@@ -39,6 +39,34 @@ export const useUnderwritingDataStore = defineStore(
       },
     });
 
+    function $reset() {
+      underwritingData.value = {
+        personalData: {
+          account_type: "",
+          first_name: "John",
+          last_name: "Doe",
+          mobile_number: "0242762412",
+          email: "sombody@gmail.com",
+          id_type: "",
+          id_number: "GHA-00000000-0",
+          branch: "",
+        },
+        vehicleData: {
+          vehicle_brand: "",
+          vehicle_make: "",
+          vehicle_model: "",
+          registration_number: "GW 147-V",
+          vehicle_colour: "",
+          chassis_number: "8743923472497429",
+          body_type: "",
+          body_type_code: "SALOON",
+          model_code: "100269",
+          customer_code: "ID0134348",
+          vehicle_risk: "AMBULANCE",
+        },
+      };
+    }
+
     const checkFormField = (field) => {
       return underwritingParams.value?.find((item) => item.params === field);
     };
@@ -227,6 +255,7 @@ export const useUnderwritingDataStore = defineStore(
       getIdTypes,
       submitUnderwritingData,
       checkFormField,
+      $reset,
     };
   }
   //   {

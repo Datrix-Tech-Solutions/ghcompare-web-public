@@ -9,6 +9,10 @@
             </div>
         </div>
 
+        <div class="mb-14">
+            <img :src="institutionLogo" alt="" class="max-w-[250px] mx-auto">
+        </div>
+
         <!-- form -->
         <form @submit.prevent="$emit('sendData', { personalData })" class="">
             <div class="mb-10">
@@ -140,11 +144,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, inject } from 'vue';
 import ButtonWithArrow from '../../components/ui/ButtonWithArrow.vue'
 import { useUnderwritingDataStore } from '../../store/underwritingData';
 import Loader from '../ui/Loader.vue';
 
+const institutionLogo = inject('institutionLogo')
 const underwritingDataStore = useUnderwritingDataStore()
 
 const personalData = ref(underwritingDataStore.underwritingData.personalData)

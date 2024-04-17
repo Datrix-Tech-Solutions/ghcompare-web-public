@@ -1,18 +1,32 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue';
+import ToastNotification from './components/ui/ToastNotification.vue';
 import { useRoute } from 'vue-router'
+import { useToastStore } from '../src/store/toast'
+import { ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+
+const toastStore = useToastStore()
+
+// for notification
+const { showToast } = storeToRefs(toastStore)
 
 const route = useRoute()
+
 </script>
 
 <template>
   <div class="bg-[#f0f3f5]">
     <!-- navigation bar -->
+
     <NavBar :key="route.path" />
 
-    <router-view></router-view>
+    <Transition name="slide-fade" appear>
+      <ToastNotification v-if="showToast" />
+    </Transition>
 
+    <router-view></router-view>
     <!-- footer -->
     <Footer />
   </div>
@@ -72,5 +86,19 @@ select:focus {
 .scrollbar::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background: #ccc;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
 }
 </style>

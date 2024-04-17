@@ -4,7 +4,9 @@ import VehicleDetailsForm from './VehicleDetailsForm.vue';
 import { useFormDataStore } from '../../store/formData'
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useToastStore } from '../../store/toast';
 
+const toastStore = useToastStore()
 const store = useFormDataStore() //for storing data in store
 
 const route = useRoute() // initialise route object
@@ -61,7 +63,7 @@ async function getFormData(data) {
         if (store.success) {
             await router.push({ name: 'Premium', 'params': { insuranceType: route.meta.insuranceType } })
         } else {
-            alert('something went wrong')
+            toastStore.addToastMessage('danger', 'Failed', 'Something Went Wrong')
         }
     }
     console.log(formData.value)

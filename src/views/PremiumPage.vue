@@ -57,10 +57,11 @@ const formData = store.motorInsuranceData
                 <h2 class="text-4xl font-bold  text-gray-600">Compare Premiums</h2>
                 <p class="text-lg">Maximize value, minimize hassle – discover the best premium for you!</p>
             </div>
-            <div class="flex gap-5">
-                <div v-for="(value, key) in store.motorInsurancePremium " :key="key">
-                    <PremiumCard :premium="value" :insurance-type="$route.params.insuranceType" />
-                </div>
+            <div class="flex gap-5 flex-wrap lg:flex-nowrap">
+                <template v-for="(value, key) in store.motorInsurancePremium " :key="key">
+                    <PremiumCard :premium="value" :insurance-type="$route.params.insuranceType"
+                        class="fl flex-gro]w flex-shrink" />
+                </template>
             </div>
             <!-- {{ store.motorInsurancePremium }} -->
         </section>

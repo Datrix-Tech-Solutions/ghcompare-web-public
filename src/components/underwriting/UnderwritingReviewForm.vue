@@ -1,5 +1,11 @@
 <template>
     <div class="bg-white px-10 py-16 rounded-lg">
+
+        <div class="mb-14">
+            <img :src="institutionLogo" alt="" class="max-w-[250px] mx-auto">
+        </div>
+
+
         <form @submit.prevent="$emit('sendData')" class="">
             <div class="mb-10">
                 <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
@@ -233,11 +239,12 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, inject } from 'vue';
 import ButtonWithArrow from '../../components/ui/ButtonWithArrow.vue'
 import Loader from '../ui/Loader.vue';
 import { useUnderwritingDataStore } from '../../store/underwritingData';
 
+const institutionLogo = inject('institutionLogo')
 const underwritingDataStore = useUnderwritingDataStore()
 const buyerData = ref({ ...underwritingDataStore.underwritingData.personalData, ...underwritingDataStore.underwritingData.vehicleData })
 </script>
