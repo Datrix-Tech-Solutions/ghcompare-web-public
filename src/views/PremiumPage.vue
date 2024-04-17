@@ -4,9 +4,12 @@
 import Partners from '../components/Partners.vue';
 import FormSummary from '../components/motorinsurance/FormSummary.vue';
 import PremiumCard from '../components/PremiumCard.vue';
+import PaymentModal from '../components/underwriting/PaymentModal.vue';
 import { useFormDataStore } from '../store/formData';
+import { ref } from 'vue';
 
 const store = useFormDataStore() //initialize store
+const paymentLink = ref('')
 
 /**
  *  Motor Insurance Form data from store...
@@ -16,6 +19,7 @@ const formData = store.motorInsuranceData
 </script>
 
 <template>
+    <PaymentModal :paymentLink="paymentLink" v-if="paymentLink" @close-modal="() => { paymentLink = '' }" />
     <main class="max-width py-20">
         <!-- heading and some description -->
         <section>
@@ -35,20 +39,6 @@ const formData = store.motorInsuranceData
                     <FormSummary :form-data="formData" />
                 </div>
 
-                <!-- Display premium -->
-                <!-- <div class="mlg:w-1/2 w-full">
-                    <p class="text-center font-semibold text-2xl mb-3">
-                        Total Premium Payable
-                    </p>
-                    <p class="text-center text-primary text-5xl font-bold">Gh&#8373;200</p> -->
-
-                <!-- button to compare offers -->
-                <!-- <div class="flex mt-10 justify-center">
-                        <button class="group button-primary w-1/2">Compare Offers
-                        </button>
-                    </div>
-
-                </div> -->
             </div>
         </section>
 
@@ -60,7 +50,7 @@ const formData = store.motorInsuranceData
             <div class="flex gap-5 flex-wrap lg:flex-nowrap">
                 <template v-for="(value, key) in store.motorInsurancePremium " :key="key">
                     <PremiumCard :premium="value" :insurance-type="$route.params.insuranceType"
-                        class="fl flex-gro]w flex-shrink" />
+                        @paymentUrl="(url) => paymentLink = url" class="fl flex-gro]w flex-shrink" />
                 </template>
             </div>
             <!-- {{ store.motorInsurancePremium }} -->

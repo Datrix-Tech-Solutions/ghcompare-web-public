@@ -64,12 +64,21 @@ const routes = [
 
   // Underwriting page
   {
-    path: "/:insuranceType/:institutionId/:institutionSlug",
+    path: "/:insuranceType/:institutionId/:institutionSlug/underwriting",
     name: "Underwriting",
     component: () =>
       import(
         /* webpackChunkName: "underwriting" */ "../views/UnderwritingPage.vue"
       ),
+    props: true,
+  },
+
+  // Payment
+  {
+    path: "/:insuranceType/:institutionId/:institutionSlug/payment",
+    name: "Payment",
+    component: () =>
+      import(/* webpackChunkName: "Payment" */ "../views/PaymentPage.vue"),
     props: true,
   },
 

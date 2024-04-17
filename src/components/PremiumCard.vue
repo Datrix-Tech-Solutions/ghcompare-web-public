@@ -24,7 +24,11 @@
         </div>
 
         <div class="">
-            <router-link
+            <div v-if="premium?.institution[0]?.slug === 'enterprise'"
+                @click="$emit('paymentUrl', premium?.paymentData?.url)">
+                <button class="button-primary w-full">Buy</button>
+            </div>
+            <router-link v-else
                 :to="{ name: 'Underwriting', params: { insuranceType: insuranceType, institutionSlug: premium?.institution[0]?.slug, institutionId: premium?.institution[0]?.id } }">
                 <button class="button-primary w-full">Buy</button>
             </router-link>

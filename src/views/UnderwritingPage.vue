@@ -51,14 +51,13 @@ async function submitData(buyerData) {
     let generatePremiumData = { ...formDataStore.motorInsuranceData.coverDetails, ...formDataStore.motorInsuranceData.vehicleDetails }
     let data = await underwritingDataStore.submitUnderwritingData(premiumData, generatePremiumData, institutionData.value?.institution[0]?.id)
     console.log(data)
-    if (data) {
+    if (data && institutionData.value.institution[0].slug !== 'enterprise') {
         console.log(data)
         paymentLink.value = data?.data?.paymentData.url
-    } else {
+    } else if (!data) {
         toastStore.addToastMessage('danger', 'Failed', 'Something Went Wrong')
         console.log(data)
     }
-
     // window.open(data?.data?.paymentData.url, '_blank')
 }
 

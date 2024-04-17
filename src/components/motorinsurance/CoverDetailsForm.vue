@@ -54,6 +54,17 @@ async function submitForm() {
 
         <!-- the form -->
         <form @submit.prevent="submitForm">
+            <!-- Email -->
+            <div class="">
+                <div class="w-1/2">
+                    <h4 class="text-lg text-primary font-semibold mb-3">Your Email</h4>
+                    <input type="email" name="seats" id="email" class="w-full" required v-model="coverData.data.email"
+                        placeholder="Johndoe@somemail.com">
+                </div>
+            </div>
+
+            <hr class="my-6">
+
             <!-- cover type -->
             <h4 class="text-lg text-primary font-semibold mb-3">Cover Type</h4>
 

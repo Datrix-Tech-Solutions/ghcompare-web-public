@@ -23,7 +23,7 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-4 md:p-5 space-y-4 h-[70%]">
+                <div class="p-4 md:p-5 space-y-4 h-[80%]">
                     <iframe v-if="paymentLink" :src="paymentLink" frameborder="0" class="w-full h-full"
                         name="myFrame"></iframe>
                 </div>
@@ -34,8 +34,18 @@
 </template>
 
 <script setup>
+import { onMounted, onUnmounted } from 'vue';
+
 defineProps({
     paymentLink: String
+})
+
+onMounted(() => {
+    document.body.style.overflow = 'hidden'
+})
+
+onUnmounted(() => {
+    document.body.style.overflow = 'auto'
 })
 </script>
 
