@@ -22,7 +22,7 @@
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <!-- Vehicle brand -->
-                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_make')">
+                    <div class="sm:col-span-3">
                         <label for="vehicle-brand" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
                             Brand
                         </label>
