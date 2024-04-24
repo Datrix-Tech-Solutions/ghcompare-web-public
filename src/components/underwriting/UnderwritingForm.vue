@@ -17,11 +17,18 @@
 import { ref, onMounted } from 'vue';
 import PersonalInfoForm from './PersonalInfoForm.vue';
 import VehicleInfoForm from './VehicleInfoForm.vue';
-import ReviewForm from './UnderwritingReviewForm.vue'
+import ReviewForm from './UnderwritingReviewForm.vue';
 import StepperComponent from '../../components/ui/StepperComponent.vue';
 import { useUnderwritingDataStore } from '../../store/underwritingData';
 
 const underwritingDataStore = useUnderwritingDataStore()
+
+// route params
+const props = defineProps({
+    institutionSlug: String,
+    institutionId: String,
+    insuranceType: String,
+})
 
 const forms = ref(['Personal Info', 'Vehicle Info', 'Review'])
 const selectedForm = ref(0)
@@ -38,8 +45,11 @@ function previousForm() {
 }
 
 onMounted(async () => {
-    carBrands.value = await underwritingDataStore.getCarBrands()
-    console.log(carBrands.value)
+    if (props.institutionId !== 8) {
+        carBrands.value = await underwritingDataStore.getCarBrands()
+        console.log(carBrands.value)
+    }
+
     // await getVehicleDetails()
 })
 </script>

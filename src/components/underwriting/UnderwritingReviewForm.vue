@@ -19,8 +19,34 @@
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Account type
                             (policy)</label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.account_type"
-                                class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            <input required name="" id="" v-model="buyerData.account_type" readonly
+                                class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- title-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('title')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.title" readonly class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- gender-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('gender')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Gender</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.gender" readonly class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- marital_status -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('marital_status ')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Marital Status
+                        </label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.marital_status" readonly
+                                class="input-styling" />
                         </div>
                     </div>
 
@@ -30,8 +56,7 @@
                             name</label>
                         <div class="mt-2">
                             <input readonly type="text" name="first-name" id="first-name" autocomplete="given-name"
-                                :value="buyerData.first_name"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                :value="buyerData.first_name" class="input-styling" />
                         </div>
                     </div>
 
@@ -41,8 +66,25 @@
                             name</label>
                         <div class="mt-2">
                             <input readonly type="text" name="last-name" id="last-name" autocomplete="family-name"
-                                :value="buyerData.last_name"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                :value="buyerData.last_name" class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- dob-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('dob')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Date of
+                            Birth</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.dob" readonly class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- profession-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('profession')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Profession</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.profession" readonly
+                                class="input-styling" />
                         </div>
                     </div>
 
@@ -52,8 +94,7 @@
                             address</label>
                         <div class="mt-2">
                             <input readonly id="email" name="email" type="email" autocomplete="email"
-                                :value="buyerData.email"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                :value="buyerData.email" class="input-styling" />
                         </div>
                     </div>
 
@@ -63,8 +104,23 @@
                             Number</label>
                         <div class="mt-2">
                             <input readonly type="number" name="phone-number" id="phone-number"
-                                autocomplete="phone-number" :value="buyerData.mobile_number"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                autocomplete="phone-number" :value="buyerData.mobile_number" class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- address-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('address')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Address</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.address" readonly class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- gps_code-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('gps_code')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">GPS Code</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.gps_code" readonly class="input-styling" />
                         </div>
                     </div>
 
@@ -74,8 +130,7 @@
                         </label>
                         <div class="mt-2">
                             <input readonly id="id-type" name="id-type" type="text" autocomplete="id-type"
-                                :value="buyerData.id_type"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                :value="buyerData.id_type" class="input-styling" />
                         </div>
                     </div>
 
@@ -85,8 +140,7 @@
                             Number</label>
                         <div class="mt-2">
                             <input readonly type="text" name="id-number" id="id-number" autocomplete="id-number"
-                                :value="buyerData.id_number"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                :value="buyerData.id_number" class="input-styling" />
                         </div>
                     </div>
 
@@ -95,8 +149,7 @@
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Branch</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                :value="buyerData.branch"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                :value="buyerData.branch" class="input-styling" />
                         </div>
                     </div>
                 </div>
@@ -110,14 +163,22 @@
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
+                    <!-- vehicle_trim-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_trim')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Trim</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.vehicle_trim" readonly
+                                class="input-styling" />
+                        </div>
+                    </div>
+
                     <!-- Vehicle make -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_make')">
                         <label for="vehicle-make" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Make
                         </label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-make" id="vehicle-make"
-                                autocomplete="vehicle-make" :value="buyerData.vehicle_make"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                autocomplete="vehicle-make" :value="buyerData.vehicle_make" class="input-styling" />
                         </div>
                     </div>
 
@@ -127,8 +188,56 @@
                             Model</label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-model" id="vehicle-model"
-                                autocomplete="vehicle-model" :value="buyerData.vehicle_model"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                autocomplete="vehicle-model" :value="buyerData.vehicle_model" class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- vehicle_fuel_type-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_fuel_type')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Fuel
+                            Type</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.vehicle_fuel_type" readonly
+                                class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- vehicle_no_cylinders-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_no_cylinders')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Number of
+                            Cylinders</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.vehicle_no_cylinders" readonly
+                                class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- vehicle_cc-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_cc')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Vehicle CC</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.vehicle_cc" readonly
+                                class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- vehicle_drive_type-->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_drive_type')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Drive
+                            Type</label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.vehicle_drive_type" readonly
+                                class="input-styling" />
+                        </div>
+                    </div>
+
+                    <!-- vehicle_engine_no -->
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_engine_no ')">
+                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">vehicle_engine_no
+                        </label>
+                        <div class="mt-2">
+                            <input required name="" id="" v-model="buyerData.vehicle_engine_no" readonly
+                                class="input-styling" />
                         </div>
                     </div>
 
@@ -138,8 +247,7 @@
                             Color</label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-color" id="vehicle-color"
-                                autocomplete="vehicle-color" :value="buyerData.vehicle_colour"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                autocomplete="vehicle-color" :value="buyerData.vehicle_colour" class="input-styling" />
                         </div>
                     </div>
 
@@ -148,8 +256,7 @@
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Body type</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                :value="buyerData.body_type"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                :value="buyerData.body_type" class="input-styling" />
                         </div>
                     </div>
 
@@ -159,8 +266,7 @@
                             Number</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                :value="buyerData.registration_number"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                :value="buyerData.registration_number" class="input-styling" />
                         </div>
                     </div>
 
@@ -170,8 +276,7 @@
                             Number</label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-color" id="vehicle-color"
-                                autocomplete="vehicle-color" :value="buyerData.chassis_number"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                autocomplete="vehicle-color" :value="buyerData.chassis_number" class="input-styling" />
                         </div>
                     </div>
 
@@ -182,7 +287,7 @@
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-color" id="vehicle-color"
                                 autocomplete="vehicle-color" :value="buyerData.body_type_code"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                class="input-styling" />
                         </div>
                     </div> -->
 
@@ -192,7 +297,7 @@
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
                                 :value="buyerData.model_code"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                class="input-styling" />
                         </div>
                     </div> -->
 
@@ -202,8 +307,7 @@
                             Code</label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-color" id="vehicle-color"
-                                autocomplete="vehicle-color" :value="buyerData.customer_code"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                autocomplete="vehicle-color" :value="buyerData.customer_code" class="input-styling" />
                         </div>
                     </div>
 
@@ -213,8 +317,7 @@
                             Risk</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                :value="buyerData.vehicle_risk"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                :value="buyerData.vehicle_risk" class="input-styling" />
                         </div>
                     </div>
 

@@ -23,6 +23,14 @@ export const useUnderwritingDataStore = defineStore(
         id_type: "",
         id_number: "GHA-00000000-0",
         branch: "",
+
+        title: "Mr",
+        gender: "1",
+        dob: "2001-10-10",
+        marital_status: "Single",
+        profession: "teacher",
+        address: "accra",
+        gps_code: "GS-101-1011",
       },
       vehicleData: {
         vehicle_brand: "",
@@ -36,6 +44,13 @@ export const useUnderwritingDataStore = defineStore(
         model_code: "100269",
         customer_code: "ID0134348",
         vehicle_risk: "AMBULANCE",
+
+        vehicle_trim: "Auto BMW",
+        vehicle_fuel_type: "Petrol",
+        vehicle_no_cylinders: 2,
+        vehicle_cc: 3500,
+        vehicle_drive_type: "4 Wheel",
+        vehicle_engine_no: "13323",
       },
     });
 

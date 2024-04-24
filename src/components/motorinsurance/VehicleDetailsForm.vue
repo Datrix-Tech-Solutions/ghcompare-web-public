@@ -191,7 +191,7 @@ async function submit() {
 
             <div class="flex justify-between flex-row-reverse mt-10">
                 <!-- next -->
-                <button class="group button-primary">
+                <button class="group button-primary" :disabled="store.gettingPremium">
                     <span v-if="!store.gettingPremium">Submit</span>
                     <span v-else>
                         <Loader />
