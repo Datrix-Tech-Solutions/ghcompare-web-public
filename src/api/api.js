@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const base = "https://api.starassurance.com/api/";
-const baseUrl = "http://api.ghcompare.com/";
+const baseUrl = "https://api.ghcompare.com/";
 
 export const api = axios.create({
   baseURL: baseUrl,
