@@ -86,7 +86,7 @@ async function submit() {
         <form @submit.prevent="submit">
             <!-- Vehicle use -->
             <div class="flex justify-between items-start">
-                <h4 class="text-lg text-primary font-semibold mb-3">Vehicle Use</h4>
+                <label class="label">Vehicle Use</label>
 
                 <!-- Information on Vehicle use -->
                 <div class="relative">
@@ -128,9 +128,8 @@ async function submit() {
 
             <!-- Risk Type -->
             <div class="flex justify-between items-start">
-                <h4 class="text-lg text-primary font-semibold mb-3"
-                    :class="{ disabled: vehicleData.data.vehicle_use == '' }">
-                    Vehicle Class </h4>
+                <label class="label" :class="{ disabled: vehicleData.data.vehicle_use == '' }">
+                    Vehicle Class </label>
             </div>
 
             <div class="" :title="vehicleData.data.vehicle_use ? '' : 'Please select vehicle use value'">
@@ -151,14 +150,14 @@ async function submit() {
             <div class="flex gap-5">
                 <!-- Number of seats -->
                 <div class="w-1/2">
-                    <h4 class="text-lg text-primary font-semibold mb-3">Number of Seats</h4>
+                    <label class="label">Number of Seats</label>
                     <input type="number" name="seats" id="seats" class="w-full" required
                         v-model="vehicleData.data.number_of_seats" placeholder="e.g. 12">
                 </div>
 
                 <!-- Vehicle Registration Year -->
                 <div class="w-1/2">
-                    <h4 class="text-lg text-primary font-semibold mb-3">Vehicle Registration Year</h4>
+                    <label class="label">Vehicle Registration Year</label>
                     <select name="seats" id="seats" v-model="vehicleData.data.vehicle_reg_year" class="w-full" required
                         :class="{ 'text-[#aaaaaa]': vehicleData.data.vehicle_reg_year == '' }">
                         <option disabled value="">Select registration year</option>
@@ -174,7 +173,7 @@ async function submit() {
             <div class="flex gap-5">
                 <!-- Year of Manufacture -->
                 <div class="w-1/2">
-                    <h4 class="text-lg text-primary font-semibold mb-3">Year of Manufacture</h4>
+                    <label class="label">Year of Manufacture</label>
 
                     <select name="seats" id="seats" v-model="vehicleData.data.year_of_manufacture" class="w-full"
                         required :class="{ 'text-[#aaaaaa]': vehicleData.data.year_of_manufacture == '' }">
@@ -189,7 +188,7 @@ async function submit() {
                 <!-- Amount insured -->
                 <div class="w-1/2" v-if="formData?.coverDetails.coverType !== 'Third Party'">
 
-                    <h4 class="text-lg text-primary font-semibold mb-3">Vehicle Value</h4>
+                    <label class="label">Vehicle Value</label>
 
 
                     <div class="w-full">

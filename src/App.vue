@@ -55,6 +55,15 @@ select {
   padding-block: 13.5px;
 }
 
+label.label {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
