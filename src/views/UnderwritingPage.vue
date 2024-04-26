@@ -71,6 +71,7 @@ onMounted(() => {
 
     provide('institutionId', institutionData.value?.institution[0]?.id) //for forms to access and get institution Id
     provide('institutionLogo', institutionData.value?.institution[0]?.logo) //for forms to access and get institution logo
+    provide('institutionSlug', institutionData.value?.institution[0]?.slug) //for forms to access and get institution logo
 })
 
 onUnmounted(() => {

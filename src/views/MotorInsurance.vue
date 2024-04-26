@@ -1,18 +1,6 @@
 <script setup>
 import MotorInsuranceForm from '../components/motorinsurance/MotorInsuranceForm.vue';
-import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 
-// onBeforeRouteUpdate((to, from) => {
-//     if (to.path === from.path) {
-//         const answer = window.confirm(
-//             'Do you really want to leave? you have unsaved changes!'
-//         )
-//         alert('this one')
-//         // cancel the navigation and stay on the same page
-//         if (!answer) return false
-//     }
-//     alert('that that that')
-// })
 </script>
 
 <template>

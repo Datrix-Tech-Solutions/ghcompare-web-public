@@ -22,7 +22,7 @@
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <!-- Vehicle brand -->
-                    <div class="sm:col-span-3" v-if="institutionId !== 8">
+                    <div class="sm:col-span-3" v-if="institutionSlug !== 'loyalty'">
                         <label for="vehicle-brand" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
                             Brand
                         </label>
@@ -57,7 +57,7 @@
                             Make</label>
                         <div class="mt-2">
                             <select name="vehicle-model" id="vehicle-model" autocomplete="vehicle-model"
-                                v-if="institutionId !== 8" v-model="vehicleData.vehicle_make"
+                                v-if="institutionSlug !== 'loyalty'" v-model="vehicleData.vehicle_make"
                                 :disabled="underwritingDataStore.processing" class="input-styling py-2">
                                 <option value="" disabled>Select Vehicle Make</option>
                                 <template v-for="make in vehicleMake" :key="make.name || make">
@@ -79,8 +79,9 @@
                         <div class="mt-2">
 
                             <select name="vehicle-model" id="vehicle-model" autocomplete="vehicle-model"
-                                v-if="institutionId !== 8" @change="getModelCode()" v-model="vehicleData.vehicle_model"
-                                :disabled="underwritingDataStore.processing" class="input-styling py-2">
+                                v-if="institutionSlug !== 'loyalty'" @change="getModelCode()"
+                                v-model="vehicleData.vehicle_model" :disabled="underwritingDataStore.processing"
+                                class="input-styling py-2">
                                 <option value="" disabled>Select Vehicle Model</option>
                                 <template v-for="model in vehicleModel" :key="model.name || model">
                                     <option :value='model.name || model'>{{ model.name || model }}</option>
@@ -163,7 +164,7 @@
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Body Type</label>
                         <div class="mt-2">
                             <select id="body-type" v-model="vehicleData.body_type" @change="getBodyTypeCode()"
-                                v-if="institutionId !== 8" class="input-styling py-2">
+                                v-if="institutionSlug !== 'loyalty'" class="input-styling py-2">
                                 <option value="" disabled>Select Vehicle Body Type</option>
                                 <template v-for="bodyType in vehicleBodyType" :key="bodyType.CODE || bodyType">
                                     <option :value='bodyType.NAME || bodyType'>{{ bodyType.NAME || bodyType }}
@@ -260,6 +261,7 @@ const props = defineProps({
 
 const institutionId = inject('institutionId')
 const institutionLogo = inject('institutionLogo')
+const institutionSlug = inject('institutionSlug')
 const underwritingDataStore = useUnderwritingDataStore()
 
 const vehicleData = ref(underwritingDataStore.underwritingData.vehicleData)
@@ -277,7 +279,7 @@ async function getVehicleDetails() {
     console.log('something')
     // let brand = underwritingDataStore.underwritingData.vehicleData.vehicle_make
     if (vehicleData.value.vehicle_brand) {
-        const [make, model, body, colors] = await Promise.all([underwritingDataStore.getVehicleMake(institutionId, vehicleData.value.vehicle_brand), underwritingDataStore.getVehicleModel(institutionId, vehicleData.value.vehicle_brand), underwritingDataStore.getVehicleBodyType(institutionId), underwritingDataStore.getVehicleColors()])
+        const [make, model, body, colors] = await Promise.all([underwritingDataStore.getVehicleMake(institutionId, institutionSlug, vehicleData.value.vehicle_brand), underwritingDataStore.getVehicleModel(institutionId, institutionSlug, vehicleData.value.vehicle_brand), underwritingDataStore.getVehicleBodyType(institutionId, institutionSlug), underwritingDataStore.getVehicleColors()])
         vehicleMake.value = make
         vehicleModel.value = model
         vehicleBodyType.value = body

@@ -141,20 +141,20 @@ export const useUnderwritingDataStore = defineStore(
       }
     };
 
-    const getVehicleMake = async (id, brand) => {
+    const getVehicleMake = async (id, slug, brand) => {
       try {
         processing.value = true;
         const { data } = await api.get(`/vehicle/make/${id}/${brand}`);
         processing.value = false;
         // return data;
-        switch (id) {
-          case 1:
+        switch (slug) {
+          case "enterprise":
             return data;
             break;
-          case 4:
+          case "star-assurance":
             return data.data;
             break;
-          case 7:
+          case "phoenix":
             return data.vehiclemake;
             break;
           default:
@@ -166,19 +166,19 @@ export const useUnderwritingDataStore = defineStore(
       }
     };
 
-    const getVehicleModel = async (id, brand) => {
+    const getVehicleModel = async (id, slug, brand) => {
       try {
         processing.value = true;
         const { data } = await api.get(`/vehicle/model/${id}/${brand}`);
         processing.value = false;
-        switch (id) {
-          case 1:
+        switch (slug) {
+          case "star-assurance":
             return data;
             break;
-          case 4:
+          case "enterprise":
             return data.data;
             break;
-          case 7:
+          case "phoenix":
             return data.vehModel;
             break;
           default:
@@ -191,19 +191,19 @@ export const useUnderwritingDataStore = defineStore(
       }
     };
 
-    const getVehicleBodyType = async (id) => {
+    const getVehicleBodyType = async (id, slug) => {
       try {
         processing.value = true;
         const { data } = await api.get(`/vehicle/body-types/${id}`);
         processing.value = false;
-        switch (id) {
-          case 1:
+        switch (slug) {
+          case "star-assurance":
             return data;
             break;
-          case 4:
+          case "enterprise":
             return data.data;
             break;
-          case 7:
+          case "phoenix":
             return data.vehicleBody;
             break;
           default:

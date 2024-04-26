@@ -45,7 +45,7 @@ function previousForm() {
 }
 
 onMounted(async () => {
-    if (props.institutionId !== 8) {
+    if (props.institutionSlug !== 'loyalty') {
         carBrands.value = await underwritingDataStore.getCarBrands()
         console.log(carBrands.value)
     }
