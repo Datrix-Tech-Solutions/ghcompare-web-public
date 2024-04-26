@@ -49,7 +49,6 @@ onMounted(async () => {
         carBrands.value = await underwritingDataStore.getCarBrands()
         console.log(carBrands.value)
     }
-
     // await getVehicleDetails()
 })
 </script>

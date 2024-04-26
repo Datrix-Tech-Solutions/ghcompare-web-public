@@ -51,6 +51,10 @@ textarea {
   padding: 12px;
 }
 
+select {
+  padding-block: 13.5px;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

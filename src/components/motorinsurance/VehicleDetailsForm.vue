@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useFormDataStore } from '../../store/formData'
 import Loader from '../ui/Loader.vue';
+import { getYearsArray } from '../../utils/utils';
 
 // initialise router object
 const router = useRouter()
@@ -42,6 +43,8 @@ const showVehicleUseInfo = ref(false)
 const showRiskTypeInfo = ref(false)
 const showSeatsInfo = ref(false)
 const showAmountInsuredInfo = ref(false)
+
+const yearsRange = getYearsArray()
 
 //emits
 const emit = defineEmits(['sendFormData', 'updateForm'])
@@ -133,7 +136,7 @@ async function submit() {
             <div class="" :title="vehicleData.data.vehicle_use ? '' : 'Please select vehicle use value'">
                 <select name="risktype" id="risktype" v-model="vehicleData.data.vehicle_class" class="w-full" required
                     :class="{ disabled: vehicleData.data.vehicle_use == '' }">
-                    <option disabled value="">Please select risk type</option>
+                    <option disabled value="">Select risk type</option>
                     <template
                         v-for="(risk, index) in vehicleData.data.vehicle_use == 'Commercial' ? vehicleDetails.commercialUse : vehicleDetails.privateUse"
                         :key="index">
@@ -156,8 +159,13 @@ async function submit() {
                 <!-- Vehicle Registration Year -->
                 <div class="w-1/2">
                     <h4 class="text-lg text-primary font-semibold mb-3">Vehicle Registration Year</h4>
-                    <input type="number" name="seats" id="seats" class="w-full" required
-                        v-model="vehicleData.data.vehicle_reg_year" placeholder="e.g. 2003">
+                    <select name="seats" id="seats" v-model="vehicleData.data.vehicle_reg_year" class="w-full" required
+                        :class="{ 'text-[#aaaaaa]': vehicleData.data.vehicle_reg_year == '' }">
+                        <option disabled value="">Select registration year</option>
+                        <template v-for="year in yearsRange" :key="year">
+                            <option> {{ year }}</option>
+                        </template>
+                    </select>
                 </div>
             </div>
 
@@ -168,9 +176,13 @@ async function submit() {
                 <div class="w-1/2">
                     <h4 class="text-lg text-primary font-semibold mb-3">Year of Manufacture</h4>
 
-                    <input type="number" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" name="amountinsured"
-                        id="amountinsured" class="w-full" placeholder="e.g. 1990" required
-                        v-model="vehicleData.data.year_of_manufacture">
+                    <select name="seats" id="seats" v-model="vehicleData.data.year_of_manufacture" class="w-full"
+                        required :class="{ 'text-[#aaaaaa]': vehicleData.data.year_of_manufacture == '' }">
+                        <option disabled value="">Select year of manufacture</option>
+                        <template v-for="year in yearsRange" :key="year">
+                            <option> {{ year }}</option>
+                        </template>
+                    </select>
 
                 </div>
 
