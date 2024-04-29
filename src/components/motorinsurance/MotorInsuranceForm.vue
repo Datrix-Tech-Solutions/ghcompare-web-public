@@ -5,12 +5,12 @@ import StepperComponent from '../ui/StepperComponent.vue';
 import { useFormDataStore } from '../../store/formData'
 import { onMounted, ref, } from 'vue';
 import { useToastStore } from '../../store/toast';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const toastStore = useToastStore()
-const store = useFormDataStore() //for storing data in store
-const formDataStore = ref(store.motorInsuranceData) // form data to be used for this page
-// const activeForm = ref('CoverDetailsForm') //active form
+const formDataStore = useFormDataStore() //for storing data in store
+const router = useRouter()
+const route = useRoute()
 
 // for form component switching
 const forms = ref(['Cover Details', 'Vehicle Details']);
@@ -27,8 +27,16 @@ function previousForm() {
     selectedForm.value = selectedForm.value - 1
 }
 
-function submitData() {
-
+async function submitData(data) {
+    formDataStore.motorInsuranceData = { ...formDataStore.motorInsuranceData, ...data }
+    console.log('something')
+    await formDataStore.getMotorPremium()
+    //Navigate user to premium page
+    if (formDataStore.success) {
+        await router.push({ name: 'Premium', 'params': { insuranceType: route.meta.insuranceType } })
+    } else {
+        toastStore.addToastMessage('danger', 'Failed', 'Something Went Wrong')
+    }
 }
 
 onMounted(() => {
