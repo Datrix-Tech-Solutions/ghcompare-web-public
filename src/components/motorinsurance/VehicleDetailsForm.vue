@@ -8,11 +8,12 @@ import { ref } from 'vue';
 import { useFormDataStore } from '../../store/formData'
 import Loader from '../ui/Loader.vue';
 import { getYearsArray } from '../../utils/utils';
+import Information from '../Information.vue';
 
 // initialise router object
 const router = useRouter()
 
-const store = useFormDataStore()
+const formDataStore = useFormDataStore()
 
 // props
 const props = defineProps({
@@ -22,10 +23,7 @@ const props = defineProps({
 })
 
 //form data values to be used for and captured from this form
-const vehicleData = ref({
-    formType: 'vehicle details',
-    data: props.formData?.vehicleDetails,
-})
+const vehicleData = ref(formDataStore.motorInsuranceData.vehicleDetails)
 
 /**
  * risk type options 
@@ -40,41 +38,15 @@ const info = ref(helpInfo.vehicleDetailsHelp)
 
 //to hide and show various info on these fields
 const showVehicleUseInfo = ref(false)
-const showRiskTypeInfo = ref(false)
-const showSeatsInfo = ref(false)
-const showAmountInsuredInfo = ref(false)
 
 const yearsRange = getYearsArray()
 
-//emits
-const emit = defineEmits(['sendFormData', 'updateForm'])
 
-
-/**
- * The function updates vehicle use and sets risk type to empty string
- * @param {String} vehicleUse - Use of vehicle - either private or commercial
- */
 function updateVehicleUse(vehicleUse) {
-    vehicleData.value.data.vehicle_use = vehicleUse
-    vehicleData.value.data.vehicle_class = ""
+    vehicleData.value.vehicle_use = vehicleUse
+    vehicleData.value.vehicle_class = ""
 }
 
-
-/**
- * function to go to previous form
- */
-async function goToPrev() {
-    await router.push({ name: 'MotorInsurance', query: { form: 'cover_details' } })
-    // emit('updateForm')
-}
-
-/**
- * submit form
- */
-async function submit() {
-    emit('sendFormData', vehicleData.value)
-    // alert('hello')
-}
 </script>
 
 <template>
@@ -83,34 +55,21 @@ async function submit() {
         <h3 class="text-2xl font-bold mb-5">Vehicle Details</h3>
 
         <!-- the form -->
-        <form @submit.prevent="submit">
+        <form @submit.prevent="$emit('sendData', { vehicleData })">
             <!-- Vehicle use -->
             <div class="flex justify-between items-start">
                 <label class="label">Vehicle Use</label>
 
-                <!-- Information on Vehicle use -->
-                <div class="relative">
-                    <QuestionMarkCircleIcon class="w-6 h-6 text-primary cursor-pointer"
-                        @click="() => { showVehicleUseInfo = !showVehicleUseInfo }" />
-
-                    <!-- overlay z-10 for hiding vehicle use info card -->
-                    <div class="overlay z-10 fixed top-0 bottom-0 left-0 right-0"
-                        @click="() => { showVehicleUseInfo = false }" v-if="showVehicleUseInfo"></div>
-
-                    <!-- vehicle use information card -->
-                    <div class="absolute sm:w-96 w-[75vw] z-10 top-full right-0" v-if="showVehicleUseInfo">
-                        <Information>
-                            <p>{{ info.vehicleUse }}</p>
-                        </Information>
-                    </div>
-                </div>
+                <Information>
+                    {{ info.vehicleUse }}
+                </Information>
             </div>
 
             <div class="flex gap-5">
                 <!-- commercial -->
                 <div class="border rounded-lg p-3 w-28 cursor-pointer hover:outline hover:outline-2 hover:outline-primary"
                     tabindex="0" @click="updateVehicleUse('Commercial')"
-                    :class="{ selected: vehicleData.data.vehicle_use == 'Commercial' }">
+                    :class="{ selected: vehicleData.vehicle_use == 'Commercial' }">
                     <img src="../../assets/commercial.png" alt="commercial" class="w-16 mx-auto">
                     <p class="text-sm text-gray-600 font-semibold text-center">Commercial</p>
                 </div>
@@ -118,7 +77,7 @@ async function submit() {
                 <!-- personal -->
                 <div class="border rounded-lg p-3 w-28 cursor-pointer hover:outline hover:outline-2 hover:outline-primary"
                     tabindex="0" @click="updateVehicleUse('Private')"
-                    :class="{ selected: vehicleData.data.vehicle_use == 'Private' }">
+                    :class="{ selected: vehicleData.vehicle_use == 'Private' }">
                     <img src="../../assets/private.png" alt="personal" class="w-16 mx-auto">
                     <p class="text-sm text-gray-600 font-semibold text-center">Private</p>
                 </div>
@@ -128,16 +87,20 @@ async function submit() {
 
             <!-- Risk Type -->
             <div class="flex justify-between items-start">
-                <label class="label" :class="{ disabled: vehicleData.data.vehicle_use == '' }">
+                <label class="label" :class="{ disabled: vehicleData.vehicle_use == '' }">
                     Vehicle Class </label>
+
+                <Information>
+                    {{ info.riskType }}
+                </Information>
             </div>
 
-            <div class="" :title="vehicleData.data.vehicle_use ? '' : 'Please select vehicle use value'">
-                <select name="risktype" id="risktype" v-model="vehicleData.data.vehicle_class" class="w-full" required
-                    :class="{ disabled: vehicleData.data.vehicle_use == '' }">
+            <div class="" :title="vehicleData.vehicle_use ? '' : 'Please select vehicle use value'">
+                <select name="risktype" id="risktype" v-model="vehicleData.vehicle_class" class="w-full" required
+                    :class="{ disabled: vehicleData.vehicle_use == '' }">
                     <option disabled value="">Select risk type</option>
                     <template
-                        v-for="(risk, index) in vehicleData.data.vehicle_use == 'Commercial' ? vehicleDetails.commercialUse : vehicleDetails.privateUse"
+                        v-for="(risk, index) in vehicleData.vehicle_use == 'Commercial' ? vehicleDetails.commercialUse : vehicleDetails.privateUse"
                         :key="index">
                         <option> {{ risk.risk }}</option>
                     </template>
@@ -150,16 +113,25 @@ async function submit() {
             <div class="flex gap-5">
                 <!-- Number of seats -->
                 <div class="w-1/2">
-                    <label class="label">Number of Seats</label>
+                    <div class="flex justify-between">
+                        <label class="label">Number of Seats</label>
+                        <Information>
+                            {{ info.seats }}
+                        </Information>
+                    </div>
                     <input type="number" name="seats" id="seats" class="w-full" required
-                        v-model="vehicleData.data.number_of_seats" placeholder="e.g. 12">
+                        v-model="vehicleData.number_of_seats" placeholder="e.g. 12">
                 </div>
 
                 <!-- Vehicle Registration Year -->
                 <div class="w-1/2">
-                    <label class="label">Vehicle Registration Year</label>
-                    <select name="seats" id="seats" v-model="vehicleData.data.vehicle_reg_year" class="w-full" required
-                        :class="{ 'text-[#aaaaaa]': vehicleData.data.vehicle_reg_year == '' }">
+                    <div class="flex justify-between">
+                        <label class="label">Vehicle Registration Year</label>
+
+                    </div>
+
+                    <select name="seats" id="seats" v-model="vehicleData.vehicle_reg_year" class="w-full" required
+                        :class="{ 'text-[#aaaaaa]': vehicleData.vehicle_reg_year == '' }">
                         <option disabled value="">Select registration year</option>
                         <template v-for="year in yearsRange" :key="year">
                             <option> {{ year }}</option>
@@ -173,10 +145,14 @@ async function submit() {
             <div class="flex gap-5">
                 <!-- Year of Manufacture -->
                 <div class="w-1/2">
-                    <label class="label">Year of Manufacture</label>
+                    <div class="flex justify-between">
+                        <label class="label">Year of Manufacture</label>
 
-                    <select name="seats" id="seats" v-model="vehicleData.data.year_of_manufacture" class="w-full"
-                        required :class="{ 'text-[#aaaaaa]': vehicleData.data.year_of_manufacture == '' }">
+                    </div>
+
+
+                    <select name="seats" id="seats" v-model="vehicleData.year_of_manufacture" class="w-full" required
+                        :class="{ 'text-[#aaaaaa]': vehicleData.year_of_manufacture == '' }">
                         <option disabled value="">Select year of manufacture</option>
                         <template v-for="year in yearsRange" :key="year">
                             <option> {{ year }}</option>
@@ -186,31 +162,36 @@ async function submit() {
                 </div>
 
                 <!-- Amount insured -->
-                <div class="w-1/2" v-if="formData?.coverDetails.coverType !== 'Third Party'">
-
-                    <label class="label">Vehicle Value</label>
-
+                <div class="w-1/2"
+                    v-if="formDataStore.motorInsuranceData.coverDetails.prefered_cover !== 'Third Party'">
+                    <div class="flex justify-between">
+                        <label class="label">Vehicle Value</label>
+                        <Information>
+                            {{ info.amountInsured }}
+                        </Information>
+                    </div>
 
                     <div class="w-full">
                         <span class="mr-2">GH&#8373;</span>
                         <input type="number" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" name="amountinsured"
                             id="amountinsured" class="" placeholder="e.g. 12000" required
-                            v-model="vehicleData.data.vehicle_value">
+                            v-model="vehicleData.vehicle_value">
                     </div>
                 </div>
             </div>
 
             <div class="flex justify-between flex-row-reverse mt-10">
                 <!-- next -->
-                <button class="group button-primary" :disabled="store.gettingPremium">
-                    <span v-if="!store.gettingPremium">Submit</span>
+                <button class="group button-primary" :disabled="formDataStore.gettingPremium">
+                    <span v-if="!formDataStore.gettingPremium">Submit</span>
                     <span v-else>
                         <Loader />
                     </span>
                 </button>
 
                 <!-- back -->
-                <button class="group  button-transparent hover:bg-inherit hover:text-inherit" @click="goToPrev">
+                <button class="group  button-transparent hover:bg-inherit hover:text-inherit"
+                    @click="$emit('previousForm')">
                     <ArrowLeftIcon class="w-5 h-5 inline  group-hover:-translate-x-2 transition" /> Back
                 </button>
             </div>
