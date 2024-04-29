@@ -27,6 +27,10 @@ function previousForm() {
     selectedForm.value = selectedForm.value - 1
 }
 
+function submitData() {
+
+}
+
 onMounted(() => {
 })
 
@@ -44,7 +48,7 @@ onMounted(() => {
         <StepperComponent :steps="forms" :selected-form="selectedForm" />
         <div class="my-5">
             <CoverDetailsForm v-if="forms[selectedForm] === 'Cover Details'" @sendData="getInfo" />
-            <VehicleDetailsForm v-if="forms[selectedForm] === 'Vehicle Details'" @sendData="submit"
+            <VehicleDetailsForm v-if="forms[selectedForm] === 'Vehicle Details'" @sendData="submitData"
                 @previousForm="previousForm" />
             <!-- <ReviewForm v-if="forms[selectedForm] === 'Review'" @sendData="$emit('sendData', buyerData)"
                 @previousForm="previousForm" /> -->
