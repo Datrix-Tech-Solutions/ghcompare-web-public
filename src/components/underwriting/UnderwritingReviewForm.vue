@@ -8,148 +8,145 @@
 
         <form @submit.prevent="$emit('sendData')" class="">
             <div class="mb-10">
-                <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
-                <p class="mt-1 text-sm leading-6 text-gray-600">Review information submitted for accuracy
+                <h2 class="text-xl font-bold">Personal Information</h2>
+                <p class="">Review information submitted for accuracy
                 </p>
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                     <!-- Account Type -->
                     <div class="sm:col-span-full" v-if="underwritingDataStore.checkFormField('account_type')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Account type
+                        <label for="email" class="label">Account type
                             (policy)</label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.account_type" readonly
-                                class="input-styling" />
+                            <input required name="" id="" v-model="buyerData.account_type" readonly class="w-full" />
                         </div>
                     </div>
 
                     <!-- title-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('title')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
+                        <label for="text" class="label">Title</label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.title" readonly class="input-styling" />
+                            <input required name="" id="" v-model="buyerData.title" readonly class="w-full" />
                         </div>
                     </div>
 
                     <!-- gender-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('gender')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Gender</label>
+                        <label for="text" class="label">Gender</label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.gender" readonly class="input-styling" />
+                            <input required name="" id="" v-model="buyerData.gender" readonly class="w-full" />
                         </div>
                     </div>
 
                     <!-- marital_status -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('marital_status ')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Marital Status
+                        <label for="text" class="label">Marital Status
                         </label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.marital_status" readonly
-                                class="input-styling" />
+                            <input required name="" id="" v-model="buyerData.marital_status" readonly class="w-full" />
                         </div>
                     </div>
 
                     <!-- First name  -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('first_name')">
-                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First
+                        <label for="first-name" class="label">First
                             name</label>
                         <div class="mt-2">
                             <input readonly type="text" name="first-name" id="first-name" autocomplete="given-name"
-                                :value="buyerData.first_name" class="input-styling" />
+                                :value="buyerData.first_name" class="w-full" />
                         </div>
                     </div>
 
                     <!-- Last name -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('last_name')">
-                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last
+                        <label for="last-name" class="label">Last
                             name</label>
                         <div class="mt-2">
                             <input readonly type="text" name="last-name" id="last-name" autocomplete="family-name"
-                                :value="buyerData.last_name" class="input-styling" />
+                                :value="buyerData.last_name" class="w-full" />
                         </div>
                     </div>
 
                     <!-- dob-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('dob')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Date of
+                        <label for="text" class="label">Date of
                             Birth</label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.dob" readonly class="input-styling" />
+                            <input required name="" id="" v-model="buyerData.dob" readonly class="w-full" />
                         </div>
                     </div>
 
                     <!-- profession-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('profession')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Profession</label>
+                        <label for="text" class="label">Profession</label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.profession" readonly
-                                class="input-styling" />
+                            <input required name="" id="" v-model="buyerData.profession" readonly class="w-full" />
                         </div>
                     </div>
 
                     <!-- Email -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('email')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
+                        <label for="email" class="label">Email
                             address</label>
                         <div class="mt-2">
                             <input readonly id="email" name="email" type="email" autocomplete="email"
-                                :value="buyerData.email" class="input-styling" />
+                                :value="buyerData.email" class="w-full" />
                         </div>
                     </div>
 
                     <!-- Phone number -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('mobile_number')">
-                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Phone
+                        <label for="country" class="label">Phone
                             Number</label>
                         <div class="mt-2">
                             <input readonly type="number" name="phone-number" id="phone-number"
-                                autocomplete="phone-number" :value="buyerData.mobile_number" class="input-styling" />
+                                autocomplete="phone-number" :value="buyerData.mobile_number" class="w-full" />
                         </div>
                     </div>
 
                     <!-- address-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('address')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Address</label>
+                        <label for="text" class="label">Address</label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.address" readonly class="input-styling" />
+                            <input required name="" id="" v-model="buyerData.address" readonly class="w-full" />
                         </div>
                     </div>
 
                     <!-- gps_code-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('gps_code')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">GPS Code</label>
+                        <label for="text" class="label">GPS Code</label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.gps_code" readonly class="input-styling" />
+                            <input required name="" id="" v-model="buyerData.gps_code" readonly class="w-full" />
                         </div>
                     </div>
 
                     <!-- ID type -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('id_type')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">ID type
+                        <label for="email" class="label">ID type
                         </label>
                         <div class="mt-2">
                             <input readonly id="id-type" name="id-type" type="text" autocomplete="id-type"
-                                :value="buyerData.id_type" class="input-styling" />
+                                :value="buyerData.id_type" class="w-full" />
                         </div>
                     </div>
 
                     <!-- ID number -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('id_number')">
-                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">ID
+                        <label for="country" class="label">ID
                             Number</label>
                         <div class="mt-2">
                             <input readonly type="text" name="id-number" id="id-number" autocomplete="id-number"
-                                :value="buyerData.id_number" class="input-styling" />
+                                :value="buyerData.id_number" class="w-full" />
                         </div>
                     </div>
 
                     <!-- branch -->
                     <div class="sm:col-span-full" v-if="underwritingDataStore.checkFormField('branch')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Branch</label>
+                        <label for="email" class="label">Branch</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                :value="buyerData.branch" class="input-styling" />
+                                :value="buyerData.branch" class="w-full" />
                         </div>
                     </div>
                 </div>
@@ -157,167 +154,165 @@
 
             <!-- Vehicle information -->
             <div class="">
-                <h2 class="text-base font-semibold leading-7 text-gray-900">Vehicle Information</h2>
-                <p class="mt-1 text-sm leading-6 text-gray-600">Review information submitted for accuracy
+                <h2 class="text-xl font-bold">Vehicle Information</h2>
+                <p class="">Review information submitted for accuracy
                 </p>
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                     <!-- vehicle_trim-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_trim')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Trim</label>
+                        <label for="text" class="label">Vehicle Trim</label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.vehicle_trim" readonly
-                                class="input-styling" />
+                            <input required name="" id="" v-model="buyerData.vehicle_trim" readonly class="w-full" />
                         </div>
                     </div>
 
                     <!-- Vehicle make -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_make')">
-                        <label for="vehicle-make" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Make
+                        <label for="vehicle-make" class="label">Vehicle Make
                         </label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-make" id="vehicle-make"
-                                autocomplete="vehicle-make" :value="buyerData.vehicle_make" class="input-styling" />
+                                autocomplete="vehicle-make" :value="buyerData.vehicle_make" class="w-full" />
                         </div>
                     </div>
 
                     <!-- vehicle model -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_model')">
-                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="last-name" class="label">Vehicle
                             Model</label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-model" id="vehicle-model"
-                                autocomplete="vehicle-model" :value="buyerData.vehicle_model" class="input-styling" />
+                                autocomplete="vehicle-model" :value="buyerData.vehicle_model" class="w-full" />
                         </div>
                     </div>
 
                     <!-- vehicle_fuel_type-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_fuel_type')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Fuel
+                        <label for="text" class="label">Vehicle Fuel
                             Type</label>
                         <div class="mt-2">
                             <input required name="" id="" v-model="buyerData.vehicle_fuel_type" readonly
-                                class="input-styling" />
+                                class="w-full" />
                         </div>
                     </div>
 
                     <!-- vehicle_no_cylinders-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_no_cylinders')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Number of
+                        <label for="text" class="label">Number of
                             Cylinders</label>
                         <div class="mt-2">
                             <input required name="" id="" v-model="buyerData.vehicle_no_cylinders" readonly
-                                class="input-styling" />
+                                class="w-full" />
                         </div>
                     </div>
 
                     <!-- vehicle_cc-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_cc')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Vehicle CC</label>
+                        <label for="text" class="label">Vehicle CC</label>
                         <div class="mt-2">
-                            <input required name="" id="" v-model="buyerData.vehicle_cc" readonly
-                                class="input-styling" />
+                            <input required name="" id="" v-model="buyerData.vehicle_cc" readonly class="w-full" />
                         </div>
                     </div>
 
                     <!-- vehicle_drive_type-->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_drive_type')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Drive
+                        <label for="text" class="label">Vehicle Drive
                             Type</label>
                         <div class="mt-2">
                             <input required name="" id="" v-model="buyerData.vehicle_drive_type" readonly
-                                class="input-styling" />
+                                class="w-full" />
                         </div>
                     </div>
 
                     <!-- vehicle_engine_no -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_engine_no ')">
-                        <label for="text" class="block text-sm font-medium leading-6 text-gray-900">vehicle_engine_no
+                        <label for="text" class="label">vehicle_engine_no
                         </label>
                         <div class="mt-2">
                             <input required name="" id="" v-model="buyerData.vehicle_engine_no" readonly
-                                class="input-styling" />
+                                class="w-full" />
                         </div>
                     </div>
 
                     <!-- Vehicle color -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_colour')">
-                        <label for="vehicle-colr" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="vehicle-colr" class="label">Vehicle
                             Color</label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-color" id="vehicle-color"
-                                autocomplete="vehicle-color" :value="buyerData.vehicle_colour" class="input-styling" />
+                                autocomplete="vehicle-color" :value="buyerData.vehicle_colour" class="w-full" />
                         </div>
                     </div>
 
                     <!-- body type -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('body_type')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Body type</label>
+                        <label for="email" class="label">Body type</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                :value="buyerData.body_type" class="input-styling" />
+                                :value="buyerData.body_type" class="w-full" />
                         </div>
                     </div>
 
                     <!-- Registration number -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('registration_number')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Registration
+                        <label for="email" class="label">Registration
                             Number</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                :value="buyerData.registration_number" class="input-styling" />
+                                :value="buyerData.registration_number" class="w-full" />
                         </div>
                     </div>
 
                     <!-- Chassis number -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('chassis_number')">
-                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Chassis
+                        <label for="country" class="label">Chassis
                             Number</label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-color" id="vehicle-color"
-                                autocomplete="vehicle-color" :value="buyerData.chassis_number" class="input-styling" />
+                                autocomplete="vehicle-color" :value="buyerData.chassis_number" class="w-full" />
                         </div>
                     </div>
 
                     <!-- body type code -->
                     <!-- <div class="sm:col-span-3">
-                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Body type
+                        <label for="country" class="label">Body type
                             code</label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-color" id="vehicle-color"
                                 autocomplete="vehicle-color" :value="buyerData.body_type_code"
-                                class="input-styling" />
+                                class="w-full" />
                         </div>
                     </div> -->
 
                     <!-- Model code -->
                     <!-- <div class="sm:col-span-3">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Model Code</label>
+                        <label for="email" class="label">Model Code</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
                                 :value="buyerData.model_code"
-                                class="input-styling" />
+                                class="w-full" />
                         </div>
                     </div> -->
 
                     <!-- customer code -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('customer_code')">
-                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Customer
+                        <label for="country" class="label">Customer
                             Code</label>
                         <div class="mt-2">
                             <input readonly type="text" name="vehicle-color" id="vehicle-color"
-                                autocomplete="vehicle-color" :value="buyerData.customer_code" class="input-styling" />
+                                autocomplete="vehicle-color" :value="buyerData.customer_code" class="w-full" />
                         </div>
                     </div>
 
                     <!-- Vehicle risk -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_risk')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="email" class="label">Vehicle
                             Risk</label>
                         <div class="mt-2">
                             <input readonly id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                :value="buyerData.vehicle_risk" class="input-styling" />
+                                :value="buyerData.vehicle_risk" class="w-full" />
                         </div>
                     </div>
 

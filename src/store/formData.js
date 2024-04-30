@@ -14,8 +14,7 @@ export const useFormDataStore = defineStore(
     const gettingPremium = ref(false);
     const motorInsurancePremium = ref(null);
     const processing = ref(false); //for when api is being hit
-    // const motorInsuranceDataSaved = ref()
-
+    const motorInsuranceDataSaved = ref();
     // Motor insurance Data to be sent to server
     const motorInsuranceData = ref({
       coverDetails: {
@@ -34,6 +33,25 @@ export const useFormDataStore = defineStore(
       },
     });
 
+    const $reset = () => {
+      motorInsuranceData.value = {
+        coverDetails: {
+          email: "",
+          prefered_cover: "",
+          period_cover: "",
+          start_date: new Date().toJSON().slice(0, 10),
+        },
+        vehicleDetails: {
+          vehicle_use: "",
+          vehicle_class: "",
+          number_of_seats: "",
+          vehicle_reg_year: "",
+          year_of_manufacture: "",
+          vehicle_value: "",
+        },
+      };
+    };
+
     const getMotorPremium = async () => {
       try {
         gettingPremium.value = true;
@@ -46,7 +64,7 @@ export const useFormDataStore = defineStore(
           })
         ).data;
         console.table(data);
-        // get total premium for home insurance
+        motorInsuranceDataSaved.value = { ...motorInsuranceData.value };
         motorInsurancePremium.value = data;
         gettingPremium.value = false;
         success.value = true;
@@ -115,6 +133,7 @@ export const useFormDataStore = defineStore(
       processing,
       gettingPremium,
       motorInsuranceData,
+      motorInsuranceDataSaved,
       // underwritingData,
       // getCarBrands,
       // getVehicleMake,
@@ -125,12 +144,13 @@ export const useFormDataStore = defineStore(
       getHomePremium,
       getMotorPremium,
       motorInsurancePremium,
+      $reset,
       // submitUnderwritingData,
     };
   },
   {
     persist: {
-      paths: ["motorInsurancePremium"],
+      paths: ["motorInsurancePremium", "motorInsuranceDataSaved"],
     },
   }
 );

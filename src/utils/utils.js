@@ -11,3 +11,11 @@ export const getYearsArray = () => {
   }
   return years.reverse();
 };
+
+export function onReload(event) {
+  event.preventDefault();
+  const message =
+    "Are you sure you want to leave? All provided data will be lost.";
+  event.returnValue = message;
+  return message;
+}

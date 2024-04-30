@@ -183,7 +183,7 @@ function updateVehicleUse(vehicleUse) {
             <div class="flex justify-between flex-row-reverse mt-10">
                 <!-- next -->
                 <button class="group button-primary" :disabled="formDataStore.gettingPremium">
-                    <span v-if="!formDataStore.gettingPremium">Submit</span>
+                    <span v-if="!formDataStore.gettingPremium">Generate Premium</span>
                     <span v-else>
                         <Loader />
                     </span>

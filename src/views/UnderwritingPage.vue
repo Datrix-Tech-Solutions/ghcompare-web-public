@@ -48,7 +48,7 @@ const paymentLink = ref('')
 
 async function submitData(buyerData) {
     let premiumData = institutionData.value
-    let generatePremiumData = { ...formDataStore.motorInsuranceData.coverDetails, ...formDataStore.motorInsuranceData.vehicleDetails }
+    let generatePremiumData = { ...formDataStore.motorInsuranceDataSaved.coverDetails, ...formDataStore.motorInsuranceDataSaved.vehicleDetails }
     let data = await underwritingDataStore.submitUnderwritingData(premiumData, generatePremiumData, institutionData.value?.institution[0]?.id)
     console.log(data)
     if (data && institutionData.value.institution[0].slug !== 'enterprise') {

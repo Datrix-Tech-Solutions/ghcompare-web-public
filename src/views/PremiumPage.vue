@@ -8,14 +8,16 @@ import PaymentModal from '../components/underwriting/PaymentModal.vue';
 import { useFormDataStore } from '../store/formData';
 import { ref } from 'vue';
 
-const store = useFormDataStore() //initialize store
+const formDataStore = useFormDataStore() //initialize formDataStore
 const paymentLink = ref('')
 
 /**
- *  Motor Insurance Form data from store...
+ *  Motor Insurance Form data from formDataStore...
  *  @type {Object}
  */
-const formData = store.motorInsuranceData
+const formData = formDataStore.motorInsuranceDataSaved
+
+console.log(formDataStore.motorInsurancePremium)
 </script>
 
 <template>
@@ -48,7 +50,7 @@ const formData = store.motorInsuranceData
                 <p class="text-lg">Maximize value, minimize hassle – discover the best premium for you!</p>
             </div>
             <div class="flex gap-5 flex-wrap lg:flex-nowrap">
-                <template v-for="(value, key) in store.motorInsurancePremium " :key="key">
+                <template v-for="(value, key) in formDataStore.motorInsurancePremium " :key="key">
                     <PremiumCard :premium="value" :insurance-type="$route.params.insuranceType"
                         @paymentUrl="(url) => paymentLink = url" class="fl flex-gro]w flex-shrink" />
                 </template>

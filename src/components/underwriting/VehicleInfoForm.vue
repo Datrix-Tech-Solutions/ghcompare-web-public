@@ -17,18 +17,18 @@
 
             <!-- Vehicle information -->
             <div class="">
-                <h2 class="text-base font-semibold leading-7 text-gray-900">Vehicle Information</h2>
-                <p class="mt-1 text-sm leading-6 text-gray-600">Provide accurate information.</p>
+                <h2 class="text-2xl font-bold ">Vehicle Information</h2>
+                <p class=" text-gray-600">Provide accurate information.</p>
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <!-- Vehicle brand -->
                     <div class="sm:col-span-3" v-if="institutionSlug !== 'loyalty'">
-                        <label for="vehicle-brand" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="vehicle-brand" class="label">Vehicle
                             Brand
                         </label>
                         <div class="mt-2">
                             <select id="vehicle-brand" v-model="vehicleData.vehicle_brand" @change="getVehicleDetails()"
-                                class="input-styling py-2">
+                                class="w-full">
                                 <option value="" disabled>Select Vehicle Brand</option>
                                 <template v-for="vbrand in carBrands" :key="vbrand.brand">
                                     <option :value='vbrand.brand'>{{ vbrand.brand }}
@@ -40,12 +40,11 @@
                     <!-- Vehicle trim -->
                     <div class="sm:col-span-3" v-else>
                         <div class="" v-if="underwritingDataStore.checkFormField('vehicle_trim')">
-                            <label for="vehicle_trim" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                            <label for="vehicle_trim" class="label">Vehicle
                                 Trim</label>
                             <div class="mt-2">
                                 <input required id="vehicle_trim" name="vehicle_trim" type="text"
-                                    autocomplete="vehicle_trim" v-model="vehicleData.vehicle_trim"
-                                    class="input-styling" />
+                                    autocomplete="vehicle_trim" v-model="vehicleData.vehicle_trim" class="w-full" />
                             </div>
                         </div>
                     </div>
@@ -53,12 +52,12 @@
 
                     <!-- vehicle make -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_make')">
-                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="last-name" class="label">Vehicle
                             Make</label>
                         <div class="mt-2">
                             <select name="vehicle-model" id="vehicle-model" autocomplete="vehicle-model"
                                 v-if="institutionSlug !== 'loyalty'" v-model="vehicleData.vehicle_make"
-                                :disabled="underwritingDataStore.processing" class="input-styling py-2">
+                                :disabled="underwritingDataStore.processing" class="w-full">
                                 <option value="" disabled>Select Vehicle Make</option>
                                 <template v-for="make in vehicleMake" :key="make.name || make">
                                     <option :value='make.name || make'>{{ make.name || make }}</option>
@@ -67,21 +66,20 @@
 
                             <!-- for loyalty -->
                             <input required id="vehicle_make" name="vehicle_make" type="text"
-                                autocomplete="vehicle_make" v-model="vehicleData.vehicle_make" class="input-styling"
-                                v-else />
+                                autocomplete="vehicle_make" v-model="vehicleData.vehicle_make" class="w-full" v-else />
                         </div>
                     </div>
 
                     <!-- Vehicle model -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_model')">
-                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="last-name" class="label">Vehicle
                             Model</label>
                         <div class="mt-2">
 
                             <select name="vehicle-model" id="vehicle-model" autocomplete="vehicle-model"
                                 v-if="institutionSlug !== 'loyalty'" @change="getModelCode()"
                                 v-model="vehicleData.vehicle_model" :disabled="underwritingDataStore.processing"
-                                class="input-styling py-2">
+                                class="w-full">
                                 <option value="" disabled>Select Vehicle Model</option>
                                 <template v-for="model in vehicleModel" :key="model.name || model">
                                     <option :value='model.name || model'>{{ model.name || model }}</option>
@@ -89,19 +87,19 @@
                             </select>
                             <!-- for loyalty -->
                             <input required id="vehicle_model" name="vehicle_model" type="text"
-                                autocomplete="vehicle_model" v-model="vehicleData.vehicle_model" class="input-styling"
+                                autocomplete="vehicle_model" v-model="vehicleData.vehicle_model" class="w-full"
                                 v-else />
                         </div>
                     </div>
 
                     <!-- Vehicle fuel type -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_fuel_type')">
-                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="last-name" class="label">Vehicle
                             Fuel Type</label>
                         <div class="mt-2">
 
                             <select name="vehicle-model" id="vehicle-model" v-model="vehicleData.vehicle_fuel_type"
-                                class="input-styling py-2">
+                                class="w-full">
                                 <option value="" disabled>Select Vehicle Fuel Type</option>
                                 <template v-for="fuel in vehicleFuelType" :key="fuel">
                                     <option :value='fuel'>{{ fuel }}</option>
@@ -112,12 +110,12 @@
 
                     <!-- Vehicle  no of cylinders -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_no_cylinders')">
-                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Number of
+                        <label for="last-name" class="label">Number of
                             Cylinders</label>
                         <div class="mt-2">
 
                             <select name="vehicle-model" id="vehicle-model" v-model="vehicleData.vehicle_no_cylinders"
-                                class="input-styling py-2">
+                                class="w-full">
                                 <option value="" disabled>Select Number of Cylinders</option>
                                 <template v-for="value in 15" :key="value">
                                     <option :value='value - 1'>{{ value - 1 }}</option>
@@ -128,43 +126,40 @@
 
                     <!-- Vheicle_cc -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_cc')">
-                        <label for="vehicle_cc" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="vehicle_cc" class="label">Vehicle
                             CC</label>
                         <div class="mt-2">
                             <input required id="vehicle_cc" name="reg-number" type="text" autocomplete="reg-number"
-                                v-model="vehicleData.vehicle_cc" class="input-styling" />
+                                v-model="vehicleData.vehicle_cc" class="w-full" />
                         </div>
                     </div>
 
                     <!-- vehicle_drive_type -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_drive_type')">
-                        <label for="vehicle_drive_type"
-                            class="block text-sm font-medium leading-6 text-gray-900">Vehicle Drive Type</label>
+                        <label for="vehicle_drive_type" class="label">Vehicle Drive Type</label>
                         <div class="mt-2">
                             <input required id="vehicle_drive_type" name="reg-number" type="text"
-                                autocomplete="reg-number" v-model="vehicleData.vehicle_drive_type"
-                                class="input-styling" />
+                                autocomplete="reg-number" v-model="vehicleData.vehicle_drive_type" class="w-full" />
                         </div>
                     </div>
 
                     <!-- vehicle_engine_no -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_engine_no')">
-                        <label for="vehicle_engine_no" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="vehicle_engine_no" class="label">Vehicle
                             Engine
                             Number</label>
                         <div class="mt-2">
                             <input required id="vehicle_engine_no" name="reg-number" type="text"
-                                autocomplete="reg-number" v-model="vehicleData.vehicle_engine_no"
-                                class="input-styling" />
+                                autocomplete="reg-number" v-model="vehicleData.vehicle_engine_no" class="w-full" />
                         </div>
                     </div>
 
                     <!-- Body type -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('body_type')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Body Type</label>
+                        <label for="email" class="label">Body Type</label>
                         <div class="mt-2">
                             <select id="body-type" v-model="vehicleData.body_type" @change="getBodyTypeCode()"
-                                v-if="institutionSlug !== 'loyalty'" class="input-styling py-2">
+                                v-if="institutionSlug !== 'loyalty'" class="w-full">
                                 <option value="" disabled>Select Vehicle Body Type</option>
                                 <template v-for="bodyType in vehicleBodyType" :key="bodyType.CODE || bodyType">
                                     <option :value='bodyType.NAME || bodyType'>{{ bodyType.NAME || bodyType }}
@@ -173,19 +168,19 @@
                             </select>
                             <!-- for loyalty -->
                             <input required id="body_type" name="body_type" type="text" autocomplete="body_type"
-                                v-model="vehicleData.body_type" class="input-styling" v-else />
+                                v-model="vehicleData.body_type" class="w-full" v-else />
                         </div>
                     </div>
 
                     <!-- vehicle color -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_colour')">
-                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="country" class="label">Vehicle
                             Color</label>
                         <div class="mt-2">
 
                             <select name="vehicle-color" id="vehicle-color" autocomplete="vehicle-color"
                                 v-model="vehicleData.vehicle_colour" :disabled="underwritingDataStore.processing"
-                                class="input-styling py-2">
+                                class="w-full">
                                 <option value="" disabled>Select Vehicle Color</option>
                                 <template v-for="color in vehicleColors" :key="color">
                                     <option :value='color'>{{ color }}</option>
@@ -196,43 +191,41 @@
 
                     <!-- Registration number -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('registration_number')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Registration
+                        <label for="email" class="label">Registration
                             Number</label>
                         <div class="mt-2">
                             <input required id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                v-model="vehicleData.registration_number" class="input-styling" />
+                                v-model="vehicleData.registration_number" class="w-full" />
                         </div>
                     </div>
 
                     <!-- Chassis number -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('chassis_number')">
-                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Chassis
+                        <label for="country" class="label">Chassis
                             Number</label>
                         <div class="mt-2">
                             <input required type="text" name="vehicle-color" id="vehicle-color"
-                                autocomplete="vehicle-color" v-model="vehicleData.chassis_number"
-                                class="input-styling" />
+                                autocomplete="vehicle-color" v-model="vehicleData.chassis_number" class="w-full" />
                         </div>
                     </div>
 
                     <!-- Customer Code  -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('customer_code')">
-                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Customer
+                        <label for="country" class="label">Customer
                             Code</label>
                         <div class="mt-2">
                             <input required type="text" name="vehicle-color" id="vehicle-color"
-                                autocomplete="vehicle-color" v-model="vehicleData.customer_code"
-                                class="input-styling" />
+                                autocomplete="vehicle-color" v-model="vehicleData.customer_code" class="w-full" />
                         </div>
                     </div>
 
                     <!-- Vehicle Risk -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_risk')">
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Vehicle
+                        <label for="email" class="label">Vehicle
                             Risk</label>
                         <div class="mt-2">
                             <input required id="reg-number" name="reg-number" type="text" autocomplete="reg-number"
-                                v-model="vehicleData.vehicle_risk" class="input-styling" />
+                                v-model="vehicleData.vehicle_risk" class="w-full" />
                         </div>
                     </div>
                 </div>

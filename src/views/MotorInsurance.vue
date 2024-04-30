@@ -1,14 +1,45 @@
 <script setup>
 import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import MotorInsuranceForm from '../components/motorinsurance/MotorInsuranceForm.vue';
+import { nextTick, onBeforeUnmount, onMounted, onUnmounted, ref, watch } from 'vue';
+import { onReload } from '../utils/utils';
+import { useFormDataStore } from '../store/formData';
 
-// onBeforeRouteLeave((to, from) => {
-//     const answer = window.confirm(
-//         'Do you really want to leave? you have unsaved changes!'
-//     )
-//     // cancel the navigation and stay on the same page
-//     if (!answer) return false
-// })
+const formDataStore = useFormDataStore()
+
+const isEdited = ref(false)
+
+watch(formDataStore.motorInsuranceData, () => {
+    isEdited.value = true
+})
+onBeforeRouteLeave((to, from) => {
+    if (to.path.includes('premium')) {
+        return true
+    }
+    else {
+        if (isEdited.value) {
+            const answer = window.confirm(
+                'Do you really want to leave? you made edits to this form!'
+            )
+            // cancel the navigation and stay on the same page
+            if (!answer) return false
+        } else {
+            return true
+        }
+    }
+})
+
+onMounted(() => {
+    window.addEventListener('beforeunload', onReload);
+})
+
+onBeforeUnmount(() => {
+    window.removeEventListener('beforeunload', onReload)
+})
+
+onUnmounted(() => {
+    formDataStore.$reset()
+})
 
 </script>
 
