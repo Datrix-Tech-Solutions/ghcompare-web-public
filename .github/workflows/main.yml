@@ -24,7 +24,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
         script: |
-          cd var/www/apps/ghcompare.com
+          cd /var/www/apps/ghcompare.com
           git pull origin master
           git status
           npm install --only=prod
