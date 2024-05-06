@@ -29,7 +29,7 @@ export const useFormDataStore = defineStore(
         number_of_seats: "",
         vehicle_reg_year: "",
         year_of_manufacture: "",
-        vehicle_value: "",
+        vehicle_value: "20000",
       },
     });
 
@@ -47,7 +47,7 @@ export const useFormDataStore = defineStore(
           number_of_seats: "",
           vehicle_reg_year: "",
           year_of_manufacture: "",
-          vehicle_value: "",
+          vehicle_value: "20000",
         },
       };
     };
