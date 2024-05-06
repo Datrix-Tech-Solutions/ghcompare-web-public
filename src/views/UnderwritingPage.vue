@@ -65,7 +65,7 @@ onMounted(() => {
     // finding institution data by slug
     let values = Object.values(formDataStore.motorInsurancePremium)
     institutionData.value = (values.find(item => { return item.institution[0].slug === props.institutionSlug }))
-    underwritingDataStore.underwritingParams = institutionData.value.underwritingParams
+    underwritingDataStore.underwritingParams = institutionData.value?.underwritingParams
 
     console.log(underwritingDataStore.underwritingParams)
 

@@ -38,6 +38,7 @@
                                 </template>
                             </select>
                         </div>
+                        <SelectField labelName="Account type" :disable="underwritingDataStore.processing" :options="underwritingDataStore.checkFormField('account_type')?.datalist" v-model="personalData.account_type"  />
                     </div>
 
 
@@ -250,6 +251,7 @@ import { ref, onMounted, inject } from 'vue';
 import ButtonWithArrow from '../../components/ui/ButtonWithArrow.vue'
 import { useUnderwritingDataStore } from '../../store/underwritingData';
 import Loader from '../ui/Loader.vue';
+import SelectField from './formfields/SelectField.vue';
 
 const institutionLogo = inject('institutionLogo')
 const underwritingDataStore = useUnderwritingDataStore()
