@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const base = "https://api.starassurance.com/api/";
+const base = "http://api.starassurance.com/api/";
 // const baseUrl = "https://api.ghcompare.com/";
-const baseUrl = "https://137.184.6.183:5000/";
+const baseUrl = "http://137.184.6.183:5000/";
 
 export const api = axios.create({
   baseURL: baseUrl,
