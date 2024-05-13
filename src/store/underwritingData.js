@@ -150,13 +150,13 @@ export const useUnderwritingDataStore = defineStore(
         switch (slug) {
           case "enterprise":
             return data;
-            break;
+          // break;
           case "star-assurance":
             return data.data;
-            break;
+          // break;
           case "phoenix":
             return data.vehiclemake;
-            break;
+          // break;
           default:
             return data;
         }
@@ -172,15 +172,15 @@ export const useUnderwritingDataStore = defineStore(
         const { data } = await api.get(`/vehicle/model/${id}/${brand}`);
         processing.value = false;
         switch (slug) {
-          case "star-assurance":
-            return data;
-            break;
           case "enterprise":
+            return data;
+          // break;
+          case "star-assurance":
             return data.data;
-            break;
+          // break;
           case "phoenix":
             return data.vehModel;
-            break;
+          // break;
           default:
             return data;
         }
@@ -197,15 +197,15 @@ export const useUnderwritingDataStore = defineStore(
         const { data } = await api.get(`/vehicle/body-types/${id}`);
         processing.value = false;
         switch (slug) {
-          case "star-assurance":
-            return data;
-            break;
           case "enterprise":
+            return data;
+          // break;
+          case "star-assurance":
             return data.data;
-            break;
+          // break;
           case "phoenix":
             return data.vehicleBody;
-            break;
+          // break;
           default:
             return data;
         }
