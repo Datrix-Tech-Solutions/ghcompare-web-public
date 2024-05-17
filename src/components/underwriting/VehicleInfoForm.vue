@@ -2,7 +2,7 @@
     <div class="bg-white md:p-16 p-10 rounded-lg relative">
         <!-- form loader -->
         <div class="absolute top-0 bottom-0 right-0 left-0 bg-black/10 z-20 rounded-lg flex justify-center items-center"
-            v-if="underwritingDataStore.processing">
+            v-if="fetchingData">
             <div class="bg-black relative z-30 px-5 py-3 rounded-lg">
                 <Loader />
             </div>
@@ -57,7 +57,7 @@
                         <div class="mt-2">
                             <select name="vehicle-model" id="vehicle-model" autocomplete="vehicle-model"
                                 v-if="institutionSlug !== 'loyalty'" v-model="vehicleData.vehicle_make"
-                                :disabled="underwritingDataStore.processing" class="w-full">
+                                :disabled="fetchingData || !vehicleData.vehicle_brand" class="w-full">
                                 <option value="" disabled>Select Vehicle Make</option>
                                 <template v-for="make in vehicleMake" :key="make.name || make">
                                     <option :value='make.name || make'>{{ make.name || make }}</option>
@@ -78,8 +78,8 @@
 
                             <select name="vehicle-model" id="vehicle-model" autocomplete="vehicle-model"
                                 v-if="institutionSlug !== 'loyalty'" @change="getModelCode()"
-                                v-model="vehicleData.vehicle_model" :disabled="underwritingDataStore.processing"
-                                class="w-full">
+                                v-model="vehicleData.vehicle_model"
+                                :disabled="fetchingData || !vehicleData.vehicle_brand" class="w-full">
                                 <option value="" disabled>Select Vehicle Model</option>
                                 <template v-for="model in vehicleModel" :key="model.name || model">
                                     <option :value='model.name || model'>{{ model.name || model }}</option>
@@ -159,7 +159,8 @@
                         <label for="email" class="label">Body Type</label>
                         <div class="mt-2">
                             <select id="body-type" v-model="vehicleData.body_type" @change="getBodyTypeCode()"
-                                v-if="institutionSlug !== 'loyalty'" class="w-full">
+                                v-if="institutionSlug !== 'loyalty'" class="w-full"
+                                :disabled="fetchingData || !vehicleData.vehicle_brand">
                                 <option value="" disabled>Select Vehicle Body Type</option>
                                 <template v-for="bodyType in vehicleBodyType" :key="bodyType.CODE || bodyType">
                                     <option :value='bodyType.NAME || bodyType'>{{ bodyType.NAME || bodyType }}
@@ -177,10 +178,10 @@
                         <label for="country" class="label">Vehicle
                             Color</label>
 
-                        <div class="mt-2" v-if="vehicleColors.length > 0">
+                        <div class="mt-2" v-if="vehicleColors?.length > 0">
                             <select name="vehicle-color" id="vehicle-color" autocomplete="vehicle-color"
-                                v-model="vehicleData.vehicle_colour" :disabled="underwritingDataStore.processing"
-                                class="w-full">
+                                v-model="vehicleData.vehicle_colour"
+                                :disabled="fetchingData || !vehicleData.vehicle_brand" class="w-full">
                                 <option value="" disabled>Select Vehicle Color</option>
                                 <template v-for="color in vehicleColors" :key="color">
                                     <option :value='color'>{{ color }}</option>
@@ -190,10 +191,9 @@
 
                         <!-- vehicle color if color array can't be fetched -->
                         <div class="mt-2" v-else>
-
                             <input name="vehicle-color" id="vehicle-color" autocomplete="vehicle-color"
-                                v-model="vehicleData.vehicle_colour" :disabled="underwritingDataStore.processing"
-                                class="w-full" />
+                                v-model="vehicleData.vehicle_colour"
+                                :disabled="fetchingData || !vehicleData.vehicle_brand" class="w-full" />
                         </div>
                     </div>
 
@@ -255,6 +255,7 @@ import { inject, onMounted, ref } from 'vue';
 import ButtonWithArrow from '../../components/ui/ButtonWithArrow.vue'
 import Loader from '../ui/Loader.vue';
 import { useUnderwritingDataStore } from '../../store/underwritingData';
+import { getVehicleBodyType, getVehicleColors, getVehicleMake, getVehicleModel } from '../../utils/underwritingUtils'
 
 const props = defineProps({
     carBrands: Array,
@@ -268,6 +269,7 @@ const underwritingDataStore = useUnderwritingDataStore()
 const vehicleData = ref(underwritingDataStore.underwritingData.vehicleData)
 // const brand = ref('')
 // const carBrands = ref([])
+const fetchingData = ref(false)
 const vehicleMake = ref([])
 const vehicleModel = ref([])
 const vehicleBodyType = ref([])
@@ -280,12 +282,14 @@ async function getVehicleDetails() {
     console.log('something')
     // let brand = underwritingDataStore.underwritingData.vehicleData.vehicle_make
     if (vehicleData.value.vehicle_brand) {
-        const [make, model, body, colors] = await Promise.all([underwritingDataStore.getVehicleMake(institutionId, institutionSlug, vehicleData.value.vehicle_brand), underwritingDataStore.getVehicleModel(institutionId, institutionSlug, vehicleData.value.vehicle_brand), underwritingDataStore.getVehicleBodyType(institutionId, institutionSlug), underwritingDataStore.getVehicleColors()])
+        fetchingData.value = true;
+        const [make, model, body, colors] = await Promise.all([getVehicleMake(institutionId, institutionSlug, vehicleData.value.vehicle_brand), getVehicleModel(institutionId, institutionSlug, vehicleData.value.vehicle_brand), getVehicleBodyType(institutionId, institutionSlug), getVehicleColors()])
         vehicleMake.value = make
         vehicleModel.value = model
         vehicleBodyType.value = body
         vehicleColors.value = colors
         console.log(make, model, body, colors)
+        fetchingData.value = false
     }
 }
 

@@ -2,12 +2,12 @@
     <div class="bg-white md:p-16 p-10 rounded-lg relative">
 
         <!-- form loader -->
-        <div class="absolute top-0 bottom-0 right-0 left-0 bg-black/10 z-20 rounded-lg flex justify-center items-center"
-            v-if="underwritingDataStore.processing">
+        <!-- <div
+            class="absolute top-0 bottom-0 right-0 left-0 bg-black/10 z-20 rounded-lg flex justify-center items-center">
             <div class="bg-black relative z-30 px-5 py-3 rounded-lg">
                 <Loader />
             </div>
-        </div>
+        </div> -->
 
         <div class="mb-14">
             <img :src="institutionLogo" alt="" class="max-w-[250px] mx-auto">
@@ -17,8 +17,6 @@
         <form @submit.prevent="$emit('sendData', { personalData })" class="">
             <div class="mb-10">
                 <h2 class="text-2xl font-bold mb-">Personal Information</h2>
-                <p class=" text-gray-600">Use a permanent address where you can receive mail.
-                </p>
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
@@ -38,7 +36,9 @@
                                 </template>
                             </select>
                         </div>
-                        <SelectField labelName="Account type" :disable="underwritingDataStore.processing" :options="underwritingDataStore.checkFormField('account_type')?.datalist" v-model="personalData.account_type"  />
+                        <SelectField labelName="Account type" :disable="underwritingDataStore.processing"
+                            :options="underwritingDataStore.checkFormField('account_type')?.datalist"
+                            v-model="personalData.account_type" />
                     </div>
 
 
@@ -253,21 +253,19 @@ import { useUnderwritingDataStore } from '../../store/underwritingData';
 import Loader from '../ui/Loader.vue';
 import SelectField from './formfields/SelectField.vue';
 
+defineProps({
+    idTypes: Array,
+    branches: Array,
+})
+
 const institutionLogo = inject('institutionLogo')
 const underwritingDataStore = useUnderwritingDataStore()
 
 const personalData = ref(underwritingDataStore.underwritingData.personalData)
-const idTypes = ref([])
-const branches = ref([])
+
 
 onMounted(async () => {
-    if (underwritingDataStore.checkFormField('id_type')) {
-        idTypes.value = await underwritingDataStore.getIdTypes()
-    }
-    if (underwritingDataStore.checkFormField('branch')) {
-        branches.value = await underwritingDataStore.getBranches()
-    }
-    console.log(idTypes.value, branches.value)
+
 })
 </script>
 

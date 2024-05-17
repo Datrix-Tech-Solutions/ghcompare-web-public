@@ -2,6 +2,9 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { api, star_api } from "../api/api";
 import dayjs from "dayjs";
+import { useFormDataStore } from "../store/formData";
+
+const formDataStore = useFormDataStore();
 
 export const useUnderwritingDataStore = defineStore(
   "underwritingData",
@@ -19,38 +22,39 @@ export const useUnderwritingDataStore = defineStore(
         first_name: "",
         last_name: "",
         mobile_number: "",
-        email: "",
+        email: formDataStore.motorInsuranceDataSaved?.coverDetails?.email,
         id_type: "",
-        id_number: "GHA-00000000-0",
+        id_number: "",
         branch: "",
 
         title: "Mr",
         gender: "1",
-        dob: "2001-10-10",
-        marital_status: "Single",
-        profession: "teacher",
-        address: "accra",
-        gps_code: "GS-101-1011",
+        dob: "",
+        marital_status: "",
+        profession: "",
+        address: "",
+        gps_code: "",
       },
       vehicleData: {
         vehicle_brand: "",
         vehicle_make: "",
         vehicle_model: "",
-        registration_number: "GW 147-V",
+        registration_number: "",
         vehicle_colour: "",
-        chassis_number: "8743923472497429",
+        chassis_number: "",
         body_type: "",
-        body_type_code: "SALOON",
-        model_code: "100269",
-        customer_code: "ID0134348",
-        vehicle_risk: "AMBULANCE",
+        body_type_code: "",
+        model_code: "",
+        customer_code: "",
+        vehicle_risk:
+          formDataStore.motorInsuranceDataSaved?.vehicleDetails?.vehicle_class,
 
-        vehicle_trim: "Auto BMW",
-        vehicle_fuel_type: "Petrol",
+        vehicle_trim: "",
+        vehicle_fuel_type: "",
         vehicle_no_cylinders: 2,
         vehicle_cc: 3500,
-        vehicle_drive_type: "4 Wheel",
-        vehicle_engine_no: "13323",
+        vehicle_drive_type: "",
+        vehicle_engine_no: "",
       },
     });
 
@@ -129,131 +133,131 @@ export const useUnderwritingDataStore = defineStore(
       }
     };
 
-    const getCarBrands = async () => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/vehicle/brands`);
-        processing.value = false;
-        return data;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getCarBrands = async () => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/vehicle/brands`);
+    //     processing.value = false;
+    //     return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
-    const getVehicleMake = async (id, slug, brand) => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/vehicle/make/${id}/${brand}`);
-        processing.value = false;
-        // return data;
-        switch (slug) {
-          case "enterprise":
-            return data;
-          // break;
-          case "star-assurance":
-            return data.data;
-          // break;
-          case "phoenix":
-            return data.vehiclemake;
-          // break;
-          default:
-            return data;
-        }
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getVehicleMake = async (id, slug, brand) => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/vehicle/make/${id}/${brand}`);
+    //     processing.value = false;
+    //     // return data;
+    //     switch (slug) {
+    //       case "enterprise":
+    //         return data;
+    //       // break;
+    //       case "star-assurance":
+    //         return data.data;
+    //       // break;
+    //       case "phoenix":
+    //         return data.vehiclemake;
+    //       // break;
+    //       default:
+    //         return data;
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
-    const getVehicleModel = async (id, slug, brand) => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/vehicle/model/${id}/${brand}`);
-        processing.value = false;
-        switch (slug) {
-          case "enterprise":
-            return data;
-          // break;
-          case "star-assurance":
-            return data.data;
-          // break;
-          case "phoenix":
-            return data.vehModel;
-          // break;
-          default:
-            return data;
-        }
-        // return data;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getVehicleModel = async (id, slug, brand) => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/vehicle/model/${id}/${brand}`);
+    //     processing.value = false;
+    //     switch (slug) {
+    //       case "enterprise":
+    //         return data;
+    //       // break;
+    //       case "star-assurance":
+    //         return data.data;
+    //       // break;
+    //       case "phoenix":
+    //         return data.vehModel;
+    //       // break;
+    //       default:
+    //         return data;
+    //     }
+    //     // return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
-    const getVehicleBodyType = async (id, slug) => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/vehicle/body-types/${id}`);
-        processing.value = false;
-        switch (slug) {
-          case "enterprise":
-            return data;
-          // break;
-          case "star-assurance":
-            return data.data;
-          // break;
-          case "phoenix":
-            return data.vehicleBody;
-          // break;
-          default:
-            return data;
-        }
-        // if (id === 4) {
-        //   return data.data;
-        // }
-        // return data;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getVehicleBodyType = async (id, slug) => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/vehicle/body-types/${id}`);
+    //     processing.value = false;
+    //     switch (slug) {
+    //       case "enterprise":
+    //         return data;
+    //       // break;
+    //       case "star-assurance":
+    //         return data.data;
+    //       // break;
+    //       case "phoenix":
+    //         return data.vehicleBody;
+    //       // break;
+    //       default:
+    //         return data;
+    //     }
+    //     // if (id === 4) {
+    //     //   return data.data;
+    //     // }
+    //     // return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
-    const getVehicleColors = async () => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/vehicle/colors`);
-        processing.value = false;
-        return data.vehColor;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getVehicleColors = async () => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/vehicle/colors`);
+    //     processing.value = false;
+    //     return data.vehColor;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
-    const getIdTypes = async () => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/policies/id-types`);
-        processing.value = false;
-        return data.ids;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getIdTypes = async () => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/policies/id-types`);
+    //     processing.value = false;
+    //     return data.ids;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
-    const getBranches = async () => {
-      try {
-        processing.value = true;
-        const { data } = await api.get(`/institution/branches`);
-        processing.value = false;
-        return data.data.entries;
-      } catch (error) {
-        console.log(error);
-        processing.value = false;
-      }
-    };
+    // const getBranches = async () => {
+    //   try {
+    //     processing.value = true;
+    //     const { data } = await api.get(`/institution/branches`);
+    //     processing.value = false;
+    //     return data.data.entries;
+    //   } catch (error) {
+    //     console.log(error);
+    //     processing.value = false;
+    //   }
+    // };
 
     return {
       success,
@@ -261,13 +265,6 @@ export const useUnderwritingDataStore = defineStore(
       processing,
       underwritingData,
       underwritingParams,
-      getCarBrands,
-      getVehicleMake,
-      getVehicleModel,
-      getVehicleBodyType,
-      getVehicleColors,
-      getBranches,
-      getIdTypes,
       submitUnderwritingData,
       checkFormField,
       $reset,
