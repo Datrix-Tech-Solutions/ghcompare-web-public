@@ -176,8 +176,8 @@
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_colour')">
                         <label for="country" class="label">Vehicle
                             Color</label>
-                        <div class="mt-2">
 
+                        <div class="mt-2" v-if="vehicleColors.length > 0">
                             <select name="vehicle-color" id="vehicle-color" autocomplete="vehicle-color"
                                 v-model="vehicleData.vehicle_colour" :disabled="underwritingDataStore.processing"
                                 class="w-full">
@@ -186,6 +186,14 @@
                                     <option :value='color'>{{ color }}</option>
                                 </template>
                             </select>
+                        </div>
+
+                        <!-- vehicle color if color array can't be fetched -->
+                        <div class="mt-2" v-else>
+
+                            <input name="vehicle-color" id="vehicle-color" autocomplete="vehicle-color"
+                                v-model="vehicleData.vehicle_colour" :disabled="underwritingDataStore.processing"
+                                class="w-full" />
                         </div>
                     </div>
 
