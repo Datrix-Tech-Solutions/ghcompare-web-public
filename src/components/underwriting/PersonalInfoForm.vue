@@ -36,9 +36,9 @@
                                 </template>
                             </select>
                         </div>
-                        <SelectField labelName="Account type" :disable="underwritingDataStore.processing"
+                        <!-- <SelectField labelName="Account type" :disable="underwritingDataStore.processing"
                             :options="underwritingDataStore.checkFormField('account_type')?.datalist"
-                            v-model="personalData.account_type" />
+                            v-model="personalData.account_type" /> -->
                     </div>
 
 
