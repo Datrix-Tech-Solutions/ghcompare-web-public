@@ -6,6 +6,7 @@
         <div class="relative p-4 w-full max-w-3xl h-[80%]">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow h-full  ">
+                {{ paymentStatus }}
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 ">
                     <h3 class="text-xl font-semibold text-gray-900 ">
@@ -34,18 +35,41 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
+import { socket, state } from '../../socket'
+// import { usePaymentSocketStore } from '../../store/paymentSocket'
 
-defineProps({
-    paymentLink: String
+const props = defineProps({
+    paymentLink: String,
+    institutionSlug: String,
+    transactionId: String,
 })
+
+const paymentStatus = ref("Unpaid")
+const intervalId = ref()
+
+const connect = () => {
+    socket.emit("get_status", {
+        transaction_id: props.transactionId,
+        institution_slug: props.institutionSlug,
+    });
+    socket.on("response", (data) => {
+        console.log("response received:", data);
+        paymentStatus.value = data?.data?.status;
+    });
+}
 
 onMounted(() => {
     document.body.style.overflow = 'hidden'
+
+    socket.connect();
+    intervalId.value = setInterval(() => { connect() }, 5000)
 })
 
 onUnmounted(() => {
     document.body.style.overflow = 'auto'
+    socket.disconnect()
+    clearInterval(intervalId.value)
 })
 </script>
 

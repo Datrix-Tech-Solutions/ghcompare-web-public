@@ -49,6 +49,8 @@
                         </div>
                     </div>
 
+                    <!-- <SelectField labelName="Account type" :disable="fetchingData" :options="carBrands" v-model="test" /> -->
+
 
                     <!-- vehicle make -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_make')">
@@ -254,6 +256,8 @@
 import { inject, onMounted, ref } from 'vue';
 import ButtonWithArrow from '../../components/ui/ButtonWithArrow.vue'
 import Loader from '../ui/Loader.vue';
+import SelectField from './formfields/SelectField.vue';
+
 import { useUnderwritingDataStore } from '../../store/underwritingData';
 import { getVehicleBodyType, getVehicleColors, getVehicleMake, getVehicleModel } from '../../utils/underwritingUtils'
 
@@ -269,6 +273,7 @@ const underwritingDataStore = useUnderwritingDataStore()
 const vehicleData = ref(underwritingDataStore.underwritingData.vehicleData)
 // const brand = ref('')
 // const carBrands = ref([])
+const test = ref('lskjdlfs')
 const fetchingData = ref(false)
 const vehicleMake = ref([])
 const vehicleModel = ref([])

@@ -1,13 +1,14 @@
 <template>
     <div>
-        <PaymentModal :paymentLink="paymentLink" v-if="paymentLink" @close-modal="() => { paymentLink = '' }" />
+        <PaymentModal :paymentLink="paymentLink" :institution-slug="institutionSlug" :transaction-id="transactionId"
+            v-if="paymentLink" @close-modal="() => { paymentLink = '' }" />
         <main class="max-width py-20">
             <!-- image -->
             <div class="" v-if="Object.keys(institutionData).length > 0">
                 <!-- <img :src="institutionData?.institution[0]?.logo" alt="" class="max-w-[500px]"> -->
                 <h2 class="text-3xl font-bold text-center mb-10 text-primary mt-10"> {{
-            institutionData?.institution[0]?.name
-        }}
+                    institutionData?.institution[0]?.name
+                }}
                     Underwriting Form</h2>
 
                 <div class="max-w-[800px] mx-auto">
@@ -44,6 +45,8 @@ const route = useRoute()
 const institutionData = ref({})
 // const showPaymentModal = ref(false)
 const paymentLink = ref('')
+const institutionSlug = ref('')
+const transactionId = ref()
 
 
 async function submitData(buyerData) {
@@ -53,7 +56,8 @@ async function submitData(buyerData) {
     console.log(data)
     if (data && institutionData.value.institution[0].slug !== 'enterprise') {
         console.log(data)
-        paymentLink.value = data?.data?.paymentData.url
+        transactionId.value = data?.data?.paymentData?.transaction_id
+        paymentLink.value = data?.data?.paymentData?.url
     } else if (!data) {
         toastStore.addToastMessage('danger', 'Failed', 'Something Went Wrong')
         console.log(data)
@@ -68,6 +72,8 @@ onMounted(() => {
     underwritingDataStore.underwritingParams = institutionData.value?.underwritingParams
 
     console.log(underwritingDataStore.underwritingParams)
+
+    institutionSlug.value = institutionData.value?.institution[0]?.slug
 
     provide('institutionId', institutionData.value?.institution[0]?.id) //for forms to access and get institution Id
     provide('institutionLogo', institutionData.value?.institution[0]?.logo) //for forms to access and get institution logo
