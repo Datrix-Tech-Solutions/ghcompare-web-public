@@ -29,8 +29,8 @@ const props = defineProps({
 })
 
 onMounted(() => {
-    let values = Object.values(formDataStore.motorInsurancePremium)
-    institution.value = (values.find(item => { return item.institution[0].slug === props.institutionSlug })).institution[0].name
+    let values = Object.values(formDataStore?.motorInsurancePremium)
+    institution.value = (values.find(item => { return item?.institution[0].slug === props.institutionSlug }))?.institution[0].name
     // console.log(institution.value)
 })
 
@@ -38,6 +38,7 @@ onUnmounted(() => {
     useUnderwritingDataStore().$reset;
     useFormDataStore().$reset;
     useFormDataStore().motorInsuranceDataSaved = {}
+    useFormDataStore().motorInsurancePremium = null
 })
 </script>
 
