@@ -2,33 +2,11 @@
 import LandingHeader from '../components/LandingHeader.vue';
 import ComparePolicies from '../components/ComparePolicies.vue';
 import HowToBuy from '../components/HowToBuy.vue';
-// import { state, socket } from "../socket";
-// import { computed, ref } from 'vue';
-
-// const connected = computed(() => {
-//     return state.connected
-// })
-
-// const paymentStatus = ref('unpaid')
-
-// const connect = () => {
-//     socket.connect();
-
-//     if (state.connected) {
-//         socket.on("response", (data) => {
-//             console.log("response received:", data);
-//         })
-//     }
-// }
-
-// const disconnect = () => {
-//     socket.disconnect();
-// }
 
 </script>
 
 <template>
-    State: {{ connected }} <button @click="connect()">connect</button> <button @click="disconnect()">disconnect</button>
+
     <!-- Header -->
     <LandingHeader />
 

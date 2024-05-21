@@ -119,30 +119,10 @@ function updateVehicleUse(vehicleUse) {
                             {{ info.seats }}
                         </Information>
                     </div>
-                    <input type="number" name="seats" id="seats" class="w-full" required
+                    <input type="number" name="seats" id="seats" class="w-full" autocomplete="seats" required
                         v-model="vehicleData.number_of_seats" placeholder="e.g. 12">
                 </div>
 
-                <!-- Vehicle Registration Year -->
-                <div class="w-1/2">
-                    <div class="flex justify-between">
-                        <label class="label">Vehicle Registration Year</label>
-
-                    </div>
-
-                    <select name="seats" id="seats" v-model="vehicleData.vehicle_reg_year" class="w-full" required
-                        :class="{ 'text-[#aaaaaa]': vehicleData.vehicle_reg_year == '' }">
-                        <option disabled value="">Select registration year</option>
-                        <template v-for="year in yearsRange" :key="year">
-                            <option> {{ year }}</option>
-                        </template>
-                    </select>
-                </div>
-            </div>
-
-            <hr class="my-8">
-
-            <div class="flex gap-5">
                 <!-- Year of Manufacture -->
                 <div class="w-1/2">
                     <div class="flex justify-between">
@@ -159,6 +139,28 @@ function updateVehicleUse(vehicleUse) {
                         </template>
                     </select>
 
+                </div>
+
+            </div>
+
+            <hr class="my-8">
+
+            <div class="flex gap-5">
+
+                <!-- Vehicle Registration Year -->
+                <div class="w-1/2">
+                    <div class="flex justify-between">
+                        <label class="label">Vehicle Registration Year</label>
+
+                    </div>
+
+                    <select name="seats" id="seats" v-model="vehicleData.vehicle_reg_year" class="w-full" required
+                        :class="{ 'text-[#aaaaaa]': vehicleData.vehicle_reg_year == '' }">
+                        <option disabled value="">Select registration year</option>
+                        <template v-for="year in yearsRange" :key="year">
+                            <option> {{ year }}</option>
+                        </template>
+                    </select>
                 </div>
 
                 <!-- Amount insured -->

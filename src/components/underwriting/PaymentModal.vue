@@ -35,8 +35,9 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { socket, state } from '../../socket'
+import { routerKey, useRoute, useRouter } from 'vue-router';
 // import { usePaymentSocketStore } from '../../store/paymentSocket'
 
 const props = defineProps({
@@ -47,6 +48,14 @@ const props = defineProps({
 
 const paymentStatus = ref("Unpaid")
 const intervalId = ref()
+const route = useRoute()
+const router = useRouter()
+
+watch(paymentStatus, (newStatus) => {
+    if (newStatus.toLowerCase() === 'paid') {
+        router.push({ name: 'PaymentSuccess', params: { insuranceType: route.params.insuranceType, institutionSlug: route.params.institutionSlug, institutionId: route.params.institutionId } })
+    }
+})
 
 const connect = () => {
     socket.emit("get_status", {
@@ -63,7 +72,7 @@ onMounted(() => {
     document.body.style.overflow = 'hidden'
 
     socket.connect();
-    intervalId.value = setInterval(() => { connect() }, 5000)
+    intervalId.value = setInterval(() => { connect() }, 2000)
 })
 
 onUnmounted(() => {

@@ -58,8 +58,8 @@ const company = [
                     <li class="mb-3"><router-link :to="{ name: item.to ? item.to : '', hash: item.to ? '' : '#' }"
                             class="hover:text-primary"
                             :class="{ 'hover:!text-gray-600 cursor-not-allowed': !item.to }">{{
-                    item.text
-                }}</router-link></li>
+                                item.text
+                            }}</router-link></li>
                 </ul>
             </div>
 
@@ -70,7 +70,7 @@ const company = [
                     <li class="mb-3"><router-link :to="{ name: item.soon ? '' : item.to, hash: item.soon ? '#' : '' }"
                             class="hover:text-primary"
                             :class="{ 'hover:!text-gray-600 cursor-not-allowed': item.soon }">{{
-                    item.text
+                                item.text
                             }} <span v-if="item.soon"
                                 class="text-white rounded-full bg-red-500 px-1 py-1 text-[8px] relative -top-3 ">Coming
                                 soon</span></router-link>
@@ -103,7 +103,8 @@ const company = [
         </div>
 
         <div class="border-t border-gray-300">
-            <p class="text-center text-sm py-3"> &copy; 2023 GHCOMPARE | All Rights Reserved</p>
+            <p class="text-center text-sm py-3"> &copy; {{ new Date().getFullYear() }} GHCOMPARE | All Rights Reserved
+            </p>
         </div>
     </footer>
 </template>

@@ -8,11 +8,11 @@
   }
 
   .button-primary {
-    @apply px-6 py-3 bg-primary inline-block rounded hover:bg-primary-dark font-semibold text-white transition border border-primary hover:border-primary-dark leading-none;
+    @apply px-6 py-3 bg-primary inline-block rounded hover:bg-primary-dark font-semibold text-white transition border border-primary hover:border-primary-dark leading-none active:bg-primary active:border-primary ;
   }
 
   .button-transparent {
-    @apply px-6 py-3 bg-transparent inline-block rounded leading-none hover:bg-primary font-semibold transition border border-primary hover:text-white hover:border-primary;
+    @apply px-6 py-3 bg-transparent inline-block rounded leading-none hover:bg-primary font-semibold transition border border-primary hover:text-white hover:border-primary active:bg-primary-dark active:border-primary-dark;
   }
 
   .input-styling {

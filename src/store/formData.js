@@ -14,7 +14,7 @@ export const useFormDataStore = defineStore(
     const gettingPremium = ref(false);
     const motorInsurancePremium = ref(null);
     const processing = ref(false); //for when api is being hit
-    const motorInsuranceDataSaved = ref();
+    const motorInsuranceDataSaved = ref({});
     // Motor insurance Data to be sent to server
     const motorInsuranceData = ref({
       coverDetails: {

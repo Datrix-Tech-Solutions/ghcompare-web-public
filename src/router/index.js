@@ -82,6 +82,15 @@ const routes = [
     props: true,
   },
 
+  // Payment Success
+  {
+    path: "/:insuranceType/:institutionId/:institutionSlug/payment-successful",
+    name: "PaymentSuccess",
+    component: () =>
+      import(/* webpackChunkName: "Payment" */ "../views/PaymentSuccess.vue"),
+    props: true,
+  },
+
   //display premium ( home insurance )
   {
     path: "/home-insurance/premium",
