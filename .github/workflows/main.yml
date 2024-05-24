@@ -26,7 +26,5 @@ jobs:
         script: |
           cd /var/www/apps/ghcompare.com
           git pull origin main
-          git status
-          npm install --only=prod
+          npm i
           npm run build
-          pm2 restart 1
