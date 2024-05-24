@@ -46,7 +46,7 @@ const fetchingData = ref(false)
 function getInfo(data) {
     underwritingDataStore.underwritingData = { ...underwritingDataStore.underwritingData, ...data }
     selectedForm.value = selectedForm.value + 1;
-    console.log(underwritingDataStore.underwritingData)
+    // console.log(underwritingDataStore.underwritingData)
 }
 
 function previousForm() {
@@ -58,7 +58,7 @@ onMounted(async () => {
         fetchingData.value = true
         carBrands.value = await getCarBrands()
         fetchingData.value = false
-        console.log(carBrands.value)
+        // console.log(carBrands.value)
     }
     if (underwritingDataStore.checkFormField('id_type')) {
         fetchingData.value = true
@@ -70,7 +70,7 @@ onMounted(async () => {
         branches.value = await getBranches()
         fetchingData.value = false
     }
-    console.log(idTypes.value, branches.value)
+    // console.log(idTypes.value, branches.value)
     // await getVehicleDetails()
 })
 </script>

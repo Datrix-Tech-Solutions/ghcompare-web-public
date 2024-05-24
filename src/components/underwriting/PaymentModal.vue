@@ -63,7 +63,7 @@ const connect = () => {
         institution_slug: props.institutionSlug,
     });
     socket.on("response", (data) => {
-        console.log("response received:", data);
+        // console.log("response received:", data);
         paymentStatus.value = data?.data?.status;
     });
 }

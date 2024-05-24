@@ -120,7 +120,7 @@ export const useUnderwritingDataStore = defineStore(
             ddata[underwritingParams.value[item].params];
         }
       }
-      console.log(buyerData);
+      // console.log(buyerData);
 
       let underwriting = {
         buyerData,
@@ -133,7 +133,7 @@ export const useUnderwritingDataStore = defineStore(
           `motor/underwriting/${id}`,
           underwriting
         );
-        console.log(underwriting);
+        // console.log(underwriting);
         processing.value = false;
         return data;
       } catch (error) {
