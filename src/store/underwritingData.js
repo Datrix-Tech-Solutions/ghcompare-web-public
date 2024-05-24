@@ -62,9 +62,9 @@ export const useUnderwritingDataStore = defineStore(
       underwritingData.value = {
         personalData: {
           account_type: "",
-          first_name: "John",
-          last_name: "Doe",
-          mobile_number: "0242762412",
+          first_name: "",
+          last_name: "",
+          mobile_number: "",
           email: formDataStore.motorInsuranceDataSaved?.coverDetails?.email,
           id_type: "",
           id_number: "",
@@ -141,132 +141,6 @@ export const useUnderwritingDataStore = defineStore(
         processing.value = false;
       }
     };
-
-    // const getCarBrands = async () => {
-    //   try {
-    //     processing.value = true;
-    //     const { data } = await api.get(`/vehicle/brands`);
-    //     processing.value = false;
-    //     return data;
-    //   } catch (error) {
-    //     console.log(error);
-    //     processing.value = false;
-    //   }
-    // };
-
-    // const getVehicleMake = async (id, slug, brand) => {
-    //   try {
-    //     processing.value = true;
-    //     const { data } = await api.get(`/vehicle/make/${id}/${brand}`);
-    //     processing.value = false;
-    //     // return data;
-    //     switch (slug) {
-    //       case "enterprise":
-    //         return data;
-    //       // break;
-    //       case "star-assurance":
-    //         return data.data;
-    //       // break;
-    //       case "phoenix":
-    //         return data.vehiclemake;
-    //       // break;
-    //       default:
-    //         return data;
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //     processing.value = false;
-    //   }
-    // };
-
-    // const getVehicleModel = async (id, slug, brand) => {
-    //   try {
-    //     processing.value = true;
-    //     const { data } = await api.get(`/vehicle/model/${id}/${brand}`);
-    //     processing.value = false;
-    //     switch (slug) {
-    //       case "enterprise":
-    //         return data;
-    //       // break;
-    //       case "star-assurance":
-    //         return data.data;
-    //       // break;
-    //       case "phoenix":
-    //         return data.vehModel;
-    //       // break;
-    //       default:
-    //         return data;
-    //     }
-    //     // return data;
-    //   } catch (error) {
-    //     console.log(error);
-    //     processing.value = false;
-    //   }
-    // };
-
-    // const getVehicleBodyType = async (id, slug) => {
-    //   try {
-    //     processing.value = true;
-    //     const { data } = await api.get(`/vehicle/body-types/${id}`);
-    //     processing.value = false;
-    //     switch (slug) {
-    //       case "enterprise":
-    //         return data;
-    //       // break;
-    //       case "star-assurance":
-    //         return data.data;
-    //       // break;
-    //       case "phoenix":
-    //         return data.vehicleBody;
-    //       // break;
-    //       default:
-    //         return data;
-    //     }
-    //     // if (id === 4) {
-    //     //   return data.data;
-    //     // }
-    //     // return data;
-    //   } catch (error) {
-    //     console.log(error);
-    //     processing.value = false;
-    //   }
-    // };
-
-    // const getVehicleColors = async () => {
-    //   try {
-    //     processing.value = true;
-    //     const { data } = await api.get(`/vehicle/colors`);
-    //     processing.value = false;
-    //     return data.vehColor;
-    //   } catch (error) {
-    //     console.log(error);
-    //     processing.value = false;
-    //   }
-    // };
-
-    // const getIdTypes = async () => {
-    //   try {
-    //     processing.value = true;
-    //     const { data } = await api.get(`/policies/id-types`);
-    //     processing.value = false;
-    //     return data.ids;
-    //   } catch (error) {
-    //     console.log(error);
-    //     processing.value = false;
-    //   }
-    // };
-
-    // const getBranches = async () => {
-    //   try {
-    //     processing.value = true;
-    //     const { data } = await api.get(`/institution/branches`);
-    //     processing.value = false;
-    //     return data.data.entries;
-    //   } catch (error) {
-    //     console.log(error);
-    //     processing.value = false;
-    //   }
-    // };
 
     return {
       success,
