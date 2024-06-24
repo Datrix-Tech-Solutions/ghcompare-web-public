@@ -20,7 +20,7 @@
 
             <hr class="my-4">
 
-            <p class="font-bold text-4xl text-center my-8">&#8373;{{ premium?.premium.toFixed(2) }}</p>
+            <p class="font-bold text-4xl text-center my-8">&#8373;{{ parseInt(premium?.premium).toFixed(2) }}</p>
         </div>
 
         <div class="">
