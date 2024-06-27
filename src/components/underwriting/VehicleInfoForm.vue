@@ -194,8 +194,7 @@
                         <!-- vehicle color if color array can't be fetched -->
                         <div class="mt-2" v-else>
                             <input name="vehicle-color" id="vehicle-color" autocomplete="vehicle-color"
-                                v-model="vehicleData.vehicle_colour"
-                                :disabled="fetchingData || !vehicleData.vehicle_brand" class="w-full" />
+                                v-model="vehicleData.vehicle_colour" class="w-full" />
                         </div>
                     </div>
 

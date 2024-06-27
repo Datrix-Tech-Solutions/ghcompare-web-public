@@ -38,7 +38,7 @@
 import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { socket, state } from '../../socket'
 import { routerKey, useRoute, useRouter } from 'vue-router';
-// import { usePaymentSocketStore } from '../../store/paymentSocket'
+import { useUnderwritingDataStore } from '../../store/underwritingData';
 
 const props = defineProps({
     paymentLink: String,
@@ -46,6 +46,7 @@ const props = defineProps({
     transactionId: String,
 })
 
+const underwritingDataStore = useUnderwritingDataStore()
 const paymentStatus = ref("Unpaid")
 const intervalId = ref()
 const route = useRoute()
@@ -53,8 +54,10 @@ const router = useRouter()
 
 watch(paymentStatus, (newStatus) => {
     if (newStatus.toLowerCase() === 'paid') {
+        console.log(underwritingDataStore.paymentSuccessData)
         router.push({ name: 'PaymentSuccess', params: { insuranceType: route.params.insuranceType, institutionSlug: route.params.institutionSlug, institutionId: route.params.institutionId } })
     }
+    console.log(newStatus)
 })
 
 const connect = () => {
@@ -63,9 +66,11 @@ const connect = () => {
         institution_slug: props.institutionSlug,
     });
     socket.on("response", (data) => {
-        // console.log("response received:", data);
+        console.log("response received:", data);
         paymentStatus.value = data?.data?.status;
+        underwritingDataStore.paymentSuccessData = data
     });
+    console.log(props.transactionId, props.institutionSlug)
 }
 
 onMounted(() => {

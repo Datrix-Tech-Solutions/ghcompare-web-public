@@ -15,7 +15,7 @@ export const useUnderwritingDataStore = defineStore(
     const err = ref(false);
     const processing = ref(false); //for when api is being hit
     const underwritingParams = ref();
-
+    const paymentSuccessData = ref(null);
     const underwritingData = ref({
       personalData: {
         account_type: "",
@@ -59,6 +59,7 @@ export const useUnderwritingDataStore = defineStore(
     });
 
     function $reset() {
+      paymentSuccessData.value = null;
       underwritingData.value = {
         personalData: {
           account_type: "",
@@ -150,6 +151,7 @@ export const useUnderwritingDataStore = defineStore(
       underwritingParams,
       submitUnderwritingData,
       checkFormField,
+      paymentSuccessData,
       $reset,
     };
   }
