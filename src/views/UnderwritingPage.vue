@@ -7,6 +7,8 @@
         <PaymentModal :paymentLink="paymentLink" :institution-slug="institutionSlug" :transaction-id="transactionId"
             v-if="paymentLink" @close-modal="() => { paymentLink = '' }" />
 
+        <LoyaltyPaymentModal v-if="showLoyaltyModal" @close-modal="() => { showLoyaltyModal = false }" />
+
         <main class="max-width py-20">
             <!-- image -->
             <div class="" v-if="Object.keys(institutionData).length > 0">
@@ -35,6 +37,7 @@ import UnderwritingForm from '../components/underwriting/UnderwritingForm.vue';
 import PaymentModal from '../components/underwriting/PaymentModal.vue';
 import { useToastStore } from '../store/toast';
 import AlertModal from '../components/ui/AlertModal.vue';
+import LoyaltyPaymentModal from '../components/underwriting/LoyaltyPaymentModal.vue';
 
 
 // route params
@@ -54,6 +57,7 @@ const showAlert = ref(false)
 const paymentLink = ref('')
 const institutionSlug = ref('')
 const transactionId = ref()
+const showLoyaltyModal = ref(false)
 
 
 async function submitData(buyerData) {
@@ -61,14 +65,18 @@ async function submitData(buyerData) {
     let generatePremiumData = { ...formDataStore.motorInsuranceDataSaved.coverDetails, ...formDataStore.motorInsuranceDataSaved.vehicleDetails }
     responseData.value = await underwritingDataStore.submitUnderwritingData(premiumData, generatePremiumData, institutionData.value?.institution[0]?.id)
     console.log(responseData.value)
-    if (responseData.value?.data && institutionData.value.institution[0].slug !== 'enterprise') {
+    if (responseData.value?.data && institutionData.value.institution[0].slug !== 'enterprise' && institutionData.value.institution[0].slug !== 'loyalty') {
         console.log(responseData.value)
         transactionId.value = responseData.value?.data?.paymentData?.transaction_id
         paymentLink.value = responseData.value?.data?.paymentData?.url
         if (responseData.value?.data.state === false) {
             showAlert.value = true
         }
-    } else if (!responseData.value) {
+    } else if (responseData.value?.data && institutionData.value.institution[0].slug === 'loyalty') {
+        console.log(responseData.value)
+        showLoyaltyModal.value = true
+    }
+    else if (!responseData.value) {
         toastStore.addToastMessage('danger', 'Failed', 'Something Went Wrong')
         console.log(responseData.value)
     }
