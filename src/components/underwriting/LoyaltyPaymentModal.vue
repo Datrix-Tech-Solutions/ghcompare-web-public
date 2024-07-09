@@ -33,8 +33,7 @@
                     <div class="">
                         <label for="number" class="label !mb-0">Phone Number</label>
                         <small class="mb-2 inline-block">Check for accuracy of your phone number</small>
-                        <input type="number" id="number" class="w-full" required
-                            v-model="paymentDetails.mobile_number" />
+                        <input type="text" id="number" class="w-full" required v-model="paymentDetails.mobile_number" />
                     </div>
 
                     <div class="mt-10">
@@ -89,7 +88,7 @@ async function submitPayment() {
     // console.log(paymentDetails.value)
     try {
         loading.value = true
-        const { data } = await api.post('/motor/make-payment', paymentDetails.value)
+        const { data } = await api.post('/motor/make-payment', { ...paymentDetails.value, mobile_number: parseInt(paymentDetails.value.mobile_number) })
         console.log(data)
     } catch (error) {
         loading.value = false

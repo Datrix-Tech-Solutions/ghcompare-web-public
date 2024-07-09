@@ -171,7 +171,7 @@
                         <label for="country" class="label">Phone
                             Number</label>
                         <div class="mt-2">
-                            <input required type="number" name="phone-number" id="phone-number" placeholder="0500000000"
+                            <input required type="text" name="phone-number" id="phone-number" placeholder="0500000000"
                                 autocomplete="phone-number" v-model="personalData.mobile_number" class="w-full" />
                         </div>
                     </div>
