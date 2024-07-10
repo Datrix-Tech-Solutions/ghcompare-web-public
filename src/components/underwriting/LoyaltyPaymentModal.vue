@@ -88,7 +88,7 @@ async function submitPayment() {
     // console.log(paymentDetails.value)
     try {
         loading.value = true
-        const { data } = await api.post('/motor/make-payment', { ...paymentDetails.value, mobile_number: parseInt(paymentDetails.value.mobile_number) })
+        const { data } = await api.post('/motor/make-payment', paymentDetails.value)
         console.log(data)
     } catch (error) {
         loading.value = false
