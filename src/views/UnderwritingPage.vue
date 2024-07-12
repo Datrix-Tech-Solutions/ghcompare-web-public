@@ -7,7 +7,8 @@
         <PaymentModal :paymentLink="paymentLink" :institution-slug="institutionSlug" :transaction-id="transactionId"
             v-if="paymentLink" @close-modal="() => { paymentLink = '' }" />
 
-        <LoyaltyPaymentModal v-if="showLoyaltyModal" @close-modal="() => { showLoyaltyModal = false }" />
+        <LoyaltyPaymentModal v-if="showLoyaltyModal" :institution-slug="institutionSlug" :transaction-id="transactionId"
+            :amount="premium" @close-modal="() => { showLoyaltyModal = false }" />
 
         <main class="max-width py-20">
             <!-- image -->
@@ -15,7 +16,7 @@
                 <!-- <img :src="institutionData?.institution[0]?.logo" alt="" class="max-w-[500px]"> -->
                 <h2 class="text-3xl font-bold text-center mb-10 text-primary mt-10"> {{
                     institutionData?.institution[0]?.name
-                    }}
+                }}
                     Underwriting Form</h2>
 
                 <div class="max-w-[800px] mx-auto">
@@ -57,6 +58,7 @@ const showAlert = ref(false)
 const paymentLink = ref('')
 const institutionSlug = ref('')
 const transactionId = ref()
+const premium = ref()
 const showLoyaltyModal = ref(false)
 
 
@@ -73,6 +75,7 @@ async function submitData(buyerData) {
             showAlert.value = true
         }
     } else if (responseData.value?.data && institutionData.value.institution[0].slug === 'loyalty') {
+        transactionId.value = responseData.value?.data?.paymentData?.transaction_id
         console.log(responseData.value)
         showLoyaltyModal.value = true
     }
@@ -92,6 +95,7 @@ onMounted(() => {
     console.log(underwritingDataStore.underwritingParams)
 
     institutionSlug.value = institutionData.value?.institution[0]?.slug
+    premium.value = institutionData.value.premium
 
     provide('institutionId', institutionData.value?.institution[0]?.id) //for forms to access and get institution Id
     provide('institutionLogo', institutionData.value?.institution[0]?.logo) //for forms to access and get institution logo

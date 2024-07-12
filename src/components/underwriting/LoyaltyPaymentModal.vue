@@ -17,50 +17,73 @@
                     <span class="sr-only">Close modal</span>
                 </button>
 
-                <h3 class="text-2xl font-bold text-primary">Payment Details</h3>
+                <div class="" v-if="!showSuccess">
+                    <h3 class="text-2xl font-bold mb-3 text-primary">Payment Details</h3>
 
-                <form class="mt-5 space-y-5" @submit.prevent="submitPayment">
-                    <div class="">
-                        <label for="momo" class="label">Momo Merchant</label>
-                        <select name="momo" id="momo" class="w-full" required v-model="paymentDetails.network_code">
-                            <option disabled value="">Select momo merchant</option>
-                            <template v-for="momo in momoOptions" :key="momo.id">
-                                <option :value="momo.code">{{ momo.name }}</option>
-                            </template>
-                        </select>
-                    </div>
+                    <p class="">You will be debited an amount of <span class=" text-xl font-bold text-primary">GHS{{
+                        parseInt(amount).toFixed(2) }}</span> on successful payment</p>
 
-                    <div class="">
-                        <label for="number" class="label !mb-0">Phone Number</label>
-                        <small class="mb-2 inline-block">Check for accuracy of your phone number</small>
-                        <input type="text" id="number" class="w-full" required v-model="paymentDetails.mobile_number" />
-                    </div>
+                    <form class="mt-2 space-y-5" @submit.prevent="submitPayment">
+                        <div class="">
+                            <label for="momo" class="label">Momo Merchant</label>
+                            <select name="momo" id="momo" class="w-full" required v-model="paymentDetails.network_code">
+                                <option disabled value="">Select momo merchant</option>
+                                <template v-for="momo in momoOptions" :key="momo.id">
+                                    <option :value="momo.code">{{ momo.name }}</option>
+                                </template>
+                            </select>
+                        </div>
 
-                    <div class="mt-10">
+                        <div class="">
+                            <label for="number" class="label !mb-0">Phone Number</label>
+                            <small class="mb-2 inline-block">Check for accuracy of your phone number</small>
+                            <input type="text" id="number" class="w-full" required
+                                v-model="paymentDetails.mobile_number" />
+                        </div>
 
-                        <button class="button-primary w-full h-12 flex justify-center items-center">
-                            <Loader v-if="loading" class="" />
-                            <span v-else>Pay</span>
-                        </button>
-                    </div>
-                </form>
+                        <div class="mt-10">
+
+                            <span v-if="prompt" class="text-sm text-green-600 inline-block mb-1">Payment has been
+                                initiated! Approve
+                                on your mobile
+                                device</span>
+                            <button class="button-primary w-full h-12 flex justify-center items-center">
+                                <Loader v-if="loading" class="" />
+                                <span v-else>Pay</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class=" text-center" v-else>
+                    <CheckBadgeIcon class="w-14 mx-auto mb-5 text-green-600" />
+                    <p class="font-bold text-3xl text-primary">Payment Successful!</p>
+                    <p class="t text-neutral-500  mb-2">Click on finish to view documents</p>
+                    <router-link
+                        :to="{ name: 'PaymentSuccess', params: { insuranceType: route.params.insuranceType, institutionSlug: route.params.institutionSlug, institutionId: route.params.institutionId } }">
+                        <button class="button-primary w-full ">Finish</button>
+                    </router-link>
+                </div>
             </div>
+
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { api } from '../../api/api';
 import Loader from '../ui/Loader.vue';
+import { CheckBadgeIcon } from '@heroicons/vue/24/outline';
+import { api } from '../../api/api';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { socket, state } from '../../socket'
+import { routerKey, useRoute, useRouter } from 'vue-router';
 import { useUnderwritingDataStore } from '../../store/underwritingData';
 
-const underwritingDataStore = useUnderwritingDataStore()
-
-const paymentDetails = ref({
-    network_code: "", mobile_number: underwritingDataStore.underwritingData.personalData.mobile_number
+const props = defineProps({
+    amount: String,
+    institutionSlug: String,
+    transactionId: String,
 })
-const loading = ref(false)
+
 const momoOptions = [
     {
         "id": 1,
@@ -83,12 +106,47 @@ const momoOptions = [
         "code": "VOD"
     }
 ]
+const underwritingDataStore = useUnderwritingDataStore()
+const paymentStatus = ref("Unpaid")
+const intervalId = ref()
+const route = useRoute()
+const router = useRouter()
+const paymentDetails = ref({
+    network_code: "", mobile_number: underwritingDataStore.underwritingData.personalData.mobile_number
+})
+const loading = ref(false)
+const prompt = ref(false)
+const showSuccess = ref(false)
+
+watch(paymentStatus, (newStatus) => {
+    if (newStatus.toLowerCase() === 'paid') {
+        console.log(underwritingDataStore.paymentSuccessData)
+        showSuccess.value = true
+    }
+    console.log(newStatus)
+})
+
+const connect = () => {
+    socket.emit("get_status", {
+        transaction_id: props.transactionId,
+        institution_slug: props.institutionSlug,
+    });
+    socket.on("response", (data) => {
+        console.log("response received:", data);
+        paymentStatus.value = data?.data?.status;
+        underwritingDataStore.paymentSuccessData = data
+    });
+    console.log(props.transactionId, props.institutionSlug)
+}
 
 async function submitPayment() {
     // console.log(paymentDetails.value)
     try {
         loading.value = true
+        socket.connect();
+        intervalId.value = setInterval(() => { connect() }, 2000)
         const { data } = await api.post('/motor/make-payment', paymentDetails.value)
+        prompt.value = true
         console.log(data)
     } catch (error) {
         loading.value = false
@@ -97,6 +155,16 @@ async function submitPayment() {
     console.log(paymentDetails.value)
 
 }
+
+onMounted(() => {
+    document.body.style.overflow = 'hidden'
+})
+
+onUnmounted(() => {
+    document.body.style.overflow = 'auto'
+    socket.disconnect()
+    clearInterval(intervalId.value)
+})
 </script>
 
 <style lang="scss" scoped></style>
