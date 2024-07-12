@@ -58,6 +58,12 @@
                                     v-model="personalData.title" class="" />
                                 <label for="mrs" class="text-sm ml-1">Mrs.</label>
                             </div>
+                            <!-- Miss -->
+                            <div class="">
+                                <input required type="radio" name="title" id="mrs" value="Mrs" autocomplete="given-name"
+                                    v-model="personalData.title" class="" />
+                                <label for="mrs" class="text-sm ml-1">Miss</label>
+                            </div>
                             <!-- Dr -->
                             <div class="">
                                 <input required type="radio" name="title" id="dr" value="Dr" autocomplete="given-name"
