@@ -60,9 +60,9 @@
                             </div>
                             <!-- Miss -->
                             <div class="">
-                                <input required type="radio" name="title" id="mrs" value="Mrs" autocomplete="given-name"
-                                    v-model="personalData.title" class="" />
-                                <label for="mrs" class="text-sm ml-1">Miss</label>
+                                <input required type="radio" name="title" id="miss" value="Miss"
+                                    autocomplete="given-name" v-model="personalData.title" class="" />
+                                <label for="miss" class="text-sm ml-1">Miss</label>
                             </div>
                             <!-- Dr -->
                             <div class="">

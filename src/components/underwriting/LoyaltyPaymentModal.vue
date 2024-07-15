@@ -54,7 +54,7 @@
                         </div>
                     </form>
                 </div>
-                <div class=" text-center" v-else>
+                <!-- <div class=" text-center" v-else>
                     <CheckBadgeIcon class="w-14 mx-auto mb-5 text-green-600" />
                     <p class="font-bold text-3xl text-primary">Payment Successful!</p>
                     <p class="t text-neutral-500  mb-2">Click on finish to view documents</p>
@@ -62,7 +62,7 @@
                         :to="{ name: 'PaymentSuccess', params: { insuranceType: route.params.insuranceType, institutionSlug: route.params.institutionSlug, institutionId: route.params.institutionId } }">
                         <button class="button-primary w-full ">Finish</button>
                     </router-link>
-                </div>
+                </div> -->
             </div>
 
         </div>
@@ -75,7 +75,7 @@ import { CheckBadgeIcon } from '@heroicons/vue/24/outline';
 import { api } from '../../api/api';
 import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { socket, state } from '../../socket'
-import { routerKey, useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useUnderwritingDataStore } from '../../store/underwritingData';
 
 const props = defineProps({
@@ -109,6 +109,7 @@ const underwritingDataStore = useUnderwritingDataStore()
 const paymentStatus = ref("Unpaid")
 const intervalId = ref()
 const route = useRoute()
+const router = useRouter()
 const transactionId = ref()
 const paymentDetails = ref({
     network_code: "", mobile_number: underwritingDataStore.underwritingData.personalData.mobile_number, institution_id: route.params.institutionId, amount: 1
@@ -120,6 +121,7 @@ const showSuccess = ref(false)
 watch(paymentStatus, (newStatus) => {
     if (newStatus.toLowerCase() === 'paid') {
         console.log(underwritingDataStore.paymentSuccessData)
+        router.push({ name: 'PaymentSuccess', params: { insuranceType: route.params.insuranceType, institutionSlug: route.params.institutionSlug, institutionId: route.params.institutionId } })
         showSuccess.value = true
     }
     console.log(newStatus)
