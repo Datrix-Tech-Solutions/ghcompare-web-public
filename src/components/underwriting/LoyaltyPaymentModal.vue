@@ -81,7 +81,6 @@ import { useUnderwritingDataStore } from '../../store/underwritingData';
 const props = defineProps({
     amount: String,
     institutionSlug: String,
-    transactionId: String,
 })
 
 const momoOptions = [
@@ -110,9 +109,9 @@ const underwritingDataStore = useUnderwritingDataStore()
 const paymentStatus = ref("Unpaid")
 const intervalId = ref()
 const route = useRoute()
-const router = useRouter()
+const transactionId = ref()
 const paymentDetails = ref({
-    network_code: "", mobile_number: underwritingDataStore.underwritingData.personalData.mobile_number
+    network_code: "", mobile_number: underwritingDataStore.underwritingData.personalData.mobile_number, institution_id: route.params.institutionId, amount: 1
 })
 const loading = ref(false)
 const prompt = ref(false)
@@ -128,7 +127,7 @@ watch(paymentStatus, (newStatus) => {
 
 const connect = () => {
     socket.emit("get_status", {
-        transaction_id: props.transactionId,
+        transaction_id: transactionId.value,
         institution_slug: props.institutionSlug,
     });
     socket.on("response", (data) => {
@@ -143,9 +142,10 @@ async function submitPayment() {
     // console.log(paymentDetails.value)
     try {
         loading.value = true
-        socket.connect();
         intervalId.value = setInterval(() => { connect() }, 2000)
         const { data } = await api.post('/motor/make-payment', paymentDetails.value)
+        transactionId.value = data.transaction_id
+        socket.connect();
         prompt.value = true
         console.log(data)
     } catch (error) {

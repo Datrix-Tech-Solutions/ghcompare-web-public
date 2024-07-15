@@ -317,7 +317,7 @@
                     </div>
 
                     <div class="sm:col-span-full mt-10 flex justify-between flex-row-reverse">
-                        <button class="button-primary px-10  block">
+                        <button class="button-primary px-10  block" :disabled="underwritingDataStore?.processing">
                             <span v-if="!underwritingDataStore?.processing">
                                 Submit
                             </span>
