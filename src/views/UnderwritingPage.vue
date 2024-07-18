@@ -8,7 +8,7 @@
             v-if="paymentLink" @close-modal="() => { paymentLink = '' }" />
 
         <LoyaltyPaymentModal v-if="showLoyaltyModal" :institution-slug="institutionSlug" :amount="premium"
-            @close-modal="() => { showLoyaltyModal = false }" />
+            :policy-id="policyId" @close-modal="() => { showLoyaltyModal = false }" />
 
         <main class="max-width py-20">
             <!-- image -->
@@ -58,6 +58,7 @@ const showAlert = ref(false)
 const paymentLink = ref('')
 const institutionSlug = ref('')
 const transactionId = ref()
+const policyId = ref()
 const premium = ref()
 const showLoyaltyModal = ref(false)
 
@@ -76,6 +77,7 @@ async function submitData(buyerData) {
         }
     } else if (responseData.value?.data && institutionData.value.institution[0].slug === 'loyalty') {
         console.log(responseData.value)
+        policyId.value = responseData.value.policyId
         showLoyaltyModal.value = true
     }
     else if (!responseData.value) {

@@ -81,6 +81,7 @@ import { useUnderwritingDataStore } from '../../store/underwritingData';
 const props = defineProps({
     amount: String,
     institutionSlug: String,
+    policyId: String,
 })
 
 const momoOptions = [
@@ -112,7 +113,11 @@ const route = useRoute()
 const router = useRouter()
 const transactionId = ref()
 const paymentDetails = ref({
-    network_code: "", mobile_number: underwritingDataStore.underwritingData.personalData.mobile_number, institution_id: route.params.institutionId, amount: 1
+    network_code: "",
+    mobile_number: underwritingDataStore.underwritingData.personalData.mobile_number,
+    // institution_id: route.params.institutionId,
+    policyId: props.policyId,
+    amount: 1
 })
 const loading = ref(false)
 const prompt = ref(false)
