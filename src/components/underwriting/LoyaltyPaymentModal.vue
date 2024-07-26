@@ -17,7 +17,7 @@
                     <span class="sr-only">Close modal</span>
                 </button>
 
-                <div class="" v-if="!showSuccess">
+                <div class="">
                     <h3 class="text-2xl font-bold mb-3 text-primary">Payment Details</h3>
 
                     <p class="">You will be debited an amount of <span class=" text-xl font-bold text-primary">GHS{{
@@ -54,15 +54,6 @@
                         </div>
                     </form>
                 </div>
-                <!-- <div class=" text-center" v-else>
-                    <CheckBadgeIcon class="w-14 mx-auto mb-5 text-green-600" />
-                    <p class="font-bold text-3xl text-primary">Payment Successful!</p>
-                    <p class="t text-neutral-500  mb-2">Click on finish to view documents</p>
-                    <router-link
-                        :to="{ name: 'PaymentSuccess', params: { insuranceType: route.params.insuranceType, institutionSlug: route.params.institutionSlug, institutionId: route.params.institutionId } }">
-                        <button class="button-primary w-full ">Finish</button>
-                    </router-link>
-                </div> -->
             </div>
 
         </div>
