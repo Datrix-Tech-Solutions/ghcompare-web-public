@@ -18,7 +18,7 @@ export const useFormDataStore = defineStore(
     // Motor insurance Data to be sent to server
     const motorInsuranceData = ref({
       coverDetails: {
-        email: "",
+        // email: "",
         prefered_cover: "",
         period_cover: "",
         start_date: new Date().toJSON().slice(0, 10),

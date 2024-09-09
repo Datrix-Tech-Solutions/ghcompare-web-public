@@ -56,7 +56,7 @@ onUnmounted(() => {
         </section>
 
         <!-- Form that captures details -->
-        <section class="py-20">
+        <section class="py-5">
             <MotorInsuranceForm />
         </section>
 
