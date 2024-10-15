@@ -38,8 +38,8 @@
                         </div>
                     </div>
                     <!-- Vehicle trim -->
-                    <div class="sm:col-span-3" v-else>
-                        <div class="" v-if="underwritingDataStore.checkFormField('vehicle_trim')">
+                    <div class="sm:col-span-3" v-else v-if="underwritingDataStore.checkFormField('vehicle_trim')">
+                        <div class="">
                             <label for="vehicle_trim" class="label">Vehicle
                                 Trim</label>
                             <div class="mt-2">
@@ -50,7 +50,6 @@
                     </div>
 
                     <!-- <SelectField labelName="Account type" :disable="fetchingData" :options="carBrands" v-model="test" /> -->
-
 
                     <!-- vehicle make -->
                     <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_make')">
