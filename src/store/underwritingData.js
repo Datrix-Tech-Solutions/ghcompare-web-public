@@ -95,7 +95,7 @@ export const useUnderwritingDataStore = defineStore(
           vehicle_trim: "",
           vehicle_fuel_type: "",
           vehicle_no_cylinders: 2,
-          vehicle_cc: 3500,
+          vehicle_cc: "",
           vehicle_drive_type: "",
           vehicle_engine_no: "",
         },
