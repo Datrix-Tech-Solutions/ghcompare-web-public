@@ -73,6 +73,7 @@ const policyId = ref()
 const premium = ref()
 const showLoyaltyModal = ref(false)
 const showSuggested = ref(false)
+const clearTimeout = ref()
 
 
 async function submitData(buyerData) {
@@ -95,7 +96,9 @@ async function submitData(buyerData) {
     else if (!responseData.value) {
         toastStore.addToastMessage('danger', 'Failed', 'Something Went Wrong')
         console.log(responseData.value)
-        setTimeout(() => {
+
+        // show suggested
+        clearTimeout.value = setTimeout(() => {
             showSuggested.value = true
             router.push({ path: route.path, hash: '#more-institutions' })
         }, 2500)
@@ -136,6 +139,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     underwritingDataStore.$reset()
+    clearTimeout()
 })
 </script>
 

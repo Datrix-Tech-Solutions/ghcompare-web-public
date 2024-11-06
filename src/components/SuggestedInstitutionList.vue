@@ -15,7 +15,6 @@
                     @paymentUrl="(url) => paymentLink = url" class="fl flex-gro]w flex-shrink" />
             </template>
         </div>
-        {{ formDataStore.motorInsurancePremium }}
     </div>
 </template>
 
