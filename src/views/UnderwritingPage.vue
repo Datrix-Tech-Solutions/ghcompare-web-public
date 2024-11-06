@@ -22,6 +22,13 @@
                 <div class="max-w-[800px] mx-auto">
                     <UnderwritingForm @sendData="submitData" />
                 </div>
+
+
+                <!-- suggesting other institutions -->
+                <section class="pt-28" id="more-institutions" v-if="showSuggested">
+                    <SuggestedInstitutionList :current-institution-slug="institutionSlug" />
+                </section>
+
             </div>
         </main>
         <!-- {{ institutionData }} -->
@@ -29,7 +36,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, provide, onUnmounted } from 'vue';
+import { onMounted, ref, provide, onUnmounted, watch } from 'vue';
 import { useFormDataStore } from '../store/formData';
 import { useUnderwritingDataStore } from '../store/underwritingData'
 import { useRoute, useRouter } from 'vue-router';
@@ -39,6 +46,7 @@ import PaymentModal from '../components/underwriting/PaymentModal.vue';
 import { useToastStore } from '../store/toast';
 import AlertModal from '../components/ui/AlertModal.vue';
 import LoyaltyPaymentModal from '../components/underwriting/LoyaltyPaymentModal.vue';
+import SuggestedInstitutionList from '../components/SuggestedInstitutionList.vue';
 
 
 // route params
@@ -52,15 +60,19 @@ const toastStore = useToastStore()
 const formDataStore = useFormDataStore()
 const underwritingDataStore = useUnderwritingDataStore()
 const route = useRoute()
+const router = useRouter()
 const institutionData = ref({})
 const responseData = ref()
 const showAlert = ref(false)
 const paymentLink = ref('')
-const institutionSlug = ref('')
+const institutionLogo = ref('')
+const instSlug = ref('')
+const instId = ref('')
 const transactionId = ref()
 const policyId = ref()
 const premium = ref()
 const showLoyaltyModal = ref(false)
+const showSuggested = ref(false)
 
 
 async function submitData(buyerData) {
@@ -83,24 +95,43 @@ async function submitData(buyerData) {
     else if (!responseData.value) {
         toastStore.addToastMessage('danger', 'Failed', 'Something Went Wrong')
         console.log(responseData.value)
+        setTimeout(() => {
+            showSuggested.value = true
+            router.push({ path: route.path, hash: '#more-institutions' })
+        }, 2500)
     }
     // window.open(data?.data?.paymentData.url, '_blank')
 }
 
-onMounted(() => {
-    // finding institution data by slug
+// finding institution data by slug
+function getInstitutionData() {
     let values = Object.values(formDataStore.motorInsurancePremium)
     institutionData.value = (values.find(item => { return item.institution[0].slug === props.institutionSlug }))
+
+    // getting underwriting params to populate forms
     underwritingDataStore.underwritingParams = institutionData.value?.underwritingParams
 
     console.log(underwritingDataStore.underwritingParams)
 
-    institutionSlug.value = institutionData.value?.institution[0]?.slug
-    premium.value = institutionData.value.premium
+    institutionLogo.value = institutionData.value?.institution[0]?.logo //set logo for institution for child form components
+    instSlug.value = props.institutionSlug //set slug for institution for child form components
+    instId.value = props.institutionId //set id for institution for child form components
+    premium.value = institutionData.value.premium //get premium price
+    // console.log(institutionLogo.value, props.institutionId, props.institutionSlug)
+}
 
-    provide('institutionId', institutionData.value?.institution[0]?.id) //for forms to access and get institution Id
-    provide('institutionLogo', institutionData.value?.institution[0]?.logo) //for forms to access and get institution logo
-    provide('institutionSlug', institutionData.value?.institution[0]?.slug) //for forms to access and get institution logo
+watch(() => route.path, () => {
+    window.location.reload();
+    getInstitutionData()
+})
+
+provide('institutionId', instId) //for forms to access and get institution Id
+provide('institutionLogo', institutionLogo) //for forms to access and get institution logo
+provide('institutionSlug', instSlug) //for forms to access and get institution slug
+
+onMounted(() => {
+    getInstitutionData()
+
 })
 
 onUnmounted(() => {

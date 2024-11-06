@@ -227,7 +227,7 @@
                     </div>
 
                     <!-- vehicle_engine_no -->
-                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_engine_no ')">
+                    <div class="sm:col-span-3" v-if="underwritingDataStore.checkFormField('vehicle_engine_no')">
                         <label for="text" class="label">vehicle_engine_no
                         </label>
                         <div class="mt-2">

@@ -1,5 +1,5 @@
 <template>
-    <div class="rounded-2xl border py-10 p-5 pb-8 w-[350px] min-h-[450px] bg-white flex flex-col justify-between">
+    <div class="rounded-2xl border py-10 p-5 pb-8  min-h-[450px] bg-white flex flex-col justify-between">
         <div class="">
             <div class="">
                 <img :src="premium?.institution[0]?.logo" alt="" class="w-44 h-16 object-contain">

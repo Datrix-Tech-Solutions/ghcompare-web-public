@@ -286,7 +286,7 @@ async function getVehicleDetails() {
     // let brand = underwritingDataStore.underwritingData.vehicleData.vehicle_make
     if (vehicleData.value.vehicle_brand) {
         fetchingData.value = true;
-        const [make, model, body, colors] = await Promise.all([getVehicleMake(institutionId, institutionSlug, vehicleData.value.vehicle_brand), getVehicleModel(institutionId, institutionSlug, vehicleData.value.vehicle_brand), getVehicleBodyType(institutionId, institutionSlug), getVehicleColors()])
+        const [make, model, body, colors] = await Promise.all([getVehicleMake(institutionId.value, institutionSlug.value, vehicleData.value.vehicle_brand), getVehicleModel(institutionId.value, institutionSlug.value, vehicleData.value.vehicle_brand), getVehicleBodyType(institutionId.value, institutionSlug.value), getVehicleColors()])
         vehicleMake.value = make
         vehicleModel.value = model
         vehicleBodyType.value = body
