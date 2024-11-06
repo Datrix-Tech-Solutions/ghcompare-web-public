@@ -49,7 +49,7 @@ console.log(formDataStore.motorInsurancePremium)
                 <h2 class="text-4xl font-bold  text-gray-600">Compare Premiums</h2>
                 <p class="text-lg">Maximize value, minimize hassle – discover the best premium for you!</p>
             </div>
-            <div class="flex gap-5 flex-wrap lg:flex-nowrap">
+            <div class="grid gap-5 sm:grid-cols-2 min-[900px]:grid-cols-3 xl:grid-cols-4">
                 <template v-for="(value, key) in formDataStore.motorInsurancePremium " :key="key">
                     <PremiumCard :premium="value" :insurance-type="$route.params.insuranceType"
                         @paymentUrl="(url) => paymentLink = url" class="fl flex-gro]w flex-shrink" />

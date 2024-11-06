@@ -16,7 +16,7 @@
                 <!-- <img :src="institutionData?.institution[0]?.logo" alt="" class="max-w-[500px]"> -->
                 <h2 class="text-3xl font-bold text-center mb-10 text-primary mt-10"> {{
                     institutionData?.institution[0]?.name
-                    }}
+                }}
                     Underwriting Form</h2>
 
                 <div class="max-w-[800px] mx-auto">
@@ -73,7 +73,7 @@ const policyId = ref()
 const premium = ref()
 const showLoyaltyModal = ref(false)
 const showSuggested = ref(false)
-const clearTimeout = ref()
+const timeout = ref()
 
 
 async function submitData(buyerData) {
@@ -98,7 +98,7 @@ async function submitData(buyerData) {
         console.log(responseData.value)
 
         // show suggested
-        clearTimeout.value = setTimeout(() => {
+        timeout.value = setTimeout(() => {
             showSuggested.value = true
             router.push({ path: route.path, hash: '#more-institutions' })
         }, 2500)
@@ -139,7 +139,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     underwritingDataStore.$reset()
-    clearTimeout()
+    clearTimeout(timeout.value)
 })
 </script>
 
