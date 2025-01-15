@@ -12,7 +12,7 @@ export const usePaymentSocketStore = defineStore("paymentSocket", {
       // sync the list of items upon connection
       socket.on("connect", () => {
         this.connected = true;
-        console.log("connected to the socket ======>" + socket.id);
+        // console.log("connected to the socket ======>" + socket.id);
         socket.emit("get_status", {
           transaction_id,
           institution_slug,
@@ -21,7 +21,7 @@ export const usePaymentSocketStore = defineStore("paymentSocket", {
 
       // update the store when an item was created
       socket.on("response", (data) => {
-        console.log("response received:", data);
+        // console.log("response received:", data);
       });
     },
 
@@ -32,7 +32,7 @@ export const usePaymentSocketStore = defineStore("paymentSocket", {
       });
 
       socket.on("response", (data) => {
-        console.log("response received:", data);
+        // console.log("response received:", data);
         this.paymentStatus = data.data.status;
       });
     },

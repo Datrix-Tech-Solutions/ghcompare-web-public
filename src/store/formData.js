@@ -63,7 +63,7 @@ export const useFormDataStore = defineStore(
             ...motorInsuranceData.value.vehicleDetails,
           })
         ).data;
-        console.table(data);
+        // console.table(data);
         motorInsuranceDataSaved.value = { ...motorInsuranceData.value };
         motorInsurancePremium.value = data;
         gettingPremium.value = false;
@@ -113,7 +113,7 @@ export const useFormDataStore = defineStore(
         const data = (
           await star_api.post("premium/homeowners", homeInsuranceData.value)
         ).data;
-        //   console.log(data);
+        //   // console.log(data);
         // get total premium for home insurance
         homeInsurancePremium.value = data.data.TotalPremium.toFixed(2);
         gettingPremium.value = false;

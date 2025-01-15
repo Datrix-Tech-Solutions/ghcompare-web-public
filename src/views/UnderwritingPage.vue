@@ -80,22 +80,22 @@ async function submitData(buyerData) {
     let premiumData = institutionData.value
     let generatePremiumData = { ...formDataStore.motorInsuranceDataSaved.coverDetails, ...formDataStore.motorInsuranceDataSaved.vehicleDetails }
     responseData.value = await underwritingDataStore.submitUnderwritingData(premiumData, generatePremiumData, institutionData.value?.institution[0]?.id)
-    console.log(responseData.value)
+    // console.log(responseData.value)
     if (responseData.value?.data && institutionData.value.institution[0].slug !== 'enterprise' && institutionData.value.institution[0].slug !== 'loyalty') {
-        console.log(responseData.value)
+        // console.log(responseData.value)
         transactionId.value = responseData.value?.data?.paymentData?.transaction_id
         paymentLink.value = responseData.value?.data?.paymentData?.url
-        if (responseData.value?.data.state === false) {
+        if (responseData.value?.data.state === false || responseData.value?.data.Status === 'Duplicate') {
             showAlert.value = true
         }
     } else if (responseData.value?.data && institutionData.value.institution[0].slug === 'loyalty') {
-        console.log(responseData.value)
+        // console.log(responseData.value)
         policyId.value = responseData.value.policyId
         showLoyaltyModal.value = true
     }
     else if (!responseData.value) {
         toastStore.addToastMessage('danger', 'Failed', 'Something Went Wrong')
-        console.log(responseData.value)
+        // console.log(responseData.value)
 
         // show suggested
         timeout.value = setTimeout(() => {
@@ -114,13 +114,13 @@ function getInstitutionData() {
     // getting underwriting params to populate forms
     underwritingDataStore.underwritingParams = institutionData.value?.underwritingParams
 
-    console.log(underwritingDataStore.underwritingParams)
+    // console.log(underwritingDataStore.underwritingParams)
 
     institutionLogo.value = institutionData.value?.institution[0]?.logo //set logo for institution for child form components
     instSlug.value = props.institutionSlug //set slug for institution for child form components
     instId.value = props.institutionId //set id for institution for child form components
     premium.value = institutionData.value.premium //get premium price
-    // console.log(institutionLogo.value, props.institutionId, props.institutionSlug)
+    // // console.log(institutionLogo.value, props.institutionId, props.institutionSlug)
 }
 
 watch(() => route.path, () => {

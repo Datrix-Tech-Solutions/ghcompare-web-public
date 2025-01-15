@@ -20,7 +20,7 @@ const selectedForm = ref(0)
 function getInfo(data) {
     formDataStore.motorInsuranceData = { ...formDataStore.motorInsuranceData, ...data }
     selectedForm.value = selectedForm.value + 1;
-    console.log(formDataStore.motorInsuranceData)
+    // console.log(formDataStore.motorInsuranceData)
 }
 
 function previousForm() {
@@ -29,7 +29,7 @@ function previousForm() {
 
 async function submitData(data) {
     formDataStore.motorInsuranceData = { ...formDataStore.motorInsuranceData, ...data }
-    console.log('something')
+    // console.log('something')
     await formDataStore.getMotorPremium()
     //Navigate user to premium page
     if (formDataStore.success) {

@@ -116,11 +116,11 @@ const showSuccess = ref(false)
 
 watch(paymentStatus, (newStatus) => {
     if (newStatus.toLowerCase() === 'paid') {
-        console.log(underwritingDataStore.paymentSuccessData)
+        // console.log(underwritingDataStore.paymentSuccessData)
         router.push({ name: 'PaymentSuccess', params: { insuranceType: route.params.insuranceType, institutionSlug: route.params.institutionSlug, institutionId: route.params.institutionId } })
         showSuccess.value = true
     }
-    console.log(newStatus)
+    // console.log(newStatus)
 })
 
 const connect = () => {
@@ -129,15 +129,15 @@ const connect = () => {
         institution_slug: props.institutionSlug,
     });
     socket.on("response", (data) => {
-        console.log("response received:", data);
+        // console.log("response received:", data);
         paymentStatus.value = data?.data?.status;
         underwritingDataStore.paymentSuccessData = data
     });
-    console.log(props.transactionId, props.institutionSlug)
+    // console.log(props.transactionId, props.institutionSlug)
 }
 
 async function submitPayment() {
-    // console.log(paymentDetails.value)
+    // // console.log(paymentDetails.value)
     try {
         loading.value = true
         intervalId.value = setInterval(() => { connect() }, 2000)
@@ -145,12 +145,12 @@ async function submitPayment() {
         transactionId.value = data.transaction_id
         socket.connect();
         prompt.value = true
-        console.log(data)
+        // console.log(data)
     } catch (error) {
         loading.value = false
-        console.log(error)
+        // console.log(error)
     }
-    console.log(paymentDetails.value)
+    // console.log(paymentDetails.value)
 
 }
 

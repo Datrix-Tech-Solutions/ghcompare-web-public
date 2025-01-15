@@ -54,10 +54,10 @@ const router = useRouter()
 
 watch(paymentStatus, (newStatus) => {
     if (newStatus.toLowerCase() === 'paid') {
-        console.log(underwritingDataStore.paymentSuccessData)
+        // console.log(underwritingDataStore.paymentSuccessData)
         router.push({ name: 'PaymentSuccess', params: { insuranceType: route.params.insuranceType, institutionSlug: route.params.institutionSlug, institutionId: route.params.institutionId } })
     }
-    console.log(newStatus)
+    // console.log(newStatus)
 })
 
 const connect = () => {
@@ -66,11 +66,11 @@ const connect = () => {
         institution_slug: props.institutionSlug,
     });
     socket.on("response", (data) => {
-        console.log("response received:", data);
+        // console.log("response received:", data);
         paymentStatus.value = data?.data?.status;
         underwritingDataStore.paymentSuccessData = data
     });
-    console.log(props.transactionId, props.institutionSlug)
+    // console.log(props.transactionId, props.institutionSlug)
 }
 
 onMounted(() => {

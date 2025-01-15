@@ -15,7 +15,7 @@ export const socket = io(URL);
 
 socket.on("connect", () => {
   state.connected = true;
-  console.log("connected to the socket ======>" + socket.id);
+  // console.log("connected to the socket ======>" + socket.id);
   //   socket.emit("get_status", {
   //     transaction_id: "0D40i09Wg8J000",
   //     institution_slug: "phoenix",
@@ -23,12 +23,12 @@ socket.on("connect", () => {
 });
 
 // socket.on("response", (data) => {
-//   console.log("response received:", data);
+//   // console.log("response received:", data);
 // });
 
 socket.on("disconnect", () => {
   state.connected = false;
-  console.log("disconnected xxxxxxxx Disconnected");
+  // console.log("disconnected xxxxxxxx Disconnected");
 });
 
 // socket.on("foo", (...args) => {

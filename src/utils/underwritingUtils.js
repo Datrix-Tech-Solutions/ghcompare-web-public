@@ -5,7 +5,7 @@ export const getCarBrands = async () => {
     const { data } = await api.get(`/vehicle/brands`);
     return data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -27,7 +27,7 @@ export const getVehicleMake = async (id, slug, brand) => {
         return data;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -49,7 +49,7 @@ export const getVehicleModel = async (id, slug, brand) => {
     }
     // return data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -74,7 +74,7 @@ export const getVehicleBodyType = async (id, slug) => {
     // }
     // return data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -83,7 +83,7 @@ export const getVehicleColors = async () => {
     const { data } = await api.get(`/vehicle/colors`);
     return data.vehColor;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -92,7 +92,7 @@ export const getIdTypes = async () => {
     const { data } = await api.get(`/policies/id-types`);
     return data.ids;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -101,6 +101,6 @@ export const getBranches = async () => {
     const { data } = await api.get(`/institution/branches`);
     return data.data.entries;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };

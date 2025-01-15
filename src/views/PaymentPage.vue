@@ -52,7 +52,7 @@ onMounted(() => {
     // underwritingDataStore.underwritingParams = institutionData.value.underwritingParams
     paymentLink.value = institutionData.value?.paymentData?.url
 
-    // console.log(underwritingDataStore.underwritingParams)
+    // // console.log(underwritingDataStore.underwritingParams)
 
     // provide('institutionId', institutionData.value?.institution[0]?.id) //for forms to access and get institution Id
     // provide('institutionLogo', institutionData.value?.institution[0]?.logo) //for forms to access and get institution logo

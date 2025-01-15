@@ -282,7 +282,7 @@ const vehicleFuelType = ["Petrol", "Diesel", "Electricity", "Hydrogen", "Compres
 // const modelData = ref()
 
 async function getVehicleDetails() {
-    // console.log('something')
+    // // console.log('something')
     // let brand = underwritingDataStore.underwritingData.vehicleData.vehicle_make
     if (vehicleData.value.vehicle_brand) {
         fetchingData.value = true;
@@ -291,26 +291,26 @@ async function getVehicleDetails() {
         vehicleModel.value = model
         vehicleBodyType.value = body
         vehicleColors.value = colors
-        // console.log(make, model, body, colors)
+        // // console.log(make, model, body, colors)
         fetchingData.value = false
     }
 }
 
 function getModelCode() {
     const modelData = vehicleModel.value.find(item => item.name === vehicleData.value.vehicle_model)
-    // console.log(modelData, vehicleData.value.vehicle_model)
+    // // console.log(modelData, vehicleData.value.vehicle_model)
     if (modelData?.code) { vehicleData.value.model_code = modelData?.code }
 }
 
 function getBodyTypeCode() {
     const modelData = vehicleBodyType.value.find(item => item.NAME === vehicleData.value.body_type)
-    // console.log(modelData, vehicleData.value.vehicle_model)
+    // // console.log(modelData, vehicleData.value.vehicle_model)
     if (modelData?.CODE) { vehicleData.value.body_type_code = modelData?.CODE }
 }
 
 onMounted(async () => {
     // carBrands.value = await underwritingDataStore.getCarBrands()
-    // console.log(carBrands.value)
+    // // console.log(carBrands.value)
     await getVehicleDetails()
 })
 

@@ -79,24 +79,24 @@ defineProps({
             </div>
 
             <!-- Amount insured -->
-            <div class="" v-if="formData?.coverDetails?.coverType !== 'Third Party'">
+            <div class="" v-if="formData?.coverDetails?.prefered_cover !== 'Third Party'">
                 <p class="font-semibold text-lg"> Vehicle Value:</p>
                 <p>{{ formData.vehicleDetails?.vehicle_value
-                }}</p>
+                    }}</p>
             </div>
 
             <!-- year of manufacture -->
             <div class="">
                 <p class="font-semibold text-lg"> Year of Manufacture</p>
                 <p>{{ formData.vehicleDetails?.year_of_manufacture
-                }}</p>
+                    }}</p>
             </div>
 
             <!-- year of registration -->
             <div class="">
                 <p class="font-semibold text-lg"> Registration Year</p>
                 <p>{{ formData.vehicleDetails?.vehicle_reg_year
-                }}</p>
+                    }}</p>
             </div>
         </div>
     </div>

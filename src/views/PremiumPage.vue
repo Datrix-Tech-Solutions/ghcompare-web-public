@@ -17,7 +17,7 @@ const paymentLink = ref('')
  */
 const formData = formDataStore.motorInsuranceDataSaved
 
-console.log(formDataStore.motorInsurancePremium)
+// console.log(formDataStore.motorInsurancePremium)
 </script>
 
 <template>
