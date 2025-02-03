@@ -1,4 +1,5 @@
 <script setup>
+import UserProfile from './auth/UserProfile.vue'
 import { ChevronDownIcon, Bars3BottomRightIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import DropDown from './DropDown.vue'
 import MobileNav from './MobileNav.vue';
@@ -25,12 +26,12 @@ const showMobileNav = ref(false)
                     <div class="group  relative">
                         <router-link :to="{ name: link.to }" v-if="!link.dropdown"
                             class="py-1 font-semibold text-gray-600 mr- hover:text-primary transition">{{
-                    link.text }}
+                                link.text }}
                             <ChevronDownIcon class="inline w-4 h-4" v-if="link.dropdown" />
                         </router-link>
                         <span v-else
                             class="py-1 cursor-pointer font-semibold text-gray-600 mr- hover:text-primary transition">{{
-                    link.text }}
+                                link.text }}
                             <ChevronDownIcon class="inline w-4 h-4" v-if="link.dropdown" />
                         </span>
                         <!-- dropdown -->
@@ -41,13 +42,10 @@ const showMobileNav = ref(false)
                 </div>
 
                 <!-- divider -->
-                <!-- <div class="w-[2px] bg-gray-600 h-5"></div> -->
+                <div class="w-[2px] bg-gray-600 h-5"></div>
 
-                <!-- Login and sign up -->
-                <!-- <div class="buttons">
-                    <a href="#" class="button-primary mr-1">Login</a> -->
-                <!-- <a href="#" class="button-transparent">Sign up</a> -->
-                <!-- </div> -->
+                <UserProfile />
+
             </div>
 
 
