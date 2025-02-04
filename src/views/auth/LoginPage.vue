@@ -23,12 +23,11 @@
 <script setup>
 import Button from '../../components/ui/Button.vue'
 import { onUnmounted, ref } from 'vue';
-// import { useAuthStore } from '@/stores/authentication';
+import { useAuthStore } from '../../store/auth'
 import { useRouter } from 'vue-router';
-// import { Icon } from '@iconify/vue';
 
 const email = ref('');
-// const authStore = useAuthStore()
+const { sendOTP } = useAuthStore()
 const router = useRouter()
 const mess = ref('')
 const stat = ref(false)
