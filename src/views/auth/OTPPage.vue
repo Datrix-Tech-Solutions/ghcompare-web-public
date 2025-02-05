@@ -15,7 +15,7 @@
                     v-model="otp[index]" @input="onInput(index, $event)" @keydown="onKeydown(index, $event)"
                     @paste="onPaste($event)" />
             </div>
-            <Button class="w-full" @click="confirmOtp">
+            <Button class="w-full" @click="confirmOtp" :loading="authStore.loading">
                 Confirm OTP
             </Button>
             <p class="text-center mt-4 text-sm">
@@ -35,11 +35,12 @@
 import Button from '../../components/ui/Button.vue'
 import { ref, onMounted, onUnmounted } from 'vue';
 // import { useAuthStore } from '@/stores/authentication';
+import { useAuthStore } from '../../store/auth'
 import { useRouter } from 'vue-router';
 
-// const authStore = useAuthStore()
+const authStore = useAuthStore()
 const router = useRouter()
-// const mess = ref('')
+const mess = ref('')
 const stat = ref(false)
 const timeout = ref()
 const otp = ref(['', '', '', '', '', '']);
@@ -75,18 +76,21 @@ const confirmOtp = async () => {
         }, 3000)
         return;
     }
-    const { status, message } = await authStore.loginWithOTP(otp.value.join(''))
-    mess.value = message
-    stat.value = status
-    if (status) {
-        timeout.value = setTimeout(() => {
-            router.push({ name: 'StaffRequests' })
-        }, 3000)
-    } else {
-        timeout.value = setTimeout(() => {
-            mess.value = ''
-        }, 5000)
-    }
+
+    authStore.verifyOTP(otp.value.join(''))
+
+    // const { status, message } = await authStore.loginWithOTP(otp.value.join(''))
+    // mess.value = message
+    // stat.value = status
+    // if (status) {
+    //     timeout.value = setTimeout(() => {
+    //         router.push({ name: 'StaffRequests' })
+    //     }, 3000)
+    // } else {
+    //     timeout.value = setTimeout(() => {
+    //         mess.value = ''
+    //     }, 5000)
+    // }
 };
 
 const resendOtp = async () => {
@@ -123,6 +127,9 @@ const startTimer = () => {
 
 onMounted(() => {
     startTimer();
+    if (!authStore.confirmationResult) {
+        router.push({ name: "Login" })
+    }
 });
 
 onUnmounted(() => {

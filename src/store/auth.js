@@ -10,6 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
     const token = ref(null)
     const error = ref(null)
     const loading = ref(false)
+    const confirmationResult = ref(null)
     const router = useRouter()
 
     function setupRecaptcha(elementId) {
@@ -21,28 +22,37 @@ export const useAuthStore = defineStore('auth', () => {
       }
 
       async function sendOTP(elementId, phoneNumber) {
+        loading.value = true
         setupRecaptcha(elementId);
         try {
-          const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
-          window.confirmationResult = confirmationResult;
-          console.log(window.confirmationResult)
+          confirmationResult.value = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
+          console.log(confirmationResult.value)
+          loading.value = false
         //   otpSent = true;
         router.push({name: 'OTP'})
         } catch (error) {
+            loading.value = false
           console.error(error);
         }
       }
 
-      async function verifyOTP(otp) {
+      async function verifyOTP(otp, route = {name: 'LandingPage'}) {
         try {
-          const result = await window.confirmationResult.confirm(otp);
+        loading.value = true
+        console.log("this is the confirmation: ", confirmationResult.value)
+          const result = await confirmationResult.value.confirm(otp);
           user.value = result.user;
-          token.value = firebase.auth.PhoneAuthProvider.credential(window.confirmationResult.verificationId, otp)
-          console.log(user.value)
-          console.log(token.value)
+          token.value = result
+          console.log(JSON.stringify(user.value))
+          console.log(JSON.stringify(token.value))
+          loading.value = false
+          router.push(route)
         } catch (error) {
+            loading.value = false
           console.error("Invalid OTP", error);
         }
       }
+
+      return {loading, error, user, token, sendOTP, verifyOTP, confirmationResult}
   
 })
