@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber} from 'firebase/auth'
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut} from 'firebase/auth'
 
 const firebaseApp = initializeApp({
     apiKey: "AIzaSyBVYKmByNBNpqTyZbcsmKtWO2muSboTC98",
@@ -13,4 +13,4 @@ const firebaseApp = initializeApp({
 
   const auth = getAuth(firebaseApp);
 
-export { auth, RecaptchaVerifier, signInWithPhoneNumber };
+export { auth, RecaptchaVerifier, signInWithPhoneNumber, signOut };

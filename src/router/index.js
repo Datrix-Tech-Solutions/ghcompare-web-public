@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
 import LayoutView from "../views/LayoutView.vue";
+import { useAuthStore } from "../store/auth";
 
 const routes = [
   //Home page
@@ -8,12 +9,11 @@ const routes = [
   path: '/',
   name: "Layout",
   component: LayoutView,
-  redirect: 'LandingPage',
+  redirect: {name: 'LandingPage'},
   children: [
     //landing page
     {
-      path: "",
-      alias: "/home",
+      path: "/home",
       name: "LandingPage",
       component: () => import(/* webpackChunkName: "Landing" */ "../views/LandingPage.vue"),
     },
@@ -79,6 +79,8 @@ const routes = [
           /* webpackChunkName: "underwriting" */ "../views/UnderwritingPage.vue"
         ),
       props: true,
+      meta: {requiresAuth: true, pathName: "Underwriting"},
+      beforeEnter: [checkLoginStatus]
     },
   
     // Payment
@@ -97,6 +99,15 @@ const routes = [
       component: () =>
         import(/* webpackChunkName: "Payment" */ "../views/PaymentSuccess.vue"),
       props: true,
+    },
+
+    // User Account
+    {
+      path: 'user-account',
+      name: 'UserAccount',
+      component: () => import(/* webpackChunkName: "User account" */ "../views/UserAccount.vue"),
+      meta: {requiresAuth: true},
+      beforeEnter: [checkLoginStatus],
     },
   
     //display premium ( home insurance )
@@ -160,14 +171,19 @@ const routes = [
   {
     path: "/auth/login",
     name: "Login",
-    component: () => import(/* webpackChunkName: "PrivacyPolicies" */ "../views/auth/LoginPage.vue")
+    component: () => import(/* webpackChunkName: "PrivacyPolicies" */ "../views/auth/LoginPage.vue"),
+    beforeEnter: [userLoggedIn],
   },
-  //login Page
+  //otp Page
   {
     path: "/auth/otp",
     name: "OTP",
-    component: () => import(/* webpackChunkName: "PrivacyPolicies" */ "../views/auth/OTPPage.vue")
-  }
+    component: () => import(/* webpackChunkName: "PrivacyPolicies" */ "../views/auth/OTPPage.vue"),
+    beforeEnter: [userLoggedIn],
+  },
+
+  //not found
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import("../views/NotFound.vue") },
 ];
 
 const router = createRouter({
@@ -196,5 +212,22 @@ const router = createRouter({
     }
   },
 });
+
+function checkLoginStatus(to, from , next) {
+  const authStore = useAuthStore()
+  const user = authStore.user;
+  if (to.meta.requiresAuth && !user) {
+    //add query params - i.e. pathname - to login so that user can be brought back after authentication
+    next(meta.pathName ? `/login?page=${meta.pathName}` : '/login');
+  } 
+  else {
+    next();
+  }
+} 
+
+function userLoggedIn(to, from, next) {
+  const authStore = useAuthStore()
+  authStore.user ? next({name: 'UserAccount'}) : next()
+}
 
 export default router;

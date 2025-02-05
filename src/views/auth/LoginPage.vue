@@ -4,17 +4,25 @@
             <div class="flex items-center justify-center mb-8">
                 <img src="../../assets/logo.png" alt="">
             </div>
-            <!-- <p v-if="mess" class="p-2 text-center" :class="stat ? 'bg-green-400/50' : 'bg-red-400/50'">{{ mess }}</p> -->
             <form @submit.prevent="handleLogin" class="space-y-6 bg-white rounded p-8">
                 <div class="">
                     <label for="login" class="label">Enter your phone number</label>
-                    <div class="mb-4">
-                        <input type="text" class="w-full" v-model="phoneNumber" />
+                    <!-- <p v-if="authStore.error" class="p-2 text-center bg-red-400/50 mb-4">{{ authStore.error }}</p> -->
+                    <div class="mb-4 flex ">
+                        <select v-model="selectedCountryCode" class="rounded-e-none">
+                            <option v-for="country in countries" :key="country.code" :value="country.dial_code">
+                                {{ country.dial_code }}
+                            </option>
+                        </select>
+
+                        <input type="text" class="w-full rounded-s-none border-l-0" v-model="phoneNumber" />
                     </div>
                     <Button class="w-full" :loading="authStore.loading">
                         Login
                     </Button>
-                    <div :id="elementId"></div>
+
+                    <!-- recapture element -->
+                    <div :id="authStore.elementId"></div>
                 </div>
             </form>
         </div>
@@ -23,23 +31,42 @@
 
 <script setup>
 import Button from '../../components/ui/Button.vue'
-import { onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, computed } from 'vue';
 import { useAuthStore } from '../../store/auth'
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const phoneNumber = ref('');
+const selectedCountryCode = ref("+233"); // Default country code
 const authStore = useAuthStore()
 const router = useRouter()
+const route = useRoute()
 const mess = ref('')
 const stat = ref(false)
 const timeout = ref()
 const elementId = "recaptcha-container"
 
 const handleLogin = () => {
-    console.log(phoneNumber.value)
+    console.log(fullPhoneNumber.value)
 
-    authStore.sendOTP(elementId, phoneNumber.value)
+    authStore.sendOTP(fullPhoneNumber.value)
 }
+
+const fullPhoneNumber = computed(() => `${selectedCountryCode.value}${phoneNumber.value}`);
+
+onMounted(() => {
+    // if route has the page query save it in the authstore...
+    authStore.routeToNavigateTo = route.query.page ?? null
+})
+
+const countries = ref([
+    { name: "United States", code: "US", dial_code: "+1" },
+    { name: "United Kingdom", code: "GB", dial_code: "+44" },
+    { name: "Canada", code: "CA", dial_code: "+1" },
+    { name: "India", code: "IN", dial_code: "+91" },
+    { name: "Ghana", code: "GH", dial_code: "+233" },
+    { name: "Germany", code: "DE", dial_code: "+49" },
+]);
+
 
 </script>
 

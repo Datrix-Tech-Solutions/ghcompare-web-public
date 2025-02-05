@@ -18,6 +18,11 @@
             <Button class="w-full" @click="confirmOtp" :loading="authStore.loading">
                 Confirm OTP
             </Button>
+
+            <!-- recapture element -->
+            <div :id="authStore.elementId"></div>
+
+            <!-- //resend otp -->
             <p class="text-center mt-4 text-sm">
                 Didn't receive code?
                 <a href="#" :class="{ 'text-primary hover:underline': timer === 0, 'text-gray-500': timer > 0 }"
@@ -45,6 +50,7 @@ const stat = ref(false)
 const timeout = ref()
 const otp = ref(['', '', '', '', '', '']);
 const timer = ref(30);
+const resend = ref(true)
 
 const onInput = (index) => {
     if (otp.value[index].length === 1 && index < otp.value.length - 1) {
@@ -98,20 +104,9 @@ const resendOtp = async () => {
         // Logic to resend OTP
         timer.value = 30;
         startTimer();
-        const email = localStorage.getItem('OTPmail')
-        const { status, message } = await authStore.login({ email })
-        mess.value = message
-        stat.value = status
-        if (status) {
-            timeout.value = setTimeout(() => {
-                mess.value = ''
-            }, 5000)
-        } else {
-            timeout.value = setTimeout(() => {
-                mess.value = ''
-            }, 5000)
-        }
 
+        authStore.sendOTP(authStore.phoneNumber, resend.value)
+        resend.value = false
     }
 };
 
