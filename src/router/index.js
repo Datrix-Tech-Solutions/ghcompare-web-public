@@ -103,11 +103,17 @@ const routes = [
 
     // User Account
     {
-      path: 'user-account',
+      path: '/user-account',
       name: 'UserAccount',
-      component: () => import(/* webpackChunkName: "User account" */ "../views/UserAccount.vue"),
+      component: () => import(/* webpackChunkName: "User account" */ "../views/user-account/UserAccount.vue"),
       meta: {requiresAuth: true},
       beforeEnter: [checkLoginStatus],
+      redirect: {name: 'PendingProcesses'},
+      children: [
+        {path: 'pending', name: "PendingProcesses", component: () => import("../views/user-account/PendingProcesses.vue")},
+        {path: 'completed', name: "CompletedProcesses", component: () => import("../views/user-account/CompletedProcesses.vue")},
+        {path: 'claims', name: "Claims", component: () => import("../views/user-account/Claims.vue")},
+      ]
     },
   
     //display premium ( home insurance )

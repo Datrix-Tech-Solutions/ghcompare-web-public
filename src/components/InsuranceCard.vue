@@ -19,10 +19,10 @@ defineProps({
 </script>
 
 <template>
-    <div class="group border rounded p-5 v-width hover:outline-1 hover:outline hover:outline-primary mx-auto sm:mx-0">
+    <div class="group border rounded p-5 v-width hover:shadow mx-auto sm:mx-0">
         <!-- icon image  -->
         <img :src="getImageUrl(image)" alt=""
-            class="w-28 mx-auto grayscale-[70%] group-hover:grayscale-[10%] transition-all">
+            class="w-28 mx-auto grayscale-[70%] group-hover:grayscale-[10%] transition">
         <!-- text -->
         <h2 class="text-2xl font-bold my-5">{{ text }}</h2>
         <!-- button link -->
