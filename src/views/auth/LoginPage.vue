@@ -1,9 +1,14 @@
 <template>
     <div class="flex items-center justify-center min-h-screen bg-[#f0f3f5] max-width">
         <div class="w-full max-w-sm">
-            <div class="flex items-center justify-center mb-8">
-                <img src="../../assets/logo.png" alt="">
+            <div class="flex items-center justify-center mb-4">
+                <router-link :to="{ name: 'LandingPage' }">
+                    <img src="../../assets/logo.png" alt="">
+                </router-link>
             </div>
+
+            <p v-if="route.query.page" class="text-center text-xl font-semibold mb-4">Please login to continue</p>
+
             <form @submit.prevent="handleLogin" class="space-y-6 bg-white rounded p-8">
                 <div class="">
                     <label for="login" class="label">Enter your phone number</label>
@@ -56,6 +61,7 @@ const fullPhoneNumber = computed(() => `${selectedCountryCode.value}${phoneNumbe
 onMounted(() => {
     // if route has the page query save it in the authstore...
     authStore.routeToNavigateTo = route.query.page ?? null
+    console.log(authStore.routeToNavigateTo)
 })
 
 const countries = ref([

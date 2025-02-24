@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuthStore } from "../store/auth";
 
 const base = "http://api.starassurance.com/api/";
 const baseUrl = "https://api.ghcompare.com/";
@@ -11,6 +12,22 @@ export const api = axios.create({
     // 'Access-Control-Allow-Origin': 'http://localhost:5173'
   },
 });
+
+// Add a request interceptor
+api.interceptors.request.use(
+  async (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = token;
+    }
+    console.log("Api request intercepted");
+    return config;
+  },
+  (error) => {
+    // Do something with request error
+    return Promise.reject(error);
+  },
+);
 
 export const star_api = axios.create({
   base,

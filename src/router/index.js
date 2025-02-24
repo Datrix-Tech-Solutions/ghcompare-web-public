@@ -224,7 +224,7 @@ function checkLoginStatus(to, from , next) {
   const user = authStore.user;
   if (to.meta.requiresAuth && !user) {
     //add query params - i.e. pathname - to login so that user can be brought back after authentication
-    next(meta.pathName ? `/login?page=${meta.pathName}` : '/login');
+    next({name: "Login", query: {page: to.path}});
   } 
   else {
     next();

@@ -10,9 +10,14 @@ function getUserFromLocalStorage() {
   return user ? JSON.parse(user) : null;
 }
 
+function getTokenFromLocalStorage() {
+  const token = localStorage.getItem("token");
+  return token ? token : null;
+}
+
 export const useAuthStore = defineStore("auth", () => {
   const user = ref(getUserFromLocalStorage());
-  const token = ref(null);
+  const token = ref(getTokenFromLocalStorage());
   const error = ref(null);
   const loading = ref(false);
   const confirmationResult = ref(null);
@@ -69,15 +74,14 @@ export const useAuthStore = defineStore("auth", () => {
       const result = await confirmationResult.value.confirm(otp);
       //assign user and token
       user.value = result.user;
-      token.value = result;
       // save user in local storage
       localStorage.setItem("user", JSON.stringify(user.value));
-      loading.value = false;
-
+      
       console.log(JSON.stringify(user.value))
-      // direct to home page or specified path...
-      routeToNavigateTo.value ? router.push(routeToNavigateTo.value) : router.push("/");
-      routeToNavigateTo.value = null
+      // push user data to server to get token
+      await getTokenFromServer(user.value);
+
+      loading.value = false;
     } catch (err) {
       loading.value = false;
       console.error("Invalid OTP", err);
@@ -85,10 +89,31 @@ export const useAuthStore = defineStore("auth", () => {
     }
   }
 
+  async function getTokenFromServer(userData) {
+    try {
+      loading.value = true
+      const response = await api.post("/auth/login", userData);
+      token.value = response.data.token;
+      localStorage.setItem("token", token.value);
+      console.log("Token: ", token.value);
+      loading.value = false;
+      // direct to home page or specified path...
+      routeToNavigateTo.value ? router.push(routeToNavigateTo.value) : router.push("/");
+      routeToNavigateTo.value = null
+    } catch (err) {
+      logout();
+      loading.value = false;
+      toast.addToastMessage('danger', 'Failed', err.message)
+    }
+  }
+
   async function logout() {
     await signOut(auth)
     localStorage.removeItem("user")
+    localStorage.removeItem("token")
     user.value = null
+    token.value = null
+    router.go(0) //refresh page
   }
 
   return {
