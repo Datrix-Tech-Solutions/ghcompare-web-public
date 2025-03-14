@@ -6,9 +6,9 @@
                 <h3 class="text-2xl font-semibold mt-2 text-primary">{{ premium?.institution[0]?.name }}</h3>
             </div>
 
-            <hr class="my-4">
+            <hr class="my-4" v-if="premium?.offers">
 
-            <div class="">
+            <div class="" v-if="premium?.offers">
                 <template v-for="(offer, index) in premium?.offers">
                     <p>
                         <CheckBadgeIcon class="inline w-5 relative bottom-0.5 text-primary" /> {{ offer.offer }}.

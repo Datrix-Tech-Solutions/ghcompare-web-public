@@ -13,18 +13,24 @@
 </template>
 
 <script setup>
-import { watch } from 'vue';
+import { watch, onMounted } from 'vue';
 import { useAuthStore } from '../../store/auth';
 import { useRouter } from 'vue-router';
+import { useTransactionStore } from '../../store/transaction'
 import SidebarComponent from '../../components/user-account/SidebarComponent.vue';
 
 const authStore = useAuthStore()
+const transactionStore = useTransactionStore()
 const router = useRouter()
 
 watch(() => authStore.user, (value) => {
     if (!value) {
         router.push("/")
     }
+})
+
+onMounted(() => {
+    transactionStore.getTransactions()
 })
 </script>
 

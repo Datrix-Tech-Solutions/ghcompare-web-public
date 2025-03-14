@@ -1,5 +1,4 @@
 <script setup>
-// @ts-check
 
 import Partners from '../components/Partners.vue';
 import FormSummary from '../components/motorinsurance/FormSummary.vue';
@@ -50,9 +49,10 @@ const formData = formDataStore.motorInsuranceDataSaved
                 <p class="text-lg">Maximize value, minimize hassle – discover the best premium for you!</p>
             </div>
             <div class="grid gap-5 sm:grid-cols-2 min-[900px]:grid-cols-3 xl:grid-cols-4">
-                <template v-for="(value, key) in formDataStore.motorInsurancePremium " :key="key">
-                    <PremiumCard :premium="value" :insurance-type="$route.params.insuranceType"
-                        @paymentUrl="(url) => paymentLink = url" class="fl flex-gro]w flex-shrink" />
+                <template v-for="(value, key) in formDataStore.motorInsurancePremium" :key="key">
+                    <PremiumCard v-if="key !== 'premiumId'" :premium="value"
+                        :insurance-type="$route.params.insuranceType" @paymentUrl="(url) => paymentLink = url"
+                        class="fl flex-gro]w flex-shrink" />
                 </template>
             </div>
             <!-- {{ store.motorInsurancePremium }} -->

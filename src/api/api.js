@@ -23,10 +23,21 @@ api.interceptors.request.use(
     console.log("Api request intercepted");
     return config;
   },
+  (error) => Promise.reject(error)
+);
+
+// Add a response interceptor
+api.interceptors.response.use(
+  (response) => response, // Pass through successful responses
   (error) => {
-    // Do something with request error
-    return Promise.reject(error);
-  },
+    if (error.response && error.response.status === 401) {
+      // Handle 401 Unauthorized
+      useAuthStore().logout();
+
+      return Promise.reject(error); // Stop further execution
+    }
+    return Promise.reject(error); // Handle other errors
+  }
 );
 
 export const star_api = axios.create({

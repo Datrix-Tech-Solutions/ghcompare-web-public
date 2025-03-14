@@ -79,7 +79,8 @@ const timeout = ref()
 async function submitData(buyerData) {
     let premiumData = institutionData.value
     let generatePremiumData = { ...formDataStore.motorInsuranceDataSaved.coverDetails, ...formDataStore.motorInsuranceDataSaved.vehicleDetails }
-    responseData.value = await underwritingDataStore.submitUnderwritingData(premiumData, generatePremiumData, institutionData.value?.institution[0]?.id)
+    // post data to backend
+    responseData.value = await underwritingDataStore.submitUnderwritingData(premiumData, generatePremiumData, formDataStore.motorInsurancePremium?.premiumId, institutionData.value?.institution[0]?.id)
     // console.log(responseData.value)
     if (responseData.value?.data && institutionData.value.institution[0].slug !== 'enterprise' && institutionData.value.institution[0].slug !== 'loyalty') {
         // console.log(responseData.value)

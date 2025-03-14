@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { api, star_api } from "../api/api";
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 import { useFormDataStore } from "../store/formData";
 
 const formDataStore = useFormDataStore();
@@ -109,7 +109,8 @@ export const useUnderwritingDataStore = defineStore(
     const submitUnderwritingData = async (
       premiumData,
       generatePremiumData,
-      id
+      premiumId,
+      institutionId
     ) => {
       // getting user data in one object
       let ddata = {
@@ -137,7 +138,7 @@ export const useUnderwritingDataStore = defineStore(
       try {
         processing.value = true;
         const { data } = await api.post(
-          `motor/underwriting/${id}`,
+          `motor/underwriting/${premiumId}/${institutionId}`,
           underwriting
         );
         // // console.log(underwriting);
