@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { api } from "../api/api";
 import { useToastStore } from "./toast";
 
@@ -23,6 +23,24 @@ export const useTransactionStore = defineStore("transactions", () => {
     }
   }
 
+  const completedTransactions = computed(() => {
+    return transactions.value.filter(
+      (item) => item.premium.status === "completed_underwriting"
+    );
+  });
+
+  const pendingTransactions = computed(() => {
+    return transactions.value.filter(
+      (item) => item.premium.status === "pending_underwriting"
+    );
+  });
+
+  const claims = computed(() => {
+    return transactions.value.filter(
+      (item) => item.premium.status === "claims"
+    );
+  });
+
   async function getTransactionById(id) {
     try {
       loading.value = true;
@@ -36,5 +54,14 @@ export const useTransactionStore = defineStore("transactions", () => {
     }
   }
 
-  return { getTransactions, getTransactionById };
+  return {
+    getTransactions,
+    getTransactionById,
+    pendingTransactions,
+    completedTransactions,
+    claims,
+    loading,
+    transactions,
+    error,
+  };
 });

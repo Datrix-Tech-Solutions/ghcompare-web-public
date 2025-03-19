@@ -1,11 +1,11 @@
 <template>
     <div class="h-screen max-width py-20">
-        <div class="flex gap-20 items-start">
-            <div class="w-[350px] shrink-0">
+        <div class="flex mlg:flex-row flex-col gap-10 xl:gap-20 items-start">
+            <div class="mlg:w-[350px] mlg:shrink-0">
                 <SidebarComponent />
             </div>
 
-            <div class="w-full">
+            <div class="w-full mlg:w-[calc(100%-390px)] xl:w-[calc(100%-430px)]">
                 <router-view></router-view>
             </div>
         </div>
