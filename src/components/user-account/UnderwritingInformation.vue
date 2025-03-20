@@ -5,7 +5,9 @@
         <!-- status and institution -->
         <div class="">
             <h2 class="text-xl font-semibold  ">Institution: {{ underwriting?.institution?.name }}</h2>
-            <p class="">Status: {{ underwriting?.status }}</p>
+            <p class="">Status:
+                <BadgeComponent :status="underwriting?.status" />
+            </p>
         </div>
 
         <hr class="my-5">
@@ -34,6 +36,7 @@
 </template>
 
 <script setup>
+import BadgeComponent from '../ui/BadgeComponent.vue';
 import Button from '../ui/Button.vue';
 
 const { underwriting } = defineProps({
