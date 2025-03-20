@@ -16,7 +16,9 @@
                     <td class="p-3 border text-center border-gray-300">{{ transaction?.premium?.underwriting.length }}
                     </td>
                     <td class="p-3 border border-gray-300 text-center">
-                        <button class="button-primary py-2">View</button>
+                        <router-link :to="{ name: 'ProcessDetails', params: { transactionStatus, id: transaction.id } }">
+                            <button class="button-primary py-2">View</button>
+                        </router-link>
                     </td>
                 </tr>
             </tbody>
@@ -25,7 +27,17 @@
 </template>
 
 <script setup>
-const { transactions } = defineProps(['transactions'])
+const { transactions, transactionStatus } = defineProps({
+    transactionStatus: {
+        type: String,
+        required: true,
+    },
+    transactions: {
+        type: Object,
+        required: true,
+    }
+
+})
 </script>
 
 <style scoped></style>

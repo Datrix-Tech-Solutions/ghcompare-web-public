@@ -37,7 +37,7 @@ const formData = formDataStore.motorInsuranceDataSaved
                 <!-- Form summary -->
 
                 <div class=" w-full">
-                    <FormSummary :form-data="formData" />
+                    <FormSummary :form-data="formData" :edit="true" />
                 </div>
 
             </div>

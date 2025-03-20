@@ -3,10 +3,12 @@ import { PencilSquareIcon } from '@heroicons/vue/24/outline';
 import dayjs from 'dayjs';
 
 //props
-defineProps({
+const props = defineProps({
     formData: {
-        type: Object
-    }
+        type: Object,
+        required: true
+    },
+    edit: Boolean
 })
 </script>
 
@@ -20,8 +22,8 @@ defineProps({
             <h3 class="text-xl font-semibold text-primary mb-3">Cover Details</h3>
 
             <!-- edit cover details -->
-            <router-link :to="{ name: 'MotorInsurance', query: { form: 'cover_details', edit: true } }"
-                title="Edit details">
+            <router-link v-if="props.edit"
+                :to="{ name: 'MotorInsurance', query: { form: 'cover_details', edit: true } }" title="Edit details">
                 <PencilSquareIcon class="w-5 h-5 inline text-primary cursor-pointer" />
             </router-link>
         </div>
@@ -53,8 +55,8 @@ defineProps({
             <h3 class="text-xl font-semibold text-primary mb-3">Vehicle Details</h3>
 
             <!-- edit vehicle details -->
-            <router-link :to="{ name: 'MotorInsurance', query: { form: 'vehicle_details', edit: true, } }"
-                title="Edit details">
+            <router-link v-if="props.edit"
+                :to="{ name: 'MotorInsurance', query: { form: 'vehicle_details', edit: true, } }" title="Edit details">
                 <PencilSquareIcon class="w-5 h-5 inline text-primary cursor-pointer" />
             </router-link>
         </div>
@@ -69,7 +71,7 @@ defineProps({
             <!-- risk type -->
             <div class="">
                 <p class="font-semibold text-lg"> Vehicle Class:</p>
-                <p class="!capitalize">{{ formData.vehicleDetails?.vehicle_class.toLowerCase() }}</p>
+                <p class="!capitalize">{{ formData.vehicleDetails?.vehicle_class?.toLowerCase() }}</p>
             </div>
 
             <!-- number of seats -->
