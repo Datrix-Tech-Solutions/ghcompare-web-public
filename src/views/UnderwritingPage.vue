@@ -16,7 +16,7 @@
                 <!-- <img :src="institutionData?.institution[0]?.logo" alt="" class="max-w-[500px]"> -->
                 <h2 class="text-3xl font-bold text-center mb-10 text-primary mt-10"> {{
                     institutionData?.institution[0]?.name
-                }}
+                    }}
                     Underwriting Form</h2>
 
                 <div class="max-w-[800px] mx-auto">
@@ -135,7 +135,7 @@ provide('institutionSlug', instSlug) //for forms to access and get institution s
 
 onMounted(() => {
     getInstitutionData()
-
+    console.log(formDataStore.motorInsurancePremium)
 })
 
 onUnmounted(() => {

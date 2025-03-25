@@ -23,7 +23,10 @@ const statusColors = {
 };
 
 const badgeClass = computed(() => {
-    return statusColors[status?.toLowerCase()] || "bg-gray-200 text-gray-700 border border-gray-300";
+    const matchedKey = Object.keys(statusColors).find((key) =>
+        status.toLowerCase().includes(key)
+    );
+    return statusColors[matchedKey] || "bg-gray-200 text-gray-700 border border-gray-300";
 });
 
 const formattedStatus = computed(() => {
