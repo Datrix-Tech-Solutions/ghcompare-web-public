@@ -5,8 +5,10 @@
         <!-- status and institution -->
         <div class="">
             <h2 class="text-xl font-semibold  ">Institution: {{ underwriting?.institution?.name }}</h2>
-            <p class="">Status:
+            <p class="my-1">Status:
                 <BadgeComponent :status="underwriting?.status" />
+            </p>
+            <p v-if="underwriting?.status === 'failed'" class="text-sm">Message: {{ underwriting?.response?.message }}
             </p>
         </div>
 
@@ -30,6 +32,9 @@
         <div class="flex flex-end">
             <Button v-if="underwriting?.status === 'failed'">
                 <span>Retry</span>
+            </Button>
+            <Button v-if="underwriting?.status === 'payment_pending'">
+                <span>Make payment</span>
             </Button>
         </div>
     </div>

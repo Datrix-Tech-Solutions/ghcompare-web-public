@@ -16,7 +16,8 @@
                     <td class="p-3 border text-center border-gray-300">{{ transaction?.premium?.underwriting.length }}
                     </td>
                     <td class="p-3 border border-gray-300 text-center">
-                        <router-link :to="{ name: 'ProcessDetails', params: { transactionStatus, id: transaction.id } }">
+                        <router-link
+                            :to="{ name: 'ProcessDetails', params: { transactionStatus, id: transaction.id } }">
                             <button class="button-primary py-2">View</button>
                         </router-link>
                     </td>
@@ -27,6 +28,7 @@
 </template>
 
 <script setup>
+import BadgeComponent from '../ui/BadgeComponent.vue';
 const { transactions, transactionStatus } = defineProps({
     transactionStatus: {
         type: String,
