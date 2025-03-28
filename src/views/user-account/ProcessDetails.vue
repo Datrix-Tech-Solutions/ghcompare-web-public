@@ -50,19 +50,42 @@ import { useRoute } from 'vue-router';
 import UnderwritingInformation from '../../components/user-account/UnderwritingInformation.vue';
 import BadgeComponent from '../../components/ui/BadgeComponent.vue';
 import PremiumCard from '../../components/PremiumCard.vue';
+import { useFormDataStore } from '../../store/formData';
 
 const transactionStore = useTransactionStore()
 const transaction = ref({})
 const formData = ref({ coverDetails: {}, vehicleDetails: {} })
 const route = useRoute()
+const formDataStore = useFormDataStore()
 
 
 onMounted(async () => {
     transaction.value = (await transactionStore.getTransactionById(route.params?.id))[0]
     console.log(transaction.value)
-    formData.value.coverDetails = { ...transaction.value.premium.request }
-    formData.value.vehicleDetails = { ...transaction.value.premium.request }
+    formData.value.coverDetails = {
+        prefered_cover: transaction.value?.premium?.request.prefered_cover,
+        period_cover: transaction.value?.premium?.request.period_cover,
+        start_date: transaction.value?.premium?.request.start_date,
+    }
+    formData.value.vehicleDetails = {
+        vehicle_use: transaction.value?.premium?.request.vehicle_use,
+        vehicle_class: transaction.value?.premium?.request.vehicle_class,
+        number_of_seats: transaction.value?.premium?.request.number_of_seats,
+        vehicle_reg_year: transaction.value?.premium?.request.vehicle_reg_year,
+        year_of_manufacture: transaction.value?.premium?.request.year_of_manufacture,
+        vehicle_value: transaction.value?.premium?.request.vehicle_value,
+    }
     console.log(formData.value)
+
+    // If underwriting isn't done, set data needed for underwriting forms
+    if (transaction.value?.premium?.underwriting?.length === 0) {
+        formDataStore.motorInsuranceDataSaved = formData.value
+        formDataStore.motorInsurancePremium = { ...transaction.value?.premium?.response, premiumId: transaction.value?.id }
+
+        console.log(formDataStore.motorInsuranceDataSaved)
+        console.log(formDataStore.motorInsurancePremium)
+        console.log('shittttt')
+    }
 
 })
 </script>
