@@ -44,6 +44,8 @@ const props = defineProps({
     paymentLink: String,
     institutionSlug: String,
     transactionId: String,
+    insuranceType: String,
+    institutionId: Number,
 })
 
 const underwritingDataStore = useUnderwritingDataStore()
@@ -55,7 +57,7 @@ const router = useRouter()
 watch(paymentStatus, (newStatus) => {
     if (newStatus.toLowerCase() === 'paid') {
         // console.log(underwritingDataStore.paymentSuccessData)
-        router.push({ name: 'PaymentSuccess', params: { insuranceType: route.params.insuranceType, institutionSlug: route.params.institutionSlug, institutionId: route.params.institutionId } })
+        router.push({ name: 'PaymentSuccess', params: { insuranceType: props.insuranceType, institutionSlug: props.institutionSlug, institutionId: props.institutionId } })
     }
     // console.log(newStatus)
 })

@@ -73,6 +73,8 @@ const props = defineProps({
     amount: String,
     institutionSlug: String,
     policyId: String,
+    insuranceType: String,
+    institutionId: Number,
 })
 
 const momoOptions = [
@@ -117,7 +119,7 @@ const showSuccess = ref(false)
 watch(paymentStatus, (newStatus) => {
     if (newStatus.toLowerCase() === 'paid') {
         // console.log(underwritingDataStore.paymentSuccessData)
-        router.push({ name: 'PaymentSuccess', params: { insuranceType: route.params.insuranceType, institutionSlug: route.params.institutionSlug, institutionId: route.params.institutionId } })
+        router.push({ name: 'PaymentSuccess', params: { insuranceType: props.insuranceType, institutionSlug: props.institutionSlug, institutionId: props.institutionId } })
         showSuccess.value = true
     }
     // console.log(newStatus)

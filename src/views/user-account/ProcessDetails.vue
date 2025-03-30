@@ -1,6 +1,13 @@
 <template>
     <div class="max-width py-10 h-screen" v-if="transactionStore.loading">Loading...</div>
-    <main class="max-width py-10" v-else>
+    <main class="max-width py-5 pb-10" v-else>
+        <!-- Back -->
+        <div class="mb-5">
+            <!-- Back -->
+            <GoBack :link="{ name: 'UserAccount' }" />
+        </div>
+
+
         <h2 class="text-2xl font-bold ">Transaction: {{ transaction?.id }}</h2>
         <p class="">Status:
             <BadgeComponent v-if="transaction?.id" :status="transaction?.premium?.status" />
@@ -23,7 +30,7 @@
 
         <div class="space-y-4">
             <div class="" v-for="underwriting in transaction?.premium?.underwriting" :key="underwriting.id">
-                <UnderwritingInformation :underwriting="underwriting" />
+                <UnderwritingInformation :underwriting="underwriting" :premium-id="transaction?.id" />
             </div>
             <div v-if="transaction?.premium?.underwriting?.length === 0" class="">
                 <p class="text-gray-500 mb-3">No underwriting data to display. Choose an institution and complete
@@ -50,6 +57,7 @@ import { useRoute } from 'vue-router';
 import UnderwritingInformation from '../../components/user-account/UnderwritingInformation.vue';
 import BadgeComponent from '../../components/ui/BadgeComponent.vue';
 import PremiumCard from '../../components/PremiumCard.vue';
+import GoBack from '../../components/ui/GoBack.vue';
 import { useFormDataStore } from '../../store/formData';
 
 const transactionStore = useTransactionStore()

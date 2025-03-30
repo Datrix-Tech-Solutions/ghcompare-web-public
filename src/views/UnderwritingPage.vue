@@ -5,7 +5,8 @@
 
         <!-- Payment -->
         <PaymentModal :paymentLink="paymentLink" :institution-slug="institutionSlug" :transaction-id="transactionId"
-            v-if="paymentLink" @close-modal="() => { paymentLink = '' }" />
+            insurance-type="motor-insurance" :institutionId="institutionId" v-if="paymentLink"
+            @close-modal="() => { paymentLink = '' }" />
 
         <LoyaltyPaymentModal v-if="showLoyaltyModal" :institution-slug="institutionSlug" :amount="premium"
             :policy-id="policyId" @close-modal="() => { showLoyaltyModal = false }" />
@@ -102,7 +103,8 @@ async function submitData(buyerData) {
         timeout.value = setTimeout(() => {
             showSuggested.value = true
             router.push({ path: route.path, hash: '#more-institutions' })
-        }, 2500)
+            console.log(formDataStore.motorInsurancePremium)
+        }, 2000)
     }
     // window.open(data?.data?.paymentData.url, '_blank')
 }

@@ -10,9 +10,12 @@
         </div>
         <div class="grid gap-5 sm:grid-cols-2 min-[900px]:grid-cols-3 max-w-6xl mx-auto justify-cnter">
             <template v-for="(value, key) in formDataStore.motorInsurancePremium" :key="key">
-                <PremiumCard :premium="value" :insurance-type="$route.params.insuranceType"
-                    v-if="value?.institution[0]?.slug !== currentInstitutionSlug"
-                    @paymentUrl="(url) => paymentLink = url" class="fl flex-gro]w flex-shrink" />
+                <template v-if="key !== 'premiumId'">
+                    <PremiumCard :premium="value" :insurance-type="$route.params.insuranceType"
+                        v-if="value?.institution[0]?.slug !== currentInstitutionSlug"
+                        @paymentUrl="(url) => paymentLink = url" class="fl flex-gro]w flex-shrink" />
+                </template>
+
             </template>
         </div>
     </div>
