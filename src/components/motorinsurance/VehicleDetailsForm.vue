@@ -4,7 +4,7 @@ import { ArrowLeftIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline
 import { privateUse, commercialUse } from '../../data/car_data';
 import { helpInfo } from '../../data/help_data'
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useFormDataStore } from '../../store/formData'
 import Loader from '../ui/Loader.vue';
 import { getYearsArray } from '../../utils/utils';
@@ -40,6 +40,11 @@ const info = ref(helpInfo.vehicleDetailsHelp)
 const showVehicleUseInfo = ref(false)
 
 const yearsRange = getYearsArray()
+
+// function to show only years above year of manufacture
+const availableYears = computed(() => {
+    return yearsRange.filter(year => year >= vehicleData.value.year_of_manufacture)
+})
 
 
 function updateVehicleUse(vehicleUse) {
@@ -111,18 +116,6 @@ function updateVehicleUse(vehicleUse) {
             <hr class="my-8">
 
             <div class="flex gap-5">
-                <!-- Number of seats -->
-                <div class="w-1/2">
-                    <div class="flex justify-between">
-                        <label class="label">Number of Seats</label>
-                        <Information>
-                            {{ info.seats }}
-                        </Information>
-                    </div>
-                    <input type="number" name="seats" id="seats" class="w-full" autocomplete="seats" required
-                        v-model="vehicleData.number_of_seats" placeholder="e.g. 12">
-                </div>
-
                 <!-- Year of Manufacture -->
                 <div class="w-1/2">
                     <div class="flex justify-between">
@@ -141,26 +134,39 @@ function updateVehicleUse(vehicleUse) {
 
                 </div>
 
+
+                <!-- Vehicle Registration Year -->
+                <div class="w-1/2">
+                    <div class="flex justify-between">
+                        <label class="label">Vehicle Registration Year</label>
+                    </div>
+
+                    <select name="seats" id="seats" v-model="vehicleData.vehicle_reg_year" class="w-full" required
+                        :disabled="vehicleData.year_of_manufacture == ''"
+                        :class="{ 'text-[#aaaaaa]': vehicleData.vehicle_reg_year == '', 'cursor-not-allowed': vehicleData.year_of_manufacture == '' }">
+                        <option disabled value="">Select registration year</option>
+                        <template v-for="year in availableYears" :key="year">
+                            <option> {{ year }}</option>
+                        </template>
+                    </select>
+                </div>
+
             </div>
 
             <hr class="my-8">
 
             <div class="flex gap-5">
 
-                <!-- Vehicle Registration Year -->
+                <!-- Number of seats -->
                 <div class="w-1/2">
                     <div class="flex justify-between">
-                        <label class="label">Vehicle Registration Year</label>
-
+                        <label class="label">Number of Seats</label>
+                        <Information>
+                            {{ info.seats }}
+                        </Information>
                     </div>
-
-                    <select name="seats" id="seats" v-model="vehicleData.vehicle_reg_year" class="w-full" required
-                        :class="{ 'text-[#aaaaaa]': vehicleData.vehicle_reg_year == '' }">
-                        <option disabled value="">Select registration year</option>
-                        <template v-for="year in yearsRange" :key="year">
-                            <option> {{ year }}</option>
-                        </template>
-                    </select>
+                    <input type="number" name="seats" id="seats" class="w-full" autocomplete="seats" required
+                        v-model="vehicleData.number_of_seats" placeholder="e.g. 12">
                 </div>
 
                 <!-- Amount insured -->

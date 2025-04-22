@@ -29,11 +29,11 @@ const showInfo = ref(false)
         <div class="absolute sm:w-80 w-[75vw] z-10 top-full right-0" v-if="showInfo">
             <div class=" rounded p-3 w-full glass text-sm">
                 <slot></slot>
-                <div class="text-right">
+                <!-- <div class="text-right">
                     <router-link :to="{ name: props.linkName, hash: props.linkHash }"
                         class=" text-primary hover:underline">Learn
                         More</router-link>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

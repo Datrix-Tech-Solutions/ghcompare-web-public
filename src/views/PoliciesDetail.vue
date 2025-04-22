@@ -17,14 +17,14 @@ import { motorInsurance } from '../data/insurance_policies_data'
         <nav class="mb-14 sticky bg-background top-[76px]  z-20">
             <div class="padding py-3 ">
                 <ul class="flex justify-center gap-1">
-                    <router-link :to="{ name: 'HomeDetail' }">
-                        <li class="button-transparent cursor-pointer">Home</li>
+                    <router-link :to="{ name: 'HomeDetail' }" class="button-transparent cursor-pointer">
+                        <li>Home</li>
                     </router-link>
-                    <router-link :to="{ name: 'MotorDetail' }">
-                        <li class="button-transparent cursor-pointer">Motor</li>
+                    <router-link :to="{ name: 'MotorDetail' }" class="button-transparent cursor-pointer">
+                        <li>Motor</li>
                     </router-link>
-                    <router-link :to="{ name: 'TravelDetail' }">
-                        <li class="button-transparent cursor-pointer">Travel</li>
+                    <router-link :to="{ name: 'TravelDetail' }" class="button-transparent cursor-pointer">
+                        <li>Travel</li>
                     </router-link>
                 </ul>
             </div>
@@ -41,6 +41,6 @@ import { motorInsurance } from '../data/insurance_policies_data'
 
 <style scoped>
 .router-link-exact-active {
-    @apply bg-primary text-white rounded-md
+    @apply bg-primary !text-white rounded-md;
 }
 </style>
