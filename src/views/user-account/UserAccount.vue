@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen max-width py-20">
+    <div class="min-h-screen max-width py-20">
         <div class="flex mlg:flex-row flex-col gap-10 xl:gap-14 items-start">
             <div class="mlg:w-[350px] mlg:shrink-0">
                 <SidebarComponent />

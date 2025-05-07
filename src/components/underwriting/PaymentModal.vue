@@ -63,6 +63,7 @@ watch(paymentStatus, (newStatus) => {
 })
 
 const connect = () => {
+    console.log("connected to socket")
     socket.emit("get_status", {
         transaction_id: props.transactionId,
         institution_slug: props.institutionSlug,
