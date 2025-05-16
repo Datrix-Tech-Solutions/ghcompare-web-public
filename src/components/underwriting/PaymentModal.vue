@@ -64,12 +64,13 @@ watch(paymentStatus, (newStatus) => {
 
 const connect = () => {
     console.log("connected to socket")
+    console.log(props.transactionId, props.institutionSlug)
     socket.emit("get_status", {
         transaction_id: props.transactionId,
         institution_slug: props.institutionSlug,
     });
     socket.on("response", (data) => {
-        // console.log("response received:", data);
+        console.log("response received:", data);
         paymentStatus.value = data?.data?.status;
         underwritingDataStore.paymentSuccessData = data
     });

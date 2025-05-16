@@ -23,7 +23,7 @@
                     <BadgeComponent :status="underwriting?.status" />
                 </p>
                 <p v-if="underwriting?.status === 'failed'" class="text-sm">Message: {{ underwriting?.response?.message
-                    }}
+                }}
                 </p>
                 <p v-if="underwriting?.status === 'payment_pending'" class="mt-3">Amount Due: <span
                         class="text-primary font-bold">GHS{{
@@ -89,7 +89,7 @@ const showLoyaltyModal = ref(false)
 const paymentLink = ref('')
 const institutionId = ref(underwriting?.institution?.id)
 const institutionSlug = ref(underwriting?.institution?.slug)
-const transactionId = ref()
+const transactionId = ref(underwriting?.payment[0]?.transaction_id)
 const policyId = ref()
 const premium = ref(underwriting?.payment[0]?.amount)
 
