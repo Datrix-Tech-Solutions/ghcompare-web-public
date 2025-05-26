@@ -23,7 +23,7 @@
                     <BadgeComponent :status="underwriting?.status" />
                 </p>
                 <p v-if="underwriting?.status === 'failed'" class="text-sm">Message: {{ underwriting?.response?.message
-                }}
+                    }}
                 </p>
                 <p v-if="underwriting?.status === 'payment_pending'" class="mt-3">Amount Due: <span
                         class="text-primary font-bold">GHS{{
@@ -71,7 +71,7 @@
                             </a>
 
                             <a :href="doc?.link" target="_blank"
-                                class="mt-2 inline-block underline text-blue-400 hover:text-blue-600 visited:text-purple-600">Download
+                                class="mt-2 inline-block underline text-blue-400 hover:text-blue-600 visited:text-purple-600">View
                                 document</a>
                         </div>
                     </template>
