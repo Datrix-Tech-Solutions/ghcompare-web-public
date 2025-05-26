@@ -57,12 +57,32 @@
                     <span>Make payment</span>
                 </Button>
             </div>
+
+            <!-- if completed show all documents -->
+            <div class="" v-if="underwriting?.status === 'completed'">
+                <h3 class="text-xl font-semibold text-primary mb-3">Policy documents</h3>
+                <!-- files -->
+                <div class="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 gap-10 max-w-[800px]  mt-10">
+                    <template v-for="doc in documents" :key="doc?.type">
+                        <div class="text-center">
+                            <span class="text-xl inline-block mb-3">{{ doc?.type }}</span>
+                            <a :href="doc?.link" target="_blank">
+                                <img src="/src/assets/pdf2.jpg" :alt="doc?.type" class="w-full" />
+                            </a>
+
+                            <a :href="doc?.link" target="_blank"
+                                class="mt-2 inline-block underline text-blue-400 hover:text-blue-600 visited:text-purple-600">Download
+                                document</a>
+                        </div>
+                    </template>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import BadgeComponent from '../ui/BadgeComponent.vue';
 import Button from '../ui/Button.vue';
 import AlertModal from '../ui/AlertModal.vue';
@@ -92,6 +112,19 @@ const institutionSlug = ref(underwriting?.institution?.slug)
 const transactionId = ref(underwriting?.payment[0]?.transaction_id)
 const policyId = ref()
 const premium = ref(underwriting?.payment[0]?.amount)
+
+const documents = computed(() => {
+    return [{
+        type: 'Certificate',
+        link: underwriting?.documents?.certificate
+    }, {
+        type: 'Schedule',
+        link: underwriting?.documents?.schedule
+    }, {
+        type: 'Receipt',
+        link: underwriting?.documents?.receipt
+    }];
+})
 
 function formatKey(key) {
     return key
