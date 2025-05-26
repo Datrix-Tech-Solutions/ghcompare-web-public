@@ -25,7 +25,7 @@ export const useTransactionStore = defineStore("transactions", () => {
 
   const completedTransactions = computed(() => {
     return transactions.value.filter(
-      (item) => item.premium.status === "completed_underwriting"
+      (item) => item.premium.status === "completed"
     );
   });
 
