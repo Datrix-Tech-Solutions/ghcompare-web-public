@@ -123,7 +123,13 @@ const documents = computed(() => {
     }, {
         type: 'Receipt',
         link: underwriting?.documents?.receipt
-    }];
+    },
+    {
+        type: 'Sticker',
+        link: underwriting?.documents?.sticker
+    }
+
+    ];
 })
 
 function formatKey(key) {
