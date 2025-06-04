@@ -3,6 +3,7 @@
         <table class="w-full border-collapse border border-gray-300 min-w-[640px]">
             <thead>
                 <tr class="bg-gray-200 text-gray-700">
+                    <th class="p-3 border border-gray-300">Transaction Date</th>
                     <th class="p-3 border border-gray-300">Cover</th>
                     <th class="p-3 border border-gray-300">Vehicle Class</th>
                     <th class="p-3 border border-gray-300">Underwriting Processes</th>
@@ -11,6 +12,9 @@
             </thead>
             <tbody>
                 <tr class="bg-gray-50 text-gray-900" v-for="transaction in transactions" :key="transaction.id">
+                    <td class="p-3 border border-gray-300">
+                        {{ dayjs(transaction?.premium?.createdAt).format("DD MMM, YYYY") }}
+                    </td>
                     <td class="p-3 border border-gray-300">{{ transaction?.premium?.request?.prefered_cover }}</td>
                     <td class="p-3 border border-gray-300">{{ transaction?.premium?.request?.vehicle_class }}</td>
                     <td class="p-3 border text-center border-gray-300">{{ transaction?.premium?.underwriting.length }}
@@ -28,6 +32,7 @@
 </template>
 
 <script setup>
+import dayjs from 'dayjs';
 import BadgeComponent from '../ui/BadgeComponent.vue';
 const { transactions, transactionStatus } = defineProps({
     transactionStatus: {
