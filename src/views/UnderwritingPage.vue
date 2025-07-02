@@ -17,7 +17,7 @@
                 <!-- <img :src="institutionData?.institution[0]?.logo" alt="" class="max-w-[500px]"> -->
                 <h2 class="text-3xl font-bold text-center mb-10 text-primary mt-10"> {{
                     institutionData?.institution[0]?.name
-                    }}
+                }}
                     Underwriting Form</h2>
 
                 <div class="max-w-[800px] mx-auto">
@@ -86,7 +86,7 @@ async function submitData(buyerData) {
     if (responseData.value?.data && institutionData.value.institution[0].slug !== 'enterprise' && institutionData.value.institution[0].slug !== 'loyalty') {
         // console.log(responseData.value)
         transactionId.value = responseData.value?.data?.paymentData?.transaction_id
-        paymentLink.value = responseData.value?.data?.paymentData?.url
+        paymentLink.value = responseData.value?.data?.paymentData?.url || responseData.value?.data?.paymentUrl
         if (responseData.value?.data.state === false || responseData.value?.data.Status === 'Duplicate') {
             showAlert.value = true
         }
